@@ -1,0 +1,79 @@
+<div class="container-fluid">
+    <header>
+        <div class="content-buttons container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="row p-4 d-flex justify-content-center" style="flex-direction: row;">
+                        <div  id="rowIcon"  class="col-xs-4 col-md-1">
+                            <i id="icon-bf" nz-icon [nzType]="'shop'"></i>
+                        </div>
+                        <div  id="rowName"  class="col-xs-8 col-md-7">
+                            <h2 id="name-bf" nz-typography>Blitzfud</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row p-4 d-flex justify-content-sm-center justify-content-md-end">
+                        <div id="colBtnRegister" class="col-md-6">
+                            <button [routerLink]="['/register']" id="btnRegister" nz-button nzType="default" [nzSize]="'large'"
+                                nzShape="round" class="mx-1"><span>Me quiero unir</span></button>
+                        </div>
+                        <div id="colBtnLogin" class="col-md-6">
+                            <button [routerLink]="['/login']" id="btnLogin" nz-button nzType="primary" [nzSize]="'large'"
+                                nzShape="round" class="mx-1"><span>Iniciar Sesión</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="content container-fluid">
+        <div class="row d-flex align-items-center">
+            <div class="col-sm-12 col-md-7">
+                <div class="row px-4 pt-4 pb-1 d-flex justify-content-center">
+                    <div class="col-sm-12 col-md-8">
+                        <h1 id="title-text" nz-typography>
+                            ¿Sueñas con ampliar tus ventas?
+                        </h1>
+                    </div>
+                </div>
+                <div class="row px-4 d-flex justify-content-center">
+                    <div class="col-sm-12 col-md-8">
+                        <h3 id="subtitle-text" nz-typography>
+                            ¡El momento ha llegado!
+                        </h3>
+                    </div>
+                </div>
+                <div class="row px-4 d-flex justify-content-center">
+                    <div class="col-sm-12 col-md-8">
+                        <h3 id="paragraph-text" nz-typography>
+                            <span style="color: #fe5366;">Digitaliza</span> tu tienda y <span
+                                style="color: #fe5366;">conéctala</span> con clientes cerca de ti
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div id="rowCarousel" class="row d-flex justify-content-center">
+                    <div class="col-md-12 p-5">
+                        <nz-carousel nzAutoPlay [nzEffect]="'fade'">
+                            <div nz-carousel-content class="d-flex justify-content-center"
+                                *ngFor="let imageUrl of imageUrls">
+                                <img style="height: 50vh;" [src]=imageUrl alt="Hero Image" class="img-fluid">
+                            </div>
+                        </nz-carousel>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="blitzy-img" class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <img src="assets/images/blitzy1.svg" alt="Hero Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    
+    <footer class="d-flex" style="align-self: flex-end;">
+            <nz-divider [nzText]="footerText" style="color: #fe5366;" class="my-0"></nz-divider>
+    </footer>
+</div>

@@ -1,0 +1,103 @@
+#not-found{
+    font-size: 37px;
+    color: #65617D;
+    font-weight: 400;
+    font-family: Poppins;
+}
+
+#return-button{
+    background-color: #65617D;
+    border-color: #65617D ;
+    border-radius: 16px;
+}
+
+#icon-bf{
+    font-size: 25px;
+    color: #FE5366;
+    margin-right: 5px;
+}
+
+#name-bf{
+    color: #65617D;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 20px;
+    margin-left: 0px;
+}
+
+/* Resposive Design */
+
+/*
+xs
+iPhone 6/7/8 375x667
+*/
+@media (max-width: 575px){
+    #not-found{
+        margin-bottom: 0;
+        font-size: 20px;
+    }
+
+}
+
+/*
+sm
+Mobile
+Nexus 7 600x960
+*/
+@media (min-width: 576px) and (max-width: 759px){
+    #not-found{
+        margin-bottom: 0;
+        font-size: 30px;
+    }
+}
+
+/*
+md
+Tablet
+iPad 768x1024
+*/
+@media (min-width: 760px) and (max-width: 991px) {
+    #not-found{
+        margin-bottom: 0;
+    }
+    #return-button{
+        margin-top: -8px;
+    }
+}
+
+/*
+lg
+992px-1199px
+*/
+@media (min-width: 992px) and (max-width: 1199px) {
+    #not-found{
+        margin-bottom: 20px;
+    }
+
+
+}
+/*
+xl
+Desktop
+Laptop 1280x950
+*/
+@media (min-width: 1200px) {
+    #not-found{
+        margin-bottom: 45px;
+    }
+    #return-button{
+        margin-top: 30px;
+    }
+}
+
+/* Palette
+#FAFAFE -> Backgrounf
+#FE5366 -> Primary 1
+#FEECEF -> Light 1
+#FFA001 -> Primary 2
+#FFF0DE -> Light 2
+#8C5167 -> Dark 1
+#65617D -> Dark 2
+#4a475e -> Title
+
+ */

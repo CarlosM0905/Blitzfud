@@ -1,0 +1,121 @@
+.card-distributor{
+    width:100%;
+    border-radius: 25px;
+    border-color: #FFF;
+}
+.icon-info{
+    font-size: 20px;
+}
+.name-distributor{
+    font-size: 15px;
+    color: #5C546A;
+}
+.phone-distributor{
+    font-size: 20px;
+    color: #5C546A;
+    margin-bottom: 0;
+}
+
+/* ---------> RESPONSIVE DESIGN <--------- */
+/*
+xs
+iPhone 6/7/8 375x667
+*/
+@media (max-width: 575px){
+    .row-phone{
+        display: flex;
+        justify-content: center;
+    }
+}
+/*
+sm
+Mobile
+Nexus 7 600x960
+*/
+@media (min-width: 576px) and (max-width: 759px){
+    .row-info,
+    .row-phone{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .icon-info{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .row-name{
+        display: flex;
+        text-align: center;
+    }
+    .row-data{
+        display: flex;
+        align-items: baseline;
+    }
+    .status-info{
+        display: flex;
+        justify-content: center;
+    }
+}
+/*
+md
+Tablet
+iPad 768x1024
+*/
+@media (min-width: 760px) and (max-width: 991px) {
+    .row-info,
+    .row-phone{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .icon-info{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .row-name{
+        display: flex;
+        text-align: start;
+    }
+    .row-data{
+        display: flex;
+        align-items: baseline;
+    }
+    .status-info{
+        display: flex;
+        justify-content: center;
+    }
+}
+/*
+lg
+992px-1199px
+*/
+@media (min-width: 992px) {
+    .row-info,
+    .row-phone{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .icon-info{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .row-name{
+        display: flex;
+        text-align: start;
+    }
+    .row-data{
+        display: flex;
+        align-items: baseline;
+    }
+    .status-info{
+        display: flex;
+        justify-content: center;
+    }
+}
+/*
+xl
+Desktop
+Laptop 1280x950
+*/
+@media (min-width: 1200px) {}

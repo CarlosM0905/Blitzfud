@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
+    android:orientation="vertical"
+    tools:context=".views.blitzfud.GuideActivity">
+
+    <com.synnapps.carouselview.CarouselView
+        android:id="@+id/carousel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
+        android:layout_weight="1"
+        app:fillColor="@color/colorWhite"
+        app:pageColor="#000000"
+        app:radius="6dp"
+        app:strokeColor="#777777"
+        app:strokeWidth="1dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_rounded"
+        android:fontFamily="@font/poppins_medium"
+        android:text="OMITIR"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        app:backgroundTint="@color/colorPrimary" />
+
+</LinearLayout>

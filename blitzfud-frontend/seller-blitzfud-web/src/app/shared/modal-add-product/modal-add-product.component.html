@@ -1,0 +1,19 @@
+<!-- Button trigger modal -->
+ <!--<button type="button" id="buttoncito" class="btn btn-primary" data-toggle="modal" data-target="#add">
+    Producto Agregado
+  </button> -->
+
+<!-- Modal -->
+
+<div #modalAdd style="z-index: 9999" class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div style="z-index: 9999;" class="modal-dialog" id="modal-dialog">
+        <div class="modal-content" id="modal-content">
+
+            <i nz-icon [nzType]="'check-circle'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#FE5366'" id="check-circle"></i>
+            <h5 class="modal-title" id="title">Producto Agregado</h5>
+            <h6 id="description">El producto fue agregado exitosamente a su tienda.</h6>
+            <button type="button" id="buttonOk" class="btn btn-primary" data-dismiss="modal">OK</button>
+
+        </div>
+    </div>
+</div>

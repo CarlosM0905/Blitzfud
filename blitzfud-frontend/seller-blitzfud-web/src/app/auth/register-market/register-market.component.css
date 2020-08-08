@@ -1,0 +1,220 @@
+#register-img-1{
+    height: 100vh;
+    background-color: #FFF0DE;
+}
+
+#form{
+    flex-direction: column;
+}
+
+#icon-bf{
+    font-size: 47px;
+    color: #FE5366;
+    width: 20px;
+    margin-right: 35px;
+}
+
+#name-bf{
+    color: #65617D;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 40px;
+    margin-left: 0px;
+}
+
+#message-register-market{
+    color: #4a475e;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 32px;
+}
+
+.title-input{
+    color: #000;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 18px;
+    padding-bottom: 0px;
+}
+
+.icon-eye{
+    color: #FE5366;
+}
+
+#title-modal{
+    color: #65617D;    
+}
+
+#save-location{
+    background-color: #FE5366;
+    border-color: #FE5366;
+    font-family: Poppins;
+    border-radius: 15px;
+}
+
+#save-location:hover{
+    border-color: #FE5366;
+    font-size: 16px;
+}
+
+#cancel-button{
+    background-color: #FEECEF;
+    border-color: #FEECEF;
+    font-family: Poppins;
+    border-radius: 15px;
+    color: #FE5366;
+}
+
+
+#create-my-account-button{
+    background-color: #FE5366;
+    border-color: #FE5366;
+    font-family: Poppins;
+    border-radius: 16px;
+    margin-top: 14px;
+}
+
+#create-my-account-button:hover{
+    border-color: #FE5366;
+    font-size: 18px;
+}
+
+#continue-button:disabled{
+    background-color:rgba(254,83,102, 0.6);
+    border-color: rgba(254,83,102, 0.6);
+    color: ccc;
+}
+
+#icon-back{
+    color: #8C5167;
+    font-size: 24px;
+    transition: transform .2s;
+}
+
+#icon-back:hover{
+    color: #8C5167;
+    transform: scale(1.2);
+}
+
+#returnBack:hover{
+    color: #FE5366;
+    transform: scale(1.1);
+}
+/* Resposive Design */
+
+/*
+xs
+iPhone 6/7/8 375x667
+*/
+@media (max-width: 575px){
+    #message-register-market{
+        font-size: 23px;
+        color: #FE5366;
+        background-color: #FEECEF;
+        margin-left: -60px;
+        margin-right: -60px;
+        margin-bottom: 15px;
+        margin-top: 20px;
+        text-align: center;
+    }
+    #create-my-account-button{
+        max-width: 40vh;
+    }
+}
+
+/*
+sm
+Mobile
+Nexus 7 600x960
+*/
+@media (min-width: 576px) and (max-width: 759px){
+    #input-nombre,
+    #input-descripcion,
+    #input-metodo,
+    #input-ubicacion,
+    #input-precio-delivery{
+        width: 69vh;
+        margin: 0 60px;
+    }
+
+    #message-register-market{
+        color: #FE5366;
+        background-color: #FEECEF;
+        margin-left: -80px;
+        margin-right: -80px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    #create-my-account-button{
+        max-width: 50vh;
+    }
+}
+
+/*
+md
+Tablet
+iPad 768x1024
+*/
+@media (min-width: 760px) and (max-width: 991px) {
+    #input-nombre,
+    #input-descripcion,
+    #input-metodo,
+    #input-ubicacion,
+    #input-precio-delivery{
+        width: 80vh;
+        margin: 0 60px;
+    }
+
+    #message-register-market{
+        color: #FE5366;
+        background-color: #FEECEF;
+        margin-left: 100px;
+        margin-right: 100px;
+        margin-bottom: 50px;
+        border-radius: 33px;
+        text-align: center;
+    }
+
+    #create-my-account-button{
+        max-width: 40vh;
+    }
+}
+
+agm-map {
+    height: 400px;
+    width: 100%;
+}
+
+/*
+lg
+992px-1199px
+*/
+@media (min-width: 992px) and (max-width: 1199px) {
+    #create-my-account-button{
+        max-width: 30vh;
+
+    }
+    #button-container{
+        justify-content: start;
+    }
+}
+/*
+xl
+Desktop
+Laptop 1280x950
+*/
+@media (min-width: 1200px) {
+
+}
+
+/* Palette
+#FAFAFE -> Backgrounf
+#FE5366 -> Primary 1
+#FEECEF -> Light 1
+#FFA001 -> Primary 2
+#FFF0DE -> Light 2
+#8C5167 -> Dark 1
+#65617D -> Dark 2
+#4a475e -> Title
+
+ */

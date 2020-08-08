@@ -1,0 +1,152 @@
+.header {
+  background-color: #fafafe;
+  height: 60px;
+}
+
+#title {
+  color: #65617D;
+  font: 36px Poppins;
+}
+
+#editProfile{
+  color: #fa465b;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.header-left {
+  float: left;
+  margin-left: 30px;
+  margin-top: 5px;
+}
+
+.header-right {
+  float: right;
+  margin-right: 50px;
+  margin-top: 15px;
+}
+
+.header-right-left {
+  float: left;
+}
+
+.header-right-right {
+  float: right;
+}
+
+[nz-button] {
+  margin-right: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background-color: #fe5366;
+  border-color: transparent;
+}
+
+#profile:hover {
+  background-color: #fa465b;
+  outline: none;
+}
+
+#profile:focus {
+  box-shadow: 0 0 0 0.2rem #ffa2ad;
+  outline: none;
+}
+
+#profile-name {
+  font: 12px Poppins;
+  font-weight: bolder;
+  color: #65617D;
+}
+
+#sales {
+  font: 10px Poppins;
+  font-weight: lighter;
+  color: #000000;
+}
+
+#close:not([href]) {
+  color: #fe5366;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#popover-title {
+  color: #8c5167;
+}
+
+/* Resposive Design */
+
+/*
+xs
+iPhone 6/7/8 375x667
+*/
+@media (max-width: 575px){
+  #title {
+    color: #65617D;
+    font: 22px Poppins;
+  }
+  #text-content{
+    display: none;
+  }
+  #profile-img{
+    margin-right: 34px;
+  }
+  #header-left{
+    display: none;
+  }
+}
+
+/*
+sm
+Mobile
+Nexus 7 600x960
+*/
+@media (min-width: 576px) and (max-width: 759px){
+  #title {
+    color: #65617D;
+    font: 26px Poppins;
+  }
+}
+
+/*
+md
+Tablet
+iPad 768x1024
+*/
+@media (min-width: 760px) and (max-width: 991px) {
+  #title {
+    color: #65617D;
+    font: 33px Poppins;
+  }
+}
+
+/*
+lg
+992px-1199px
+*/
+@media (min-width: 992px) {
+
+}
+/*
+xl
+Desktop
+Laptop 1280x950
+*/
+@media (min-width: 1200px) {
+
+}
+
+/* Palette
+#FAFAFE -> Backgrounf
+#FE5366 -> Primary 1
+#FEECEF -> Light 1
+#FFA001 -> Primary 2
+#FFF0DE -> Light 2
+#8C5167 -> Dark 1
+#65617D -> Dark 2
+#65617D -> Title
+
+*/

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item android:title="Tiendas">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/menuAllMarkets"
+                        android:icon="@drawable/ic_nearest"
+                        android:title="Cercanas" />
+                    <item
+                        android:id="@+id/menuFavoriteMarkets"
+                        android:icon="@drawable/ic_favorite"
+                        android:title="Suscritas" />
+
+                </group>
+            </menu>
+        </item>
+
+        <item android:title="Mis pedidos">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/menuPendingOrders"
+                        android:icon="@drawable/ic_pending"
+                        android:title="Pedidos pendientes" />
+                    <item
+                        android:id="@+id/menuHistoryOrders"
+                        android:icon="@drawable/ic_history"
+                        android:title="Historial de pedidos" />
+
+                </group>
+            </menu>
+        </item>
+        <item android:title="Ajustes">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/menuMyProfile"
+                        android:icon="@drawable/ic_profile"
+                        android:title="Mi perfil" />
+                    <item
+                        android:id="@+id/menuLogout"
+                        android:icon="@drawable/ic_logout"
+                        android:title="Cerrar sesión" />
+                </group>
+            </menu>
+        </item>
+
+    </group>
+</menu>

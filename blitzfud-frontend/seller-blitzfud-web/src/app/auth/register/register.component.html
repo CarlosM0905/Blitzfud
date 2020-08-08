@@ -1,0 +1,141 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="
+                d-none d-lg-flex
+                col-lg-6 container
+                justify-content-center
+                "
+            id="register-img-1">
+            <div class="row m-3">
+                <div class="col-md-12">
+                    <img src="assets/images/logistic.svg" alt="Register Image" class="img-fluid animate__animated animate__fadeIn animate__faster" style="transform: scaleX(-1);">
+                </div>
+            </div>
+            <div class="row my-5 d-flex justify-content-center">
+                <div class="col-sm-12 col-md-8">
+                    <button [routerLink]="['/login']" id="have-account-button" nz-button nzBlock nzType="primary" nzSize="large" >¿Ya tienes una cuenta?</button>
+                </div>
+            </div>
+        </div>
+        <div class="
+                col-md-12
+                col-lg-6
+                px-5
+                ">
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-12 col-md-11 col-lg-10">
+                    <!-- Row 1 - Logo-->
+                    <!-- Mobile & Tablet -->
+                    <div [routerLink]="['/welcome']" id="logo" class="d-flex d-lg-none justify-content-center mt-5">
+                        <i id="icon-bf" nz-icon [nzType]="'shop'"></i>
+                        <h2 id="name-bf" nz-typography>Blitzfud</h2>
+                    </div>
+                    <!-- Desktop -->
+                    <div [routerLink]="['/welcome']" id="logo" class="d-none d-lg-flex mt-5">
+                            <i id="icon-bf" nz-icon [nzType]="'shop'"></i>
+                            <h2 id="name-bf" nz-typography>Blitzfud</h2>
+                    </div>
+                    <!--- Row 2 -->
+                    <div class="">
+                        <!-- Mobile -->
+                            <h2 class="d-block d-sm-none text-center" id="message-register" nz-typography>Create una cuenta</h2>
+                        <!-- Tablet y Desktop -->
+                            <h2 class="d-none d-sm-block" id="message-register" nz-typography>Create una cuenta</h2>
+                    </div>
+                    <!-- Row 3 -->
+                    <div class="row mt-1">
+                        <div class="col-md-12">
+                            <form novalidate [formGroup]="formSeller"  (ngSubmit)="submitSellerData()" nz-form nzLayout='vertical'>
+                                <!-- Input Nombre -->
+                                <nz-form-item class="my-2" id="input-nombres">
+                                    <nz-form-label class="title-input" [nzSpan]="6" nzFor="first_name">Nombres:
+                                    </nz-form-label>
+                                    <nz-form-control [nzSpan]="18">
+                                        <input formControlName="first_name" nz-input name="first_name" type="text" id="first_name" nzSize="large" [class.is-invalid]="firstNameInvalid">
+                                    </nz-form-control>
+                                    <small *ngIf="firstNameInvalid" class="text-danger">
+                                        Ingrese un nombre minimo de 5 caracteres
+                                    </small>
+                                </nz-form-item>
+                                <!-- Input - Apellidos -->
+                                <nz-form-item class="my-2" id="input-apellidos">
+                                    <nz-form-label class="title-input" [nzSpan]="6" nzFor="last_name">Apellidos:
+                                    </nz-form-label>
+                                    <nz-form-control [nzSpan]="18">
+                                        <input formControlName="last_name" nz-input name="last_name" type="text" id="last_name" nzSize="large" [class.is-invalid]="lastNameInvalid">
+                                    </nz-form-control>
+                                    <small *ngIf="lastNameInvalid" class="text-danger">
+                                        Ingrese un apellido minimo de 5 caracteres
+                                    </small>
+                                </nz-form-item>
+                                <!-- Input - Correo -->
+                                <nz-form-item class="my-2" id="input-correo">
+                                    <nz-form-label class="title-input" [nzSpan]="6" nzFor="email">Correo:
+                                    </nz-form-label>
+                                    <nz-form-control [nzSpan]="18">
+                                        <input formControlName="email" nz-input name="email" type="email" id="email" nzSize="large" [class.is-invalid]="emailInvalid">
+                                    </nz-form-control>
+                                    <small *ngIf="emailInvalid" class="text-danger">
+                                        Ingrese un correo valido
+                                    </small>
+                                </nz-form-item>
+                                <!-- Input Contraseña -->
+                                <nz-form-item class="my-2" id="input-contraseña">
+                                    <nz-form-label class="title-input" [nzSpan]="6" nzFor="password">Contraseña:
+                                    </nz-form-label>
+                                    <nz-form-control [nzSpan]="18">
+                                        <nz-input-group [nzSuffix]="suffixTemplate" nzSize="large">
+                                            <input formControlName="password" nz-input name="password" [type]="passwordVisible ? 'text' : 'password'" id="password" [class.is-invalid]="passwordInvalid"/>
+                                        </nz-input-group>
+                                         <!-- Icon Eye -->        
+                                         <ng-template #suffixTemplate class="d-flex align-items-center">
+                                            <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"
+                                               class="icon-eye" ></i>
+                                        </ng-template>
+                                        <small *ngIf="passwordInvalid" class="text-danger">
+                                            Ingrese una contraseña valida
+                                        </small>
+                                    </nz-form-control>
+                                </nz-form-item>
+                                <!-- Input Confirmar Contraseña -->
+                                <nz-form-item class="my-2" id="input-confirmar-contraseña">
+                                    <nz-form-label class="title-input" [nzSpan]="12" nzFor="confirm-password">
+                                        Confirmar contraseña:
+                                    </nz-form-label>
+                                    <nz-form-control [nzSpan]="18">
+                                        <nz-input-group [nzSuffix]="suffixTemplate2" nzSize="large">
+                                            <input formControlName="passwordRepeat" nz-input name="passwordRepeat" [attr.type]="passwordRepeatVisible ? 'text' : 'password'" 
+                                                id="passwordRepeat" />
+                                        </nz-input-group>
+                                         <!-- Icon Eye -->        
+                                         <ng-template #suffixTemplate2 class="d-flex align-items-center">
+                                            <i nz-icon [nzType]="passwordRepeatVisible ? 'eye-invisible' : 'eye'" (click)="passwordRepeatVisible = !passwordRepeatVisible"
+                                               class="icon-eye" ></i>
+                                        </ng-template>
+                                    </nz-form-control>
+                                </nz-form-item>
+                                <nz-form-item *ngIf="this.formSeller.errors?.inputMatch && !this.formSeller.pristine">
+                                    <nz-form-label>
+                                        <p class="text-danger">
+                                            Las contraseñas deben ser iguales
+                                        </p>
+                                    </nz-form-label>
+                                </nz-form-item>
+                                <nz-form-item>
+                                    <div class="row my-2">
+                                        <div class="col-md-6 d-flex justify-content-center">
+                                            <button type="submit" [disabled]="formSeller.invalid" id="continue-button" nz-button nzBlock nzType="primary" nzSize="large">Continuar</button>
+                                        </div>
+                                    </div>
+                                </nz-form-item>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-5 d-flex  justify-content-center d-md-none">
+                <button class="d-block d-md-none" [routerLink]="['/login']" id="have-account-button" nz-button nzBlock nzType="primary" nzSize="large" >¿Ya tienes una cuenta?</button>
+            </div>
+        </div>
+    </div>
+</div>

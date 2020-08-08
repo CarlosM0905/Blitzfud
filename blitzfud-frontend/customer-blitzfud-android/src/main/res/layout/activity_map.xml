@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".views.pages.map.MapActivity">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:background="@android:color/white"
+        app:cardCornerRadius="20dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <fragment
+            android:id="@+id/autocompleteDestination"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_marker_map" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnMyPosicion"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="20dp"
+        android:background="@drawable/button_rounded"
+        android:fontFamily="@font/poppins_medium"
+        android:text="ACEPTAR"
+        android:textColor="@color/colorWhite"
+        app:backgroundTint="@color/colorPrimary" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

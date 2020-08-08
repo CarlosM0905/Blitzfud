@@ -1,0 +1,15 @@
+<nz-layout style="height: 100vh; overflow-y: hidden;">
+    <nz-sider nzWidth="235px" nzTheme="light" nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
+        <app-sidebar></app-sidebar>
+    </nz-sider>
+    <nz-layout style="background-color: #FAFAFA;">
+        <nz-header>
+            <app-header></app-header>
+        </nz-header>
+        <nz-content>
+            <div class="inner-content">
+                <router-outlet></router-outlet>
+            </div>
+        </nz-content>
+    </nz-layout>
+</nz-layout>

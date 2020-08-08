@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center pt-5">
+        <div class="col-md-6 text-center">
+            <h4 id="not-found">Pagina no encontrada</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+            <img src="assets/images/not-found.svg" alt="Not found Image" class="img-fluid animate__animated animate__fadeIn animate__faster"
+                style="width: 50vw; height: 50vh;">
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-3 pb-5">
+            <button type="button" id="return-button" nzBlock nz-button nzType="primary" nzSize="large" [routerLink]="['/dashboard']">Ir al inicio</button>
+        </div>
+    </div>
+    <div class="row  d-flex justify-content-end">
+        <div class="col-md-4 py-2 d-flex justify-content-center ">
+            <i id="icon-bf" nz-icon [nzType]="'shop'"></i>
+            <h2 id="name-bf" nz-typography>Blitzfud</h2>
+        </div>
+    </div>
+</div>

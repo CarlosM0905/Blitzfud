@@ -1,0 +1,175 @@
+#title-edit{
+  color: #65617D;
+}
+nz-select {
+  margin-right: 8px;
+  margin-bottom: 12px;
+  align-content: center;
+  justify-content: center;
+  width: 200px;
+}
+#title-edit {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 22px;
+  margin-top: 6px;
+  margin-bottom: 20px;
+}
+.text-e {
+  font-family: Poppins;
+  color: #444444;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+}
+.text-dropd {
+  font-family: Poppins;
+  color: #fe5366;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+}
+#boton {
+  color: #f5f5f5;
+  background-color: #fe5366;
+  font-family: Poppins;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-radius: 4px;
+}
+#cajaImg {
+  width: 462px;
+  height: 184px;
+  background: #f5f5f5;
+  border: 1px dashed #d9d9d9;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+#icon-box {
+  width: 48px;
+  height: 48px;
+  color: #fe5366;
+}
+#boton:focus {
+  border-color: #fe5366;
+  box-shadow: 0 0 0.2rem #fe5366;
+  outline: none;
+}
+#boton:hover {
+  border-color: #fe5366;
+  box-shadow: 0 0 0.2rem #fe5366;
+  outline: none;
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------> RESPONSIVE DESIGN <--------- */
+/*
+xs
+iPhone 6/7/8 375x667
+*/
+@media (max-width: 575px){
+  #form-container{
+    width: 85vw;
+    margin-left: auto;
+  }
+  #title-edit{
+    font-size: 18px;
+    text-align: center;
+  }
+  #Input_responsive{
+    width: 100%;
+  }
+  #title_input_responsive{
+    padding-left: 0;
+  }
+  #container_input_responsive{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #input-img-title{
+    padding-left: 0;
+  }
+  #cajaImg{
+    width: 100%;
+  }
+  #text-img{
+    font-size: 11px;
+  }
+  #div-botton-2{
+    margin-top: 0;
+  }
+}
+/*
+sm
+Mobile
+Nexus 7 600x960
+*/
+@media (min-width: 576px) and (max-width: 759px){
+  #title-edit{
+    font-size: 22px;
+  }
+  #Input_responsive{
+    width: 100%;
+  }
+  #title_input_responsive{
+    padding-left: 0;
+  }
+  #container_input_responsive{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #cajaImg{
+    width: 100%;
+  }
+}
+/*
+md
+Tablet
+iPad 768x1024
+*/
+@media (min-width: 760px) and (max-width: 991px) {
+  #title-edit{
+    font-size: 25px;
+  }
+  #Input_responsive{
+    width: 100%;
+  }
+  #title_input_responsive{
+    padding-left: 0;
+  }
+  #container_input_responsive{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #cajaImg{
+    width: 100%;
+  }
+}
+/*
+lg
+992px-1199px
+*/
+@media (min-width: 992px) {
+  #cajaImg{
+    width: 100%;
+  }
+}
+/*
+xl
+Desktop
+Laptop 1280x950
+*/
+@media (min-width: 1200px) {
+  #cajaImg{
+    width: 100%;
+  }
+}

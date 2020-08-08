@@ -1,0 +1,78 @@
+<!-- INPUT SEARCH -->
+<div class="row">
+    <div class="col-md-12">
+        <nz-input-group class="input_search" nzSearch [nzAddOnAfter]="suffixIconButton">
+            <input type="text" nz-input placeholder="Busque una orden por id o nombre de cliente" />
+        </nz-input-group>
+        <ng-template class="btn_search" #suffixIconButton>
+            <button class="btn_search" nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+        </ng-template>
+    </div>
+</div>
+
+<!-- CARD CAROUSEL -->
+<div class="row">
+    <div class="mx-3 carousel_container pb-2">
+        <nz-card
+        class="mx-2 mt-3 card_items_container"
+        *ngFor="let usuario of usuarios">
+            <!-- Photo avatar -->
+            <div class="col-md-12">
+                <div class="row">
+                    <img src="../../../../assets/images/seller-profile.svg">
+                </div>
+                <div class="row mt-2">
+                    <p class="client_name" >{{usuario.nombre}}</p>
+                </div>
+                <div class="row">
+                    <p class="primary_1_color" >{{usuario.orden}}</p>
+                </div>
+                <div class="row">
+                    <p class="dark_3_color">{{usuario.total}}</p>
+                </div>
+                <div class="row ">
+                    <p class="dark_3_color">{{usuario.productos}}</p>
+                </div>
+            </div>
+        </nz-card>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <!-- CHART -->
+    <div class="col-md-9">
+        <img class="img-fluid" src="assets/images/card1.svg">
+    </div>
+    <!-- TOP PRODUCTS -->
+    <div class="col-md-3">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="mb-2 dark_1_color text_top_products">Top productos vendidos</p>
+            </div>
+        </div>
+        <div class="row d-flex flex-column align-items-center">
+            <nz-card
+            class="mx-2 mt-2 card_top_products_container "
+            *ngFor="let producto of productos">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="d-none d-md-flex col-lg-3 px-0 justify-content-start start">
+                            <nz-avatar class="icon_start_top start" [nzSize]="60" nzIcon="user" nzSrc="../../../../assets/images/iconstar.svg"></nz-avatar>
+                        </div>
+                        <div class="col-md-9 px-0">
+                            <div class="row">
+                                <p class="ml-3 mb-0 name_product_top">{{producto.producto}}</p>
+                            </div>
+                            <div class="row">
+                                <p class="ml-3 mb-0 content_of_product_top">{{producto.cantidad}}</p>
+                            </div>
+                            <div class="row d-flex justify-content-end">
+                                <p class="mb-0 quantity_product_sold">{{producto.unidades}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nz-card>
+        </div>
+    </div>
+</div>

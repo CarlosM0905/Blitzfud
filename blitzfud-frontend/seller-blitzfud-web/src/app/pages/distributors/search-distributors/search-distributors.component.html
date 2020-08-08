@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-12">
+        <nz-input-group class="input_search" nzSearch [nzAddOnAfter]="suffixIconButton">
+            <input type="text" nz-input placeholder="Buscar" />
+        </nz-input-group>
+        <ng-template class="btn_search" #suffixIconButton>
+            <button class="btn_search" nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+        </ng-template>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <nz-card class="my-2" style="border-radius: 25px" id="nz-card">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="col-md-2 col-sm-4 col-12">
+                        <nz-avatar class="my-2" [nzSize]="48.82" nzIcon="user" nzSrc="../../../assets/images/distributor.svg"></nz-avatar>
+                </div>
+                <div class="col-md-4 col-sm-4 col-12">
+                    <p style="font-size: 12px; color: #5C546A;margin-bottom: 0px;">Franz Carhuaricra Marcelo</p>
+                </div>
+                <div class="col-md-2 col-sm-4 col-12">
+                    <p id="num" style="font-size: 12px; color: #5C546A;margin-bottom: 0px;">961457757</p>
+                </div>
+                <div class="col-md-2 col-sm-4 col-6" >
+                        <nz-tag class="mt-3" nzColor="success" id="state">Estado</nz-tag>
+                </div>
+                <div class="col-md-2 col-sm-4 col-6" >
+                        <i style="cursor: pointer;" id ="plus-circle" style="margin-left: 1px;margin-right: 1px;" nz-icon nzType="plus-circle" [nzTwotoneColor]="'#FE5366'" nzTheme="twotone" data-toggle="modal" data-target="#Modal"></i>
+                </div>
+            </div>
+        </nz-card>
+    </div>
+</div>
+<!-- MODALES -->
+<app-modal-contract-distributor></app-modal-contract-distributor>

@@ -1,0 +1,33 @@
+.input_search{
+    width: 100%;
+}
+.input_search :hover{
+    border-color: #FE5366;
+}
+.input_search :focus{
+    border-color: #FE5366;
+    box-shadow: 0 0 0.2rem #FE5366;
+}
+.btn_search{
+    background-color: #FE5366;
+}
+.btn_search:hover{
+    background-color: #FE5366;
+    border-color: #FE5366;
+    box-shadow: 0 0 0.2rem #FE5366;
+}
+#plus-circle{
+    font-size: 25px
+}
+#state{
+    margin-top: 0px!important;
+}
+/* ---------> RESPONSIVE DESIGN <--------- */
+@media (min-width: 760px) and (max-width: 1024px) {
+    #state{
+        margin-left: -5px;
+    }
+    #num{
+        margin-left: -20px;
+    }
+}

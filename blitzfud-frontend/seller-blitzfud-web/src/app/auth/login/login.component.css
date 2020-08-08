@@ -1,0 +1,159 @@
+#create-account-button{
+    background-color: #65617D;
+    border-color: #65617D;
+    font-family: Poppins;
+    border-radius: 16px;
+}
+
+#login-img{
+    height: 100vh;
+    background-color: #FFF0DE;
+    flex-direction: column;
+}
+
+#logo{
+    margin-top: 60px;
+    margin-bottom: -20px;
+    cursor: pointer;
+    outline: none;
+}
+
+#icon-bf{
+    font-size: 45px;
+    color: #FE5366;
+    width: 20px;
+    margin-right: 35px;
+}
+
+#name-bf{
+    color: #65617D;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 40px;
+    margin-left: 0px;
+}
+
+#message-login{
+    color: #4a475e;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 36px;
+    /* align-content: center; */
+}
+
+.title-input{
+    color: #262626;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 18px;
+}
+
+.icon-eye{
+    color: #FE5366;
+}
+
+#entrar-button{
+    margin-top: 60px;
+    background-color: #FE5366;
+    border-color: #FE5366;
+    font-family: Poppins;
+    border-radius: 16px;
+}
+
+#entrar-button:hover{
+    border-color: #FE5366;
+    font-size: 18px;
+}
+
+#entrar-button:disabled{
+    background-color:rgba(254,83,102, 0.6);
+    border-color: rgba(254,83,102, 0.6);
+}
+
+
+/* Resposive Design */
+
+/*
+xs
+iPhone 6/7/8 375x667
+*/
+@media (max-width: 575px){
+    #message-login{
+        font-size: 23px;
+        color: #FE5366;
+        background-color: #FEECEF;
+        margin-left: -60px;
+        margin-right: -60px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+}
+
+/*
+sm
+Mobile
+Nexus 7 600x960
+*/
+@media (min-width: 576px) and (max-width: 759px){
+    #input-correo,  #input-contraseña{
+        width: 70vh;
+        margin: 0 13px;
+    }
+
+
+    #message-login{
+        color: #FE5366;
+        background-color: #FEECEF;
+        margin-left: -80px;
+        margin-right: -80px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+}
+
+/*
+md
+Tablet
+iPad 768x1024
+*/
+@media (min-width: 760px) and (max-width: 991px) {
+    #input-correo,  #input-contraseña{
+        width: 80vh;
+        margin: 0 41px;
+    }
+
+    #message-login{
+        color: #FE5366;
+        background-color: #FEECEF;
+        margin-left: 100px;
+        margin-right: 100px;
+        margin-bottom: 50px;
+        border-radius: 33px;
+        text-align: center;
+    }
+
+    #entrar-button{
+        width: 40vh;
+    }
+
+    #create-account-button{
+        width: 40vh;
+    }
+}
+
+/*
+lg
+992px-1199px
+*/
+@media (min-width: 992px) {
+
+}
+/*
+xl
+Desktop
+Laptop 1280x950
+*/
+@media (min-width: 1200px) {
+
+}

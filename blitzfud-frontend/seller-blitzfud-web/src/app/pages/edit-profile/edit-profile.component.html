@@ -1,0 +1,123 @@
+<div class="row">
+    <div class="col-md-8">
+        <nz-tabset nzSize='large'>
+            <nz-tab (nzClick)="setImageProfile()" [nzTitle]="sellerProfile">
+                <ng-template #sellerProfile> <i nz-icon nzType="smile"></i>Datos Personales</ng-template>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8">
+                        <div class="row my-4">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                                <nz-avatar [nzSize]="96" nzIcon="user"
+                                    nzSrc="../../../../assets/images/seller-profile.svg"></nz-avatar>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-start align-items-end">
+                                <h5 id="seller_name">{{formUser.get('first_name').value}} {{formUser.get('last_name').value}}</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form novalidate [formGroup]="formUser" nz-form nzLayout='vertical'>
+                                    <nz-form-item>
+                                        <nz-form-label>Nombres:</nz-form-label>
+                                        <nz-form-control>
+                                            <input nz-input formControlName="first_name" type="text">
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <nz-form-label>Apellidos:</nz-form-label>
+                                        <nz-form-control>
+                                            <input nz-input formControlName="last_name" type="text">
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <button id="save_changes" nz-button nzBlock nzType="primary">Guardar cambios</button>
+                                            </div>
+                                        </div>
+                                    </nz-form-item>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nz-tab>
+            <nz-tab (nzClick)="setImageMarket()" [nzTitle]="marketProfile">
+                <ng-template #marketProfile> <i nz-icon nzType="shop"></i>Datos de mi tienda</ng-template>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8">
+                        <div class="row my-4">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                                <nz-avatar [nzSize]="96" nzIcon="user" nzSrc="../../../../assets/images/market.svg">
+                                </nz-avatar>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-start align-items-end">
+                                <h5 id="seller_name">{{formMarket.get('name').value}}</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form novalidate [formGroup]="formMarket" nz-form nzLayout='vertical'>
+                                    <nz-form-item>
+                                        <nz-form-label>Nombre:</nz-form-label>
+                                        <nz-form-control>
+                                            <input nz-input type="text" formControlName="name">
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <nz-form-label>Descripción:</nz-form-label>
+                                        <nz-form-control>
+                                            <input nz-input type="text" formControlName="description">
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item class="mb-0">
+                                        <div class="row">
+                                            <div class="col-md-6 d-flex justify-content-start">
+                                                <label nz-checkbox formControlName="pickup">Recojo en tienda</label>
+                                            </div>
+                                            <div class="col-md-6 d-flex justify-content-start">
+                                                <label nz-checkbox formControlName="delivery">Delivery</label>
+                                            </div>
+                                        </div>
+                                    </nz-form-item>
+                                    <nz-form-item *ngIf="isDeliverySelected()" class="animate__animated animate__fadeIn animate__faster">
+                                        <nz-form-label>Precio del Delivery:</nz-form-label>
+                                        <nz-form-control>
+                                            <input nz-input type="number" formControlName="deliveryPrice" min="0">
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                Estado:
+                                            </div>
+                                            <div class="col-md-2">
+                                                <nz-tag nzColor="success">Estado</nz-tag>
+                                            </div>
+                                            <div class="col-md-8">
+                                                Cerrado
+                                                <nz-switch></nz-switch>
+                                                Abierto
+                                            </div>
+                                        </div>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <button id="save_changes" nz-button nzBlock nzType="primary">Guardar
+                                                    cambios</button>
+                                            </div>
+                                        </div>
+                                    </nz-form-item>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nz-tab>
+        </nz-tabset>
+    </div>
+    <div class="col-md-4 d-flex justify-content-center align-items-center">
+        <img [src]=imageView alt="edit image" class="img-fluid animate__animated animate__fadeIn">
+    </div>
+</div>

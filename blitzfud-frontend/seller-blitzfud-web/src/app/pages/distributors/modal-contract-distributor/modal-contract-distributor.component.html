@@ -1,0 +1,59 @@
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog" id="modal-dialog">
+        <div class="modal-content" id="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="button-close">
+                    <span style="color: #FE5366;" aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title" id="title" style="margin-bottom:20px;margin-top:20px">Establecer Propuesta de Contrato</h5>
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-3">
+                        <div class="row d-flex justify-content-center">
+                            <nz-avatar class="my-2" [nzSize]="100" nzIcon="user" nzSrc="../../../assets/images/market.svg"></nz-avatar>
+                        </div>
+                        <h6 id="market-text" style="font:10px Poppins;">Fast Market</h6>
+                    </div>
+                    <div class="col-md-3 d-flex justify-content-center">
+                        <div class="row d-flex justify-content-center align-items-center" id="arrow-left-rigth">
+                            <div class="col-md-4">
+                                <i nz-icon nzType="arrow-left" nzTheme="outline" id="arrow-left"></i>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row d-flex justify-content-center">
+                                    <i nz-icon nzType="arrow-up" nzTheme="outline" id="arrow-up"></i>
+                                    <img src="../../assets/images/Logo.svg" id="Logo">
+                                    <i nz-icon nzType="arrow-down" nzTheme="outline" id="arrow-down"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <i nz-icon nzType="arrow-right" nzTheme="outline" id="arrow-rigth"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row d-flex justify-content-center">
+                            <nz-avatar class="my-2" [nzSize]="100" nzIcon="user" nzSrc="../../../assets/images/distributor.svg"></nz-avatar>
+                        </div>
+                        <h6 id="distributor-text" style="font:10px Poppins;">Franz Carhuaricra Marcelo</h6>
+                    </div>
+                </div>
+
+                <h6 style="font:14px Poppins;color: #FE5366;margin-top:20px;">Digitar Propuesta</h6>
+                <div class="row  d-flex justify-content-center" style="margin-top:5px;">
+                    <div class="col-md-10" style="margin-left: 20px;margin-right: 20px;">
+                        <textarea nz-input placeholder="Propuesta..." rows="4" [nzAutosize]="{ minRows: 4, maxRows: 6 }"></textarea>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center" style="margin-top:30px;">
+                    <div class="col-md-6 col-sm-6 col-8">
+                        <button id="btn_send" class="boton btn btn-primary" nz-button nzType="submit">
+                            Enviar solicitud
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

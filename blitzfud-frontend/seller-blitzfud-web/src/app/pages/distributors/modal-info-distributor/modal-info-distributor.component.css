@@ -1,0 +1,20 @@
+.modal-distributor{
+    border-radius: 25px;
+    border-color: #FFF;
+}
+.name-distributor{
+    font-size: 20px;
+    color: #5C546A;
+}
+.phone-distributor{
+    font-size: 20px;
+    color: #5C546A;
+    margin-bottom: 0;
+}
+.contract-distributor{
+    font-size: 20px;
+    color: #FE5366;
+}
+.close{
+    outline: none;
+}

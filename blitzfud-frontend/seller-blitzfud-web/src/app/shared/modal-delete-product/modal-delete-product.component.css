@@ -1,0 +1,73 @@
+#delete {
+    background-color: rgba(1, 1, 1, 0.30);
+}
+
+#buttonOk {
+    background-color: #FE5366;
+    /* Green */
+    border: none;
+    color: #FFFFFF;
+    width: 154px;
+    height: 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font: 14px Poppins;
+    position: absolute;
+    top: 274px;
+    left: 98px;
+}
+
+#modal-content {
+    background-color: #FFFFFF;
+    justify-content: center;
+    width: 350px;
+    height: 350px;
+    border-radius: 30px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    top: 60px;
+    border: none;
+}
+
+#title {
+    font: 24px Poppins;
+    font-weight: 500;
+    color: #8C5167;
+    position: absolute;
+    top: 139px;
+    left: 52px;
+}
+
+#description {
+    font: 14px Poppins;
+    color: #595959;
+    position: absolute;
+    top: 195px;
+    left: 28px;
+    text-align: center;
+    margin-right: 25px;
+}
+
+#check-circle {
+    position: absolute;
+    top: 36px;
+    left: 125px;
+    font-size: 90px;
+    color: #FFA001;
+}
+
+#buttonOk:hover {
+    background-color: #f8455a;
+    /*background-color: rgba(254, 83, 102, 0.8);
+    border-color: rgba(254, 83, 102, 0.8);*/
+    outline: none;
+}
+
+#buttonOk:focus {
+    box-shadow: 0 0 0 0.2rem #ffa5af;
+    /*background-color: rgba(254, 83, 102, 0.8);
+    border-color: rgba(254, 83, 102, 0.8);*/
+    outline: none;
+}

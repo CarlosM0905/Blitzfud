@@ -1,0 +1,156 @@
+/* ---------> INPUT SEARCH <--------- */
+.input_search{
+    width: 40vw;
+    display: flex;
+    justify-content: left;
+}
+.input_search :hover{
+    border-color: #FE5366;
+}
+.input_search :focus{
+    border-color: #FE5366;
+    box-shadow: 0 0 0.2rem #FE5366;
+}
+.btn_search{
+    background-color: #FE5366;
+}
+.btn_search:hover{
+    background-color: #FE5366;
+    border-color: #FE5366;
+    box-shadow: 0 0 0.2rem #FE5366;
+}
+
+/* ---------> CAROUSEL CARDS <--------- */
+.carousel_container{
+    overflow-x: scroll;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.card_items_container{
+    font-size: 16px;
+    border-radius: 15px;
+    background-color: white;
+    border-color: white;
+    cursor: pointer;
+}
+
+/* ---------> CARD CONTENT <--------- */
+.client_name{
+    font-size: 15px;
+    color: #65617D;
+    text-align: start;
+    min-width: 9.25em;
+    max-width: 9.25em;
+}
+
+/* ---------> TOP PRODUCTS <--------- */
+.text_top_products{
+    font-size: 1.7em;
+    font-weight: 500;
+}
+.card_top_products_container{
+    width:80%;
+    height: 9.4em;
+    border-radius: 9px;
+    border-color: white;
+    background: white;
+}
+.icon_start_top{
+    max-width: 2em;
+    min-width: 2em;
+    max-height: 2em;
+    min-height: 2em;
+}
+.name_product_top{
+    font-size: 1.1em;
+    color: #5C546A;
+    text-align: start;
+}
+.content_of_product_top{
+    font-size: 0.8em;
+    color: #aaa;
+}
+.quantity_product_sold{
+    font-size: 2em;
+    font-weight: bold;
+    color: #FF3A29;
+}
+.primary_1_color{
+    color: #FE5366;
+}
+.dark_1_color{
+    color: #8C5167;
+}
+.dark_3_color{
+    color: #5C546A;
+}
+
+/* ---------> RESPONSIVE DESIGN <--------- */
+/*
+xs
+iPhone 6/7/8 375x667
+*/
+@media (max-width: 575px){
+    .input_search{
+        width: 85vw;
+    }
+    .icon_start_top{
+        max-width: 1.4em;
+        min-width: 1.4em;
+        max-height: 1.4em;
+        min-height: 1.4em;
+    }
+    .text_top_products{
+        margin-top: 1.5em;
+    }
+}
+/*
+sm
+Mobile
+Nexus 7 600x960
+*/
+@media (min-width: 576px) and (max-width: 759px){
+    .input_search{
+        width: 87vw;
+    }
+    .icon_start_top{
+        max-width: 1.5em;
+        min-width: 1.5em;
+        max-height: 1.5em;
+        min-height: 1.5em;
+    }
+    .text_top_products{
+        margin-top: 1.5em;
+    }
+}
+/*
+md
+Tablet
+iPad 768x1024
+*/
+@media (min-width: 760px) and (max-width: 991px) {
+    .input_search{
+        width: 90vw;
+    }
+    .icon_start_top{
+        display: none;
+    }
+    .start{
+        display: none;
+    }
+    .card_top_products_container{
+        /* background-color: tomato; */
+        height: 12.2em;
+    }
+}
+/*
+lg
+992px-1199px
+*/
+@media (min-width: 992px) {}
+/*
+xl
+Desktop
+Laptop 1280x950
+*/
+@media (min-width: 1200px) {}

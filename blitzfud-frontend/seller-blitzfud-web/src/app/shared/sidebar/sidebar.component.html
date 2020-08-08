@@ -1,0 +1,70 @@
+
+<div class="row mt-4 ml-3 text-center">
+  <i id="icon-bf" nz-icon [nzType]="'shop'"></i>
+  <h2 id="name-bf" nz-typography>Blitzfud</h2>
+</div>
+<ul nz-menu class="sider-menu">
+  <li class="menu-item" nz-menu-item  [routerLink]="['home']">
+    <i
+      nz-icon
+      [nzType]="'home'"
+      [nzTheme]="'twotone'"
+      [nzTwotoneColor]="'#ffa001'"
+    ></i>
+    Inicio
+  </li>
+  <li class="menu-item" nz-menu-item [routerLink]="['products']">
+    <i
+      nz-icon
+      [nzType]="'folder'"
+      [nzTheme]="'twotone'"
+      [nzTwotoneColor]="'#ffa001'"
+    ></i>
+    Productos
+  </li>
+  <li class="menu-item" nz-menu-item [routerLink]="['distributors']">
+    <i
+      nz-icon
+      [nzType]="'rocket'"
+      [nzTheme]="'twotone'"
+      [nzTwotoneColor]="'#ffa001'"
+    ></i>
+    Repartidores
+  </li>
+  <li class="menu-item" nz-menu-item [routerLink]="['orders-pending']">
+    <i
+      nz-icon
+      [nzType]="'shopping'"
+      [nzTheme]="'twotone'"
+      [nzTwotoneColor]="'#ffa001'"
+    ></i>
+    Órdenes
+  </li>
+  <li class="menu-item" nz-menu-item [routerLink]="['history']">
+    <i
+      nz-icon
+      [nzType]="'schedule'"
+      [nzTheme]="'twotone'"
+      [nzTwotoneColor]="'#ffa001'"
+    ></i>
+    Historial
+  </li>
+  <li class="menu-item" nz-menu-item [routerLink]="['customers']">
+    <i
+      nz-icon
+      [nzType]="'contacts'"
+      [nzTheme]="'twotone'"
+      [nzTwotoneColor]="'#ffa001'"
+    ></i>
+    Clientes
+  </li>
+  <li class="menu-item" id="final-item" nz-menu-item (click)="logout()">
+    <i
+      nz-icon
+      [nzType]="'frown'"
+      [nzTheme]="'twotone'"
+      [nzTwotoneColor]="'#ffa001'"
+    ></i>
+    Cerrar Sesión
+  </li>
+</ul>

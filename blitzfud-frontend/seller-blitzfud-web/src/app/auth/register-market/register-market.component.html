@@ -1,0 +1,126 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="
+                col-md-12
+                col-lg-6
+                px-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-12 col-md-10">
+                    <div class="row mt-4 mb-2">
+                       <span id="returnBack" (click)="logout()" class="d-flex align-items-center" style="cursor: pointer;"> <i nz-icon [nzType]="'left'"></i> Regresar</span>
+                    </div>
+                    <!-- Row 1 -->
+                    <div id="logo" class="d-flex d-lg-none justify-content-center mt-3">
+                        <i id="icon-bf" nz-icon [nzType]="'shop'"></i>
+                        <h2 id="name-bf" nz-typography>Blitzfud</h2>
+                    </div>
+                    <!-- Desktop -->
+                    <div id="logo" class="d-none d-lg-flex mt-3">
+                            <i id="icon-bf" nz-icon [nzType]="'shop'"></i>
+                            <h2 id="name-bf" nz-typography>Blitzfud</h2>
+                    </div>
+                    <!--- Row 2 -->
+                    <h2 id="message-register-market" nz-typography>Datos de tu tienda</h2>
+                    <!-- Row 3 -->
+                    <div class="row mt-1">
+                        <div class="col-md-12 ">
+                            <form  novalidate [formGroup]="formMarket" (ngSubmit)="registerMarket()" nz-form nzLayout='vertical'>
+                                <nz-form-item class="my-2" id="input-nombre">
+                                    <nz-form-label class="title-input" [nzSpan]="6" nzFor="first_name">Nombre:
+                                    </nz-form-label>
+                                    <nz-form-control [nzSpan]="18">
+                                        <input formControlName="name" nz-input name="first_name" type="text"
+                                            id="first_name" nzSize="large">
+                                    </nz-form-control>
+                                </nz-form-item>
+                                <nz-form-item class="my-2" id="input-descripcion">
+                                    <nz-form-label class="title-input" [nzSpan]="6" nzFor="last_name">Descripción:
+                                    </nz-form-label>
+                                    <nz-form-control [nzSpan]="18">
+                                        <textarea formControlName="description" nz-input
+                                            [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>
+                                    </nz-form-control>
+                                </nz-form-item>
+                                <nz-form-item class="mb-0" id="input-metodo">
+                                    <nz-form-label class="title-input" [nzSpan]="12" nzFor="last_name">Metódos de entrega:</nz-form-label>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-md-6 d-flex justify-content-start">
+                                            <label nz-checkbox formControlName="pickup">Recojo en tienda</label>
+                                        </div>
+                                        <div class="col-md-6 d-flex justify-content-start">
+                                            <label nz-checkbox formControlName="delivery">Delivery</label>
+                                        </div>
+                                    </div>
+                                </nz-form-item>
+                                <nz-form-item *ngIf="deliverySelected()" class="my-2 animate__animated animate__fadeIn animate__faster" id="input-precio-delivery">
+                                    <nz-form-label class="title-input" [nzSpan]="12" nzFor="delivery-price">Precio del Delivery:
+                                    </nz-form-label>
+                                    <nz-form-control [nzSpan]="18">
+                                        <input formControlName="deliveryPrice" nz-input name="delivery-price" type="number"
+                                            id="delivery-price" nzSize="large" min="0">
+                                    </nz-form-control>
+                                </nz-form-item>
+                                <nz-form-item class="my-2" id="input-ubicacion" >
+                                    <nz-form-label class="title-input" [nzSpan]="6" nzFor="location">Ubicacion:
+                                    </nz-form-label>
+                                    <nz-form-control [nzSpan]="18" data-toggle="modal"
+                                        data-target="#exampleModalCenter">
+                                        <nz-input-group [nzSuffix]="suffixTemplate" nzSize="large"
+                                            style="cursor: pointer;">
+                                            <input formControlName="address" nz-input name="address" type="text" autocorrect="off" autocapitalize="off" spellcheck="off" autocomplete="off"
+                                                id="address" style="cursor: pointer;" [value]="this.address" readonly />
+                                        </nz-input-group>
+                                        <ng-template #suffixTemplate class="d-flex align-items-center"
+                                            style="cursor: pointer;">
+                                            <i nz-icon class="icon-eye" nzType="compass" nzTheme="outline"></i>
+                                        </ng-template>
+                                    </nz-form-control>
+                                </nz-form-item>
+                                <nz-form-item>
+                                    <div class="row my-2">
+                                        <div id="button-container" class="col-md-12 col-lg-6 d-flex justify-content-center">
+                                            <button type="submit" [disabled]="formMarket.invalid || !atLeastOneDeliveryMethod()" id="create-my-account-button" nz-button nzBlock nzType="primary" nzSize="large">
+                                                Crear mi cuenta</button>
+                                        </div>
+                                    </div>
+                                </nz-form-item>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-none d-lg-flex col-lg-6 container justify-content-center" id="register-img-1">
+            <img src="assets/images/logistic.svg" alt="Register Image" class="img-fluid  animate__animated animate__fadeIn animate__faster mb-5">
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Map -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title-modal">Escoja la ubicación de su tienda:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Seleccione una ubicacion cercana" [value]="this.address" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+                  </div>
+                <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="15" (mapClick)="mapUserClick($event)">
+                    <agm-marker (dragEnd)="markerDragEnd($event)" [markerDraggable]="true" [latitude]="latitude" [longitude]="longitude" >
+                    </agm-marker>
+                </agm-map>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancel-button">Cerrar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-location" (click)="saveLocation()">Guardar ubicación</button>
+            </div>
+        </div>
+    </div>
+</div>

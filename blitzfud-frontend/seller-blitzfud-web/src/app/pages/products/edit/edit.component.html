@@ -1,0 +1,151 @@
+<form id="form-container" novalidate autocomplete="off" [formGroup]="form" nz-form (ngSubmit)="takeData(type)">
+  <div class="container">
+    <h1 *ngIf="type === 'edit'" id="title-edit">Editar Producto</h1>
+    <h1 *ngIf="type === 'add'" id="title-edit">Agregar Producto</h1>
+    <div>
+      <div class="form-group">
+        <label class="text-e">Nombre del producto</label>
+        <input class="form-control" nz-input type="text" formControlName="name" name="name"
+          [class.is-invalid]="nameInvalid  && !form.pristine" />
+        <small *ngIf="nameInvalid && !form.pristine" class="text-danger">
+          Ingrese algún nombre válido
+        </small>
+      </div>
+    </div>
+
+    <!-- CANTIDAD DE PRODUCTO Y UNIDAD DE MEDIDA -->
+    <div class="form-row">
+      <div class="form-group col-md-12 col-lg-6">
+        <!-- TOOLTIP CONTENT -->
+        <ng-template #textContent>Ej: Milo en Lata <span style="color: #5C546A; font-weight: 600; font-size: 16px;">400</span> g </ng-template>
+        <!-- TEXT ICON -->
+        <label class="text-e d-flex align-items-center">Contenido del producto
+          <i class="mx-1" style="cursor: pointer;" nz-icon nzType="question-circle" nzTheme="twotone" [nzTwotoneColor]="'#FE5366'"
+            nz-tooltip nzTooltipPlacement="bottomLeft" [nzTooltipTitle]="textContent" [nzTooltipOrigin]="contentProduct.elementRef"
+          ></i>
+        </label>
+        <!-- ORIGINAL TOLLTIP -->
+        <input
+          #contentProduct="nzElement" nz-element
+          type="number" class="form-control" nz-input formControlName="contentOfProduct" name="contentOfProduct"
+          [class.is-invalid]="contentOfProductInvalid  && !form.pristine"  min="0"/>
+        <small *ngIf="contentOfProductInvalid  && !form.pristine" class="text-danger">
+          Ingrese una cantidad de contenido válido
+        </small>
+      </div>
+      <div class="form-group col-md-12 col-lg-6">
+        <!-- TOOLTIP UNIT -->
+        <ng-template #textUnit>Ej: Milo en Lata 400 <span style="color: #5C546A; font-weight: 600; font-size: 16px;"> g </span></ng-template>
+        <div id="title_input_responsive"  class="col">
+          <label class="text-e d-flex align-items-center">Unidad de medida
+            <!-- Text and Icon -->
+            <i class="mx-1"  style="cursor: pointer;" nz-icon nzType="question-circle" nzTheme="twotone" [nzTwotoneColor]="'#FE5366'"
+            nz-tooltip nzTooltipPlacement="bottomLeft" [nzTooltipTitle]="textUnit" [nzTooltipOrigin]="unitProduct.elementRef"
+            ></i>
+          </label>
+        </div>
+        <!-- ORIGINAL TOOLTIP -->
+        <div id="container_input_responsive" class="col" >
+          <nz-select #unitProduct="nzElement" nz-element id="Input_responsive" nzShowSearch nzAllowClear formControlName="unitOfMeasurement" name="unitOfMeasurement">
+            <nz-option *ngFor="let unit of units" nzLabel={{unit}} nzValue={{unit}}></nz-option>
+          </nz-select>
+          <small *ngIf="unitOfMeasuremenInvalid  && !form.pristine" class="text-danger">
+            Seleccione alguna unidad de medida
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- CANTIDAD MAXIMA Y CATEGORIA -->
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <!-- TOOLTIP UNIT -->
+        <ng-template #maxProductQuantity>Cantidad máxima que puede comprar un cliente de tu producto</ng-template>
+        <label class="text-e d-flex align-items-center" for="inputMaxQuantity">Cantidad Máxima
+          <!-- TEXT AND ICON -->
+          <i class="mx-1"  style="cursor: pointer;" nz-icon nzType="question-circle" nzTheme="twotone" [nzTwotoneColor]="'#FE5366'"
+          nz-tooltip nzTooltipPlacement="bottomLeft" [nzTooltipTitle]="maxProductQuantity" [nzTooltipOrigin]="maxQuantityProduct.elementRef"></i>
+        </label>
+        <!-- ORIGIN TOLLTIP -->
+        <input #maxQuantityProduct="nzElement" nz-element
+          type="number" class="form-control" nz-input formControlName="maxQuantity" name="maxQuantity"
+          [class.is-invalid]="maxQuantityInvalid  && !form.pristine" min="0" />
+        <small *ngIf="maxQuantityInvalid  && !form.pristine" class="text-danger">
+          Ingrese alguna cantidad válida
+        </small>
+      </div>
+      <div class="form-group col-md-6">
+        <div id="title_input_responsive" class="col">
+          <label class="text-e">Categoria</label>
+        </div>
+        <div id="container_input_responsive" class="col">
+          <nz-select id="Input_responsive"  nzShowSearch nzAllowClear formControlName="category" name="category"
+            [class.is-invalid]="categoryInvalid  && !form.pristine">
+            <nz-option *ngFor="let category of categories" nzLabel={{category.name}} nzValue={{category._id}}></nz-option>
+          </nz-select>
+          <small *ngIf="categoryInvalid  && !form.pristine" class="text-danger">
+            Seleccione alguna categoría
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRECIO & RESALTAR -->
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label class="text-e" for="inputPrice">Precio</label>
+        <input type="number" class="form-control" nz-input formControlName="price" name="price"
+          [class.is-invalid]="priceInvalid  && !form.pristine" min="0.0" />
+        <small *ngIf="priceInvalid  && !form.pristine" class="text-danger">
+          Ingrese algún precio válido
+        </small>
+      </div>
+      <div class="form-group col-md-6">
+        <!-- TOLLTIP UNIT -->
+        <ng-template #textHighlight>¿Quieres que este producto aparezca entre los primeros de tu tienda?</ng-template>
+        <div id="title_input_responsive" class="col">
+          <label class="text-e d-flex align-items-center">Destacar
+            <i class="mx-1"  style="cursor: pointer;" nz-icon nzType="question-circle" nzTheme="twotone" [nzTwotoneColor]="'#FE5366'"
+            nz-tooltip nzTooltipPlacement="bottom" [nzTooltipTitle]="textHighlight" [nzTooltipOrigin]="highlightProduct.elementRef"></i>
+          </label>
+        </div>
+        <div id="container_input_responsive" class="col">
+          <nz-select #highlightProduct="nzElement" nz-element id="Input_responsive" nzShowSearch nzAllowClear formControlName="highlight" name="highlight">
+            <nz-option *ngFor="let highlight of highlights" nzLabel={{highlight}} nzValue={{highlight}}></nz-option>
+          </nz-select>
+          <small *ngIf="highlightInvalid  && !form.pristine" class="text-danger">
+            Seleccione alguna opción para resaltar
+          </small>
+        </div>
+      </div>
+    </div>
+    <!-- IAMGEN -->
+    <div id="input-img-title" class="container mt-3" style="padding-left: 0; padding-right: 0;">
+      <label class="text-e" for="inputDescription">Imagen del producto</label>
+      <div id="cajaImg">
+        <nz-upload nzType="drag" [nzMultiple]="true">
+          <p class="ant-upload-drag-icon">
+            <i id="icon-box" nz-icon nzType="inbox"></i>
+          </p>
+          <p id="text-img" class="ant-upload-text">Clickee o arrastre el archivo a esta área para subirlo</p>
+          <p id="text-img" class="ant-upload-hint">
+            Soporte para archivos únicos o en conjunto.
+          </p>
+        </nz-upload>
+      </div>
+    </div>
+
+    <!--  BUTTON -->
+    <div id="div-botton" class="container col-md-12 d-flex justify-content-end" style="margin-right: 0; padding-right: 0;">
+      <div id="div-botton-2" class="col-sm-10 col-md-4 d-flex justify-content-end mt-5">
+        <button id="boton" class="btn btn-primary" nz-button nzType="submit">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- MODALES -->
+<app-modal-add-product></app-modal-add-product>
+<app-modal-updated-product></app-modal-updated-product>

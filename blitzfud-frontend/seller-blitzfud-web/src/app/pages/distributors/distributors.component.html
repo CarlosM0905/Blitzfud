@@ -1,0 +1,10 @@
+<nz-tabset [nzSize]="'large'">
+    <nz-tab [nzTitle]="titleMyDistributors">
+      <ng-template #titleMyDistributors> <i nz-icon [nzType]="'smile'"></i>Mis Repartidores</ng-template>
+      <app-my-distributors></app-my-distributors>
+    </nz-tab>
+    <nz-tab [nzTitle]="titleSearchDistributors">
+        <ng-template #titleSearchDistributors> <i nz-icon [nzType]="'search'"></i>Buscar Repartidores</ng-template>
+        <app-search-distributors></app-search-distributors>
+    </nz-tab>
+</nz-tabset>

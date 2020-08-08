@@ -1,0 +1,163 @@
+[nz-button] {
+    margin-right: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#add-product-btn {
+    background-color: #fe5366;
+    border-color: #fe5366;
+}
+.ant-checkbox-input {
+    background-color: #fe5366 !important;
+    color: #fe5366 !important;
+}
+#delete-product-btn {
+    background-color: #feecef;
+    border-color: #feecef;
+}
+#update-product-btn{
+    background-color: #feecef;
+    border-color: #feecef;
+}
+.highlight-product{
+  background-color: #FEECEF;
+  color: #FE5366
+}
+
+/* ---------> MODAL DELETE CONFIRMATION <--------- */
+#confirmationdelete {
+  background-color: rgba(1, 1, 1, 0.30);
+}
+#buttonOk {
+  background-color: #FE5366;
+  border: none;
+  color: #FFFFFF;
+  width: 51px;
+  height: 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font: 14px Poppins;
+  position: absolute;
+  top: 265px;
+  left: 185px;
+}
+#buttonOk:hover {
+  background-color: #f8455a;
+  /*background-color: rgba(254, 83, 102, 0.8);
+  border-color: rgba(254, 83, 102, 0.8);*/
+  outline: none;
+}
+#buttonOk:focus {
+  box-shadow: 0 0 0 0.2rem #ffa5af;
+  /*background-color: rgba(254, 83, 102, 0.8);
+  border-color: rgba(254, 83, 102, 0.8);*/
+  outline: none;
+}
+#buttonCancel {
+  background-color: #ffffff;
+  border-color: #D9D9D9;
+  color: #595959;
+  width: 74px;
+  height: 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font: 14px Poppins;
+  position: absolute;
+  top: 265px;
+  left: 100px;
+}
+#buttonCancel:focus {
+  box-shadow: 0 0 0 0.2rem #D9D9D9;
+  /*background-color: rgba(254, 83, 102, 0.8);
+  border-color: rgba(254, 83, 102, 0.8);*/
+  outline: none;
+}
+#modal-content {
+  background-color: #FFFFFF;
+  justify-content: center;
+  width: 350px;
+  height: 350px;
+  border-radius: 30px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  top: 60px;
+  border: none;
+}
+#title {
+  font: 24px Poppins;
+  font-weight: 500;
+  color: #8C5167;
+  position: absolute;
+  top: 139px;
+  left: 52px;
+  margin-left: 10px;
+}
+#description {
+  font: 14px Poppins;
+  color: #595959;
+  position: absolute;
+  top: 195px;
+  left: 28px;
+  text-align: center;
+  margin-right: 25px;
+  margin-left: 8px;
+}
+#check-circle {
+  position: absolute;
+  top: 36px;
+  left: 125px;
+  font-size: 90px;
+  color: #FFA001;
+}
+.icon-highlight{
+  font-size: 22px;
+  color: #FFA001;
+
+}
+.icon-unhighlight{
+  font-size: 22px;
+  color: #D9D9D9;
+}
+
+/* ---------> RESPONSIVE DESIGN <--------- */
+/*
+xs
+iPhone 6/7/8 375x667
+*/
+@media (max-width: 575px){}
+/*
+sm
+Mobile
+Nexus 7 600x960
+*/
+@media (min-width: 576px) and (max-width: 759px){}
+/*
+md
+Tablet
+iPad 768x1024
+*/
+@media (min-width: 760px) and (max-width: 991px) {
+  #actions{
+    align-items: baseline;
+  }
+}
+/*
+lg
+992px-1199px
+*/
+@media (min-width: 992px) {
+  #actions{
+    align-items: baseline;
+  }
+}
+/*
+xl
+Desktop
+Laptop 1280x950
+*/
+@media (min-width: 1200px) {}

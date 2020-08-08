@@ -1,0 +1,43 @@
+.sider-menu {
+  height: 100%;
+  border-right: 0;
+}
+[nz-menu] {
+  width: 235px;
+  height: 100vh;
+  margin-top: 20px;
+}
+.menu-item {
+  color: #8c5167;
+  font-size: 18px;
+  margin-bottom: 16px;
+  outline: none;
+}
+.menu-item:hover {
+  background-color: #feecef;
+  color: #fe5366;
+}
+.ant-menu-item-selected {
+  background-color: #ffd5dd !important;
+  color: #fe5366;
+  font-weight: 500;
+}
+[nz-icon] {
+  margin-right: 7px;
+  margin-left: 10px;
+  font-size: 20px;
+  vertical-align: 0.125em;
+}
+#final-item {
+  margin-top: 190px;
+}
+#icon-bf {
+  font-size: 25px;
+  color: #fe5366;
+}
+#name-bf {
+  color: #65617d;
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 20px;
+}

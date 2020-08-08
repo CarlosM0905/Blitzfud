@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "./styles/ng-zorro-antd.css";
+body {
+    font-family: Poppins;
+}
+.ant-drawer-content {
+  border-radius: 40px 0px 0px 40px;
+
+  border-color: #fe5366;
+  border-style: double;
+}
+.ant-drawer-content-wrapper {
+  border-radius: 40px 0px 0px 40px;
+}
+
+.pac-container {
+  z-index: 9999;
+}
+
+.modal-backdrop {
+    display: none;
+}
+
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FEECEF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF6E7F;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FE5366;
+ 
+}

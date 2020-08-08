@@ -1,0 +1,103 @@
+<div class="container-fluid">
+    <!-- Principal Row -->
+    <div class="row">
+        <!-- Image Column -->
+        <div class="
+                d-none d-lg-flex
+                col-lg-6  container
+                justify-content-center
+                "
+            id="login-img">
+            <!-- Image -->
+            <div class="row m-3">
+                <div class="col-md-12">
+                    <img src="../../assets/images/login.svg" alt="login Image" class="img-fluid animate__animated animate__fadeIn animate__faster">
+                </div>
+            </div>
+            <!-- Button -->
+            <div class="row my-5 d-flex justify-content-center">
+                <div class="col-sm-12 col-md-8">
+                    <button [routerLink]="['/register']" id="create-account-button" nz-button nzBlock nzType="primary" nzSize="large" >¿No tienes una cuenta?</button>
+                </div>
+            </div>
+        </div>
+        <!-- Form Column -->
+        <div class="
+                col-md-12 col-lg-6
+                px-5
+                ">
+            <!-- Principal Row -->
+            <div class="row d-flex justify-content-center">
+                <!-- Principal ColumnS -->
+                <div class="col-sm-12 col-md-11 col-lg-10">
+                    <!-- Row 1 - Logo-->
+                    <!-- Mobile & Tablet -->
+                    <div [routerLink]="['/welcome']"  id="logo" class="d-flex d-lg-none justify-content-center mt-5">
+                            <i id="icon-bf" nz-icon [nzType]="'shop'"></i>
+                            <h2 id="name-bf" nz-typography>Blitzfud</h2>
+                    </div>
+                    <!-- Desktop -->
+                    <div [routerLink]="['/welcome']" id="logo" class="d-none d-lg-flex mt-5">
+                            <i id="icon-bf" nz-icon [nzType]="'shop'"></i>
+                            <h2 id="name-bf" nz-typography>Blitzfud</h2>
+                    </div>
+                    <!-- Row 2 - "¡Bienvenido de vuelta!" -->
+                    <div class="">
+                        <!-- Mobile -->
+                            <h2 class="d-block d-sm-none text-center my-4" id="message-login" nz-typography>¡Bienvenido!</h2>
+                        <!-- Tablet y Desktop -->
+                            <h2 class="d-none d-sm-block" id="message-login" nz-typography>¡Bienvenido de vuelta!</h2>
+                    </div>
+                    <!-- Row 3 - Form -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form novalidate [formGroup]="formUser" (ngSubmit)="submitUserData()" nz-form nzLayout='vertical'>
+                                <!-- Input Correo -->
+                                <nz-form-item class="my-2" id="input-correo">
+                                    <nz-form-label class="title-input" [nzSpan]="6" nzFor="email">Correo:
+                                    </nz-form-label>
+                                    <nz-form-control [nzSpan]="18">
+                                        <input class="form-control" formControlName="email" nz-input name="email" type="text" nzSize="large" [class.is-invalid]="emailInvalid">
+                                        <small *ngIf="emailInvalid" class="text-danger">
+                                            Ingrese un correo valido
+                                        </small>
+                                    </nz-form-control>
+                                    
+                                </nz-form-item>
+                                <!-- Input Contraseña -->
+                                <nz-form-item class="mt-4 mb-2" id="input-contraseña">
+                                    <nz-form-label class="title-input" [nzSpan]="6" nzFor="password">Contraseña:
+                                    </nz-form-label>
+                                    <nz-form-control [nzSpan]="18">
+                                        <nz-input-group [nzSuffix]="suffixTemplate"  nzSize="large">
+                                            <input class="input-login" [type]="passwordVisible ? 'text' : 'password'"  formControlName="password" nz-input name="password" [class.is-invalid]="passwordInvalid"/>
+                                        </nz-input-group>
+                                <!-- Icon Eye -->        
+                                        <ng-template #suffixTemplate class="d-flex align-items-center">
+                                            <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"
+                                               class="icon-eye" nzType="eye"></i>
+                                        </ng-template>
+                                    </nz-form-control>
+                                    <small *ngIf="passwordInvalid && !formUser.pristine" class="text-danger">
+                                        Ingrese una contraseña
+                                    </small>
+                                </nz-form-item>
+                                <!-- Button -->
+                                <nz-form-item>
+                                    <div class="row my-2">
+                                        <div class="col-md-6 d-flex justify-content-center">
+                                            <button type="submit" [disabled]="formUser.invalid" id="entrar-button" nz-button nzBlock nzType="primary" nzSize="large">Entrar</button>
+                                        </div>
+                                    </div>
+                                </nz-form-item>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center d-md-none">
+            <button class="d-block d-md-none" [routerLink]="['/register']" id="create-account-button" nz-button nzBlock nzType="primary" nzSize="large" >¿No tienes una cuenta?</button>
+            </div>
+        </div>
+    </div>
+</div>

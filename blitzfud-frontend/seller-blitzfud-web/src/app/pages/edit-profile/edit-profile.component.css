@@ -1,0 +1,21 @@
+#seller_name{
+    color: #65617D;
+}
+#save_changes{
+    border-radius: 16px;
+}
+#save_changes:hover{
+    border-radius: 16px;
+    border-color: #FFB9B9;
+    background-color: #FFB9B9;
+}
+#save_changes:active{
+    border-radius: 16px;
+    border-color: #FE5366;
+    background-color: #FE5366;
+}
+#save_changes:focus{
+    border-radius: 16px;
+    border-color: #FE5366;
+    background-color: #FE5366;
+}

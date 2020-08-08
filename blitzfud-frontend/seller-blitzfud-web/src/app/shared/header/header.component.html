@@ -1,0 +1,32 @@
+<div class="header">
+    <div class="header-left" id="header-left">
+        <i id="title">{{this.header}}</i>
+    </div>
+    <div class="header-right" id="profile-img">
+        <div class="header-right-left">
+            <button nz-button nzType="primary" id="profile" [nzSize]="56" nzShape="circle" nz-popover [nzPopoverTitle]="title" [(nzVisible)]="visible" (nzVisibleChange)="change($event)" nzPopoverTrigger="click" [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottom">
+                <ng-template #contentTemplate>
+                    <div>
+                        <p id="editProfile" [routerLink]="['edit-profile']">Editar Perfil</p>
+                        <a (click)="logout()" id="close">Cerrar sesión</a>
+                    </div>
+                </ng-template>
+                <ng-template #title>
+                    <div id="popover-title">
+                        {{this.firstName}} {{this.lastName}}
+                    </div>
+                </ng-template>
+                <i nz-icon nzType="user"></i>
+            </button>
+        </div>
+        <div class="header-right-right">
+            <div id="text-content">
+                <div id="profile-name">{{this.firstName}}</div>
+                <div id="sales">0 ventas :(</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+</div>

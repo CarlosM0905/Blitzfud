@@ -1,0 +1,158 @@
+<div class="row">
+  <!-- DELIVERY COLUMN -->
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 d-flex flex-column align-items-center">
+    <nz-divider nzDashed [nzText]="text1" class="column_title_text" >
+    <ng-template #text1>Delivery<i class="column_title_icon" nz-icon nzType="rocket"></i></ng-template>
+    </nz-divider>
+    <!-- DELIVERY CARDS -->
+    <nz-card
+      class="container p-0 m-0 mt-3 card_items_container"
+      *ngFor="let item_delivery_order of delivery_orders">
+      <!-- ROW 1 -->
+      <div class="row mx-0">
+          <!-- PHOTO CARD -->
+          <div class="col-md-3 px-0 avatar_container" >
+            <img src="../../../../assets/images/seller-profile.svg">
+          </div>
+          <!-- ONLY RESPONSIVE -->
+          <h6 class="col-xs-12 col-sm-12 d-xs-block d-md-none mb-0 mt-3">{{item_delivery_order.client_name}}</h6>
+          <!-- ONLY RESPONSIVE -->
+          <!-- #ORDEN & TIME -->
+          <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column px-0 container_order_time">
+            <h5 class="dark_3_color text_nro_orden">Orden {{item_delivery_order.order_number}}</h5>
+            <div class="d-flex align-items-center">
+              <i  nz-icon nzType="clock-circle" nzTheme="twotone" [nzTwotoneColor]="'#FE5366'"></i>
+              <small class="ml-2 primary_1_color">Hace {{item_delivery_order.time_since_ordered}}</small>
+            </div>
+          </div>
+          <!-- TOTAL -->
+          <div class="col-md-3 ml-1 px-0">
+            <h6 class="mb-0 primary_1_color text_align_right bold text_total_price_card">S/{{item_delivery_order.amount}}</h6>
+          </div>
+      </div>
+      <!-- ROW 2 -->
+          <!-- CLIENT NAME & QUANTITY OF PRODUCTS -->
+          <div class="row d-flex justify-content-between mx-0 mt-3">
+            <p class="mb-0 dark_3_color text_client_name_card">{{item_delivery_order.client_name}}</p>
+            <p class="mb-0 primary_1_color text_number_products_card"> {{item_delivery_order.quantity_products}} producto(s)</p>
+          </div>
+          <!-- ONLY RESPONSIVE -->
+          <p class="d-xs-block d-md-none mb-0 primary_1_color"> {{item_delivery_order.quantity_products}} producto(s)</p>
+          <h6 class="d-xs-block d-md-none mb-0 mt-3 primary_1_color text_align_center bold">S/{{item_delivery_order.amount}}</h6>
+          <!-- ONLY RESPONSIVE -->
+    </nz-card>
+  </div>
+
+  <!-- PICKUP COLUMN -->
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 d-flex flex-column align-items-center container_column_recojo">
+    <nz-divider nzDashed [nzText]="text2" class="column_title_text">
+      <ng-template #text2>Recojo en Tienda<i class="column_title_icon" nz-icon nzType="rocket"></i></ng-template>
+    </nz-divider>
+    <!-- PICKUP CARDS -->
+    <nz-card
+      class="container p-0 m-0 mt-3 card_items_container"
+      *ngFor="let item_market_order of market_orders">
+      <!-- ROW 1 -->
+      <div class="row mx-0" >
+          <!-- PHOTO AVATAR -->
+          <div class="col-md-3 px-0 avatar_container">
+            <img src="../../../../assets/images/seller-profile.svg" alt="">
+          </div>
+          <!-- ONLY RESPONSIVE -->
+          <h6 class="col-xs-12 col-sm-12 d-xs-block d-md-none mb-0 mt-3">{{item_market_order.client_name}}</h6>
+          <!-- ONLY RESPONSIVE -->
+          <!-- #ORDEN & TIME -->
+          <div class="col-xs-12 col-sm-12 col-md-5 d-flex flex-column px-0 container_order_time">
+            <h5 class="dark_3_color text_nro_orden">Orden {{item_market_order.order_number}}</h5>
+            <div class="d-flex align-items-center">
+              <i  nz-icon nzType="clock-circle" nzTheme="twotone" [nzTwotoneColor]="'#FE5366'"></i>
+              <small class="ml-2 primary_1_color">Hace {{item_market_order.time_since_ordered}}</small>
+            </div>
+          </div>
+          <!-- TOTAL -->
+          <div class="col-md-3 ml-1 px-0">
+            <h6 class="mb-0 primary_1_color text_align_right bold text_total_price_card">S/{{item_market_order.amount}}</h6>
+          </div>
+      </div>
+      <!-- ROW 2 -->
+          <!-- CLIENT NAME & QUANTITY OF PRODUCTS -->
+          <div class="row d-flex justify-content-between mx-0 mt-3">
+            <p class="mb-0 dark_3_color text_client_name_card">{{item_market_order.client_name}}</p>
+            <p class="mb-0 primary_1_color text_number_products_card">{{item_market_order.quantity_products}} producto(s)</p>
+          </div>
+          <!-- ONLY RESPONSIVE -->
+          <p class="d-xs-block d-md-none mb-0 primary_1_color"> {{item_market_order.quantity_products}} producto(s)</p>
+          <h6 class="d-xs-block d-md-none mb-0 mt-3 primary_1_color text_align_center bold">S/{{item_market_order.amount}}</h6>
+          <!-- ONLY RESPONSIVE -->
+    </nz-card>
+  </div>
+
+  <!-- ORDER DETAIL -->
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 ">
+    <nz-card
+      class="border_color_white card_detail_container"
+      *ngFor="let detail of order_detail">
+      <!-- ROW 1 -->
+          <!-- N°Order & Time -->
+          <div class="row d-flex flex-column align-items-end px-2">
+              <h5 class="primary_1_color text_nro_order_detail">Orden {{detail.order_number}}</h5>
+                <div class="d-flex align-items-center">
+                  <i  nz-icon nzType="clock-circle" nzTheme="twotone" [nzTwotoneColor]="'#FE5366'"></i>
+                  <small  class="ml-2 primary_1_color">Hace {{detail.time_since_ordered}}</small>
+                </div>
+          </div>
+      <!-- ROW 2 -->
+          <!-- PROFILE USER -->
+          <div class="row d-flex mb-4 mt-1">
+              <!-- PHOTO USER -->
+              <div class="col-md-12 px-0">
+                <img class="avatar_detail" src="../../../../assets/images/seller-profile.svg" alt="">
+              </div>
+              <!-- NAME USER -->
+              <div class="col-md-12">
+                <h2 class="mb-0 mt-3 dark_3_color text_client_name_detail">{{detail.client_name}}</h2>
+              </div>
+          </div>
+      <!-- ROW 3 -->
+          <!-- TITLE PRODUCTS -->
+          <div class="row">
+            <div class="col-md-12">
+              <h2 class="dark_3_color text_align_start text_title_product">Productos:</h2>
+            </div>
+          </div>
+      <!-- ROW 4 -->
+          <!-- PRODUCTS -->
+          <div *ngFor="let products of order_detail_products" class="row my-1">
+            <!-- ITEM -->
+            <div class="col-md-2"> <h5 class="dark_3_color text_data_products">{{products.quantity_of_product}}</h5> </div>
+            <div class="col-md-7"> <h5 class="primary_1_color text_align_start text_data_products">{{products.name_of_product}}</h5> </div>
+            <div class="col-md-3"> <h5 class="dark_3_color text_align_start text_data_products">S/ {{(products.quantity_of_product * products.price_of_product) | number:'.2' }}</h5> </div>
+          </div>
+      <!-- ROW 5 -->
+          <!-- FINAL PRICE -->
+          <div class="row d-flex justify-content-end mt-3 px-4">
+            <h2 class="dark_3_color text_align_end text_total_price">Total: S/.{{detail.total_amount}}</h2>
+          </div>
+      <!-- ROW 6 -->
+          <!-- BUTTONS -->
+          <div class="row mt-5">
+            <div class="col-md-6">
+              <button id="btn_rechazar" class="boton btn btn-primary" nz-button nzType="submit"
+                      data-toggle="modal" data-target="#modal_reject_order">
+                Rechazar
+              </button>
+            </div>
+            <div class="col-md-6">
+              <button id="btn_atender" class="boton btn btn-primary" nz-button nzType="submit"
+                      data-toggle="modal" data-target="#modal_attend_order">
+                Atender
+              </button>
+            </div>
+          </div>
+    </nz-card>
+  </div>
+</div>
+
+<!-- MODALES -->
+<app-modal-reject-order></app-modal-reject-order>
+<app-modal-attend-order></app-modal-attend-order>

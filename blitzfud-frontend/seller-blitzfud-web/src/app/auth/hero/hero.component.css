@@ -1,0 +1,303 @@
+#btnLogin:hover {
+  background-color: #ff7585;
+  border-color: #fe5366;
+}
+
+#btnRegister:hover {
+  border-color: #fe5366;
+  color: #fe5366;
+}
+
+/* Resposive Design */
+
+/*
+xs
+iPhone 6/7/8 375x667
+*/
+@media (max-width: 575px) {
+  #icon-bf {
+    font-size: 2rem;
+    color: #fe5366;
+  }
+  #rowIcon {
+    display: flex;
+    justify-content: center;
+  }
+  #name-bf {
+    color: #65617d;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+
+  #rowName {
+    display: flex;
+    justify-content: center;
+  }
+  #title-text {
+    color: #fe5366;
+    font-family: Poppins;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  #subtitle-text {
+    color: #65617d;
+    font-family: Poppins;
+    font-size: 1.5rem;
+    font-weight: 450;
+    text-align: center;
+  }
+
+  #paragraph-text {
+    color: #65617d;
+    font-family: Poppins;
+    font-size: 1rem;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  #btnRegister {
+    margin-bottom: 0.5rem;
+    width: 350px;
+  }
+  #btnLogin {
+    width: 350px;
+  }
+
+  #colBtnRegister {
+    display: flex;
+    justify-content: center;
+  }
+
+  #colBtnLogin {
+    display: flex;
+    justify-content: center;
+  }
+
+  #rowCarousel {
+    display: none !important;
+  }
+
+  .footer {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+  }
+
+  #blitzy-img {
+    margin-bottom: 0.5rem;
+    padding-bottom: 1rem;
+  }
+}
+
+/*
+sm
+Mobile
+Nexus 7 600x960
+*/
+@media (min-width: 576px) and (max-width: 759px) {
+  #icon-bf {
+    font-size: 2rem;
+    color: #fe5366;
+  }
+  #name-bf {
+    color: #65617d;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+
+  #rowIcon {
+    display: flex;
+    justify-content: center;
+  }
+  #rowName {
+    display: flex;
+    justify-content: center;
+  }
+
+  #title-text {
+    color: #fe5366;
+    font-family: Poppins;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  #subtitle-text {
+    color: #65617d;
+    font-family: Poppins;
+    font-size: 1.5rem;
+    font-weight: 450;
+  }
+
+  #paragraph-text {
+    color: #65617d;
+    font-family: Poppins;
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+
+  #btnRegister {
+    width: 350px;
+    margin-bottom: 0.5rem;
+  }
+
+  #btnLogin {
+    width: 350px;
+  }
+
+  #colBtnRegister {
+    display: flex;
+    justify-content: center;
+  }
+
+  #colBtnLogin {
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+  }
+
+  #blitzy-img {
+    display: none;
+  }
+}
+
+/*
+md
+Tablet
+iPad 768x1024
+*/
+@media (min-width: 760px) and (max-width: 991px) {
+  #icon-bf {
+    font-size: 2rem;
+    color: #fe5366;
+  }
+  #name-bf {
+    color: #65617d;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+  #title-text {
+    color: #fe5366;
+    font-family: Poppins;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  #subtitle-text {
+    color: #65617d;
+    font-family: Poppins;
+    font-size: 1.4rem;
+    font-weight: 450;
+  }
+
+  #paragraph-text {
+    color: #65617d;
+    font-family: Poppins;
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+
+  #btnRegister {
+    width: 160px;
+  }
+
+  #btnLogin {
+    width: 160px;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+  }
+
+  #blitzy-img {
+    display: none;
+  }
+
+  .content-buttons {
+    height: 10vh;
+  }
+  .content {
+    height: 85vh;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (min-width: 992px) {
+  #icon-bf {
+    font-size: 3rem;
+    color: #fe5366;
+  }
+  #name-bf {
+    color: #65617d;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 2.5rem;
+  }
+  #title-text {
+    color: #fe5366;
+    font-family: Poppins;
+    font-size: 2.5rem;
+    font-weight: 500;
+  }
+  #subtitle-text {
+    color: #65617d;
+    font-family: Poppins;
+    font-size: 2rem;
+    font-weight: 450;
+  }
+
+  #paragraph-text {
+    color: #65617d;
+    font-family: Poppins;
+    font-size: 2rem;
+    font-weight: 300;
+  }
+
+  [nz-carousel-content] {
+    text-align: center;
+    height: 50vh;
+    /*overflow: hidden;*/
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+  }
+
+  #btnRegister {
+    width: 20vw;
+  }
+
+  #btnLogin {
+    width: 20vw;
+  }
+
+  #blitzy-img {
+    display: none;
+  }
+  .content-buttons {
+    height: 10vh;
+  }
+  .content {
+    height: 85vh;
+    display: flex;
+    align-items: center;
+  }
+}

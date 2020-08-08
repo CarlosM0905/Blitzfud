@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/colorWhite"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtNameMarket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/colorSecondary"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Monto del pedido:" />
+
+            <TextView
+                android:id="@+id/txtMountShopping"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins"
+                android:gravity="right"
+                android:text="S/ 00.00" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutDelivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Delivery:" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins"
+                android:gravity="right"
+                android:text="S/ 1.00" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Subtotal: "
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:id="@+id/txtSubtotal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins"
+                android:gravity="right"
+                android:text="S/ 00.00"
+                android:textColor="@color/colorBlack" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

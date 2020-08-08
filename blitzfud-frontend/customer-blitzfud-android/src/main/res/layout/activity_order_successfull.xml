@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
+    tools:context=".views.pages.order.OrderSuccessfullActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:text="Pedido registrado"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondary"
+            android:textSize="18sp" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/oksign" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnHome"
+            android:layout_width="200dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/button_rounded"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Ir al inicio"
+            android:textColor="@color/colorWhite"
+            app:backgroundTint="@color/colorPrimary" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

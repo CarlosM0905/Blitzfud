@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
+    android:orientation="vertical"
+    tools:context=".views.fragments.market.MarketsFragment">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/pantallaPrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layoutSubscribe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/border_bottom_primary"
+                    android:visibility="gone">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerSubscribedMarkets"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/lblViewAllFavoriteMarkets"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="Todos" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/searchAnchor"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:id="@+id/searchLoading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ProgressBar
+                        android:layout_width="40dp"
+                        android:layout_height="40dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/seachEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="No se encontraron resultados"
+                        android:textColor="@color/colorSecondary" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <EditText
+            android:id="@+id/txtKeyword"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:background="@drawable/custom_search"
+            android:drawableStart="@drawable/custom_icon_search"
+            android:drawableLeft="@drawable/custom_icon_search"
+            android:drawablePadding="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:fontFamily="@font/poppins"
+            android:hint="Busca un producto..."
+            android:imeOptions="actionSearch"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:visibility="visible"
+            app:layout_anchor="@id/searchAnchor"
+            app:layout_anchorGravity="center" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <LinearLayout
+        android:id="@+id/loadingMarkets"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Espere un momento..."
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/emptyMarkets"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:text="No se encontraron tiendas cercanas"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
