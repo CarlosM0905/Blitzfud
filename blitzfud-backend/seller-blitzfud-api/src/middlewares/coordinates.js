@@ -1,10 +1,18 @@
+const { responseToInvalidFormat } = require('../helpers/responses');
+
 function checkCoordinates (req, res, next) {
     let location = req.body.location;
-    if (location.constructor === Array) {
-        if (location.length == 2) {
-            let lat = Number(location[0]);
-            let lon = Number(location[1]);
-            if(!isNaN(lat) && !isNaN(lon)){
+    if (!location.coordinates){
+        return responseToInvalidFormat(res);
+    }
+    if (!location.address){
+        return responseToInvalidFormat(res);
+    }
+    if (location.coordinates.constructor === Array) {
+        if (location.coordinates.length == 2) {
+            let lon = Number(location.coordinates[0]);
+            let lat = Number(location.coordinates[1]);
+            if(!isNaN(lon) && !isNaN(lat)){
                 return next();
             }
         }
@@ -14,16 +22,6 @@ function checkCoordinates (req, res, next) {
     });
 }
 
-
-function formatCoordinates (req, res, next) {
-    const location = req.body.location;
-    req.body.location = {
-        coordinates: location
-    }
-    next();
-}
-
 module.exports = {
-    checkCoordinates,
-    formatCoordinates
+    checkCoordinates
 }

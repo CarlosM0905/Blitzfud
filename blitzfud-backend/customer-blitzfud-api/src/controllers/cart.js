@@ -6,7 +6,7 @@ const Product = require('../models/product');
 const MARKETS_PATH = urljoin(process.env.HOST, 'markets');
 const ENDPOINT_PATH = urljoin(process.env.HOST, 'cart');
 
-const { responseToInternalServerError } = require('../helpers/responses');
+const { responseToMongooseError } = require('../helpers/responses');
 
 function getAllItems (req, res) {
     const customerId = req.user._id;
@@ -22,49 +22,8 @@ function getAllItems (req, res) {
         })
         .exec()
         .then(doc => {
-            if (!(doc.shoppingCart === undefined || doc.shoppingCart.length == 0)) {
-                let cart = doc.shoppingCart.filter(subcart =>
-                    subcart.items.length != 0
-                );
-                const response = {
-                    count: cart.length,
-                    subcarts: cart.map(subcart => {
-                        return {
-                            market: {
-                                name: subcart.market.name,
-                                deliveryMethods: subcart.market.deliveryMethods,
-                                deliveryPrice: subcart.market.deliveryPrice,
-                                _id: subcart.market._id,
-                                request: {
-                                    type: 'GET',
-                                    url: urljoin(MARKETS_PATH, subcart.market._id.toString())
-                                }
-                            },
-                            items: subcart.items.map(item => {
-                                return {
-                                    product: item.product,
-                                    quantity: item.quantity,
-                                    request: {
-                                        type: 'GET',
-                                        URL: urljoin(MARKETS_PATH, item.product.market.toString(), 
-                                                    '/products', item.product._id.toString())
-                                    }
-                                }
-                            })
-                        }
-                    }),
-                    request: {
-                        type: 'POST', 
-                        url: ENDPOINT_PATH,
-                        body : {
-                            productId: 'ObjectId',
-                            quantity: 'Number'
-                        }
-                    }
-                }
-                res.status(200).json(response);
-            } else {
-                res.status(200).json({
+            if (doc.shoppingCart === undefined || doc.shoppingCart.length == 0) {
+                return res.status(200).json({
                     count: 0,
                     subcarts: [],
                     request: {
@@ -77,38 +36,82 @@ function getAllItems (req, res) {
                     }
                 });
             }
+            let cart = doc.shoppingCart.filter(subcart =>
+                subcart.items.length != 0
+            );
+            const response = {
+                count: cart.length,
+                subcarts: cart.map(subcart => {
+                    return {
+                        market: {
+                            name: subcart.market.name,
+                            deliveryMethods: subcart.market.deliveryMethods,
+                            deliveryPrice: subcart.market.deliveryPrice,
+                            _id: subcart.market._id,
+                            request: {
+                                type: 'GET',
+                                url: urljoin(MARKETS_PATH, subcart.market._id.toString())
+                            }
+                        },
+                        items: subcart.items.map(item => {
+                            return {
+                                product: item.product,
+                                quantity: item.quantity,
+                                request: {
+                                    type: 'GET',
+                                    URL: urljoin(MARKETS_PATH, item.product.market.toString(), 
+                                                '/products', item.product._id.toString())
+                                }
+                            }
+                        })
+                    }
+                }),
+                request: {
+                    type: 'POST', 
+                    url: ENDPOINT_PATH,
+                    body : {
+                        productId: 'ObjectId',
+                        quantity: 'Number'
+                    }
+                }
+            }
+            res.status(200).json(response);
         })
         .catch(err => {
-            responseToInternalServerError(res, err);
+            responseToMongooseError(res, err);
         });
 }
 
 async function getMarketOfProduct (productId) {
     return Product.findById(productId)
-                  .select('market')
-                  .exec()
-                  .then(doc => {
-                      return doc.market.toString();
-                  });
+                .select('market')
+                .exec()
+                .then(doc => {
+                    if (doc) {
+                        return doc.market.toString();
+                    } else {
+                        return null;
+                    }
+                });
 }
 
 async function isMarketInCart (customerId, marketId) {
     return Customer.findById(customerId)
-            .select('shoppingCart.market')
-            .exec()
-            .then(doc => {
-                const shoppingCart = doc.shoppingCart;
-                if (shoppingCart !== undefined){
-                    for (let i = 0; i < shoppingCart.length; i++) {
-                        if (shoppingCart[i].market == marketId){
-                            return true;
+                .select('shoppingCart.market')
+                .exec()
+                .then(doc => {
+                    const shoppingCart = doc.shoppingCart;
+                    if (shoppingCart !== undefined){
+                        for (let i = 0; i < shoppingCart.length; i++) {
+                            if (shoppingCart[i].market == marketId){
+                                return true;
+                            }
                         }
+                        return false;
+                    } else {
+                        return false;
                     }
-                    return false;
-                } else {
-                    return false;
-                }
-            });
+                });
 }
 
 function getConditionsAddItemToNewStore (item, customerId, marketId) {
@@ -144,12 +147,22 @@ async function addItem (req, res) {
         product: req.body.productId,
         quantity: req.body.quantity
     }
-    const marketId = await getMarketOfProduct(productId);
+    let marketId;
     let conditions, update;
-    if (await isMarketInCart(customerId, marketId)) {
-        [conditions, update] = getConditionsAdditemToExistingStore(item, customerId, marketId);
-    } else {
-        [conditions, update] = getConditionsAddItemToNewStore(item, customerId, marketId);
+    try {
+        marketId = await getMarketOfProduct(productId);
+        if (!marketId) {
+            return res.status(400).json({
+                message: 'Producto no existe'
+            });
+        }
+        if (await isMarketInCart(customerId, marketId)) {
+            [conditions, update] = getConditionsAdditemToExistingStore(item, customerId, marketId);
+        } else {
+            [conditions, update] = getConditionsAddItemToNewStore(item, customerId, marketId);
+        }
+    } catch (err) {
+        return responseToMongooseError(res, err);
     }
     Customer.updateOne(conditions, update)
         .then(result => {
@@ -168,7 +181,7 @@ async function addItem (req, res) {
             }
         })
         .catch(err => {
-            responseToInternalServerError(res, err);
+            responseToMongooseError(res, err);
         });
 }
 
@@ -209,7 +222,7 @@ async function updateItem (req, res) {
             }
         })
         .catch(err => {
-            responseToInternalServerError(res, err);
+            responseToMongooseError(res, err);
         });
 }
 
@@ -249,7 +262,7 @@ async function removeItem (req, res) {
             }
         })
         .catch(err => {
-            responseToInternalServerError(res, err);
+            responseToMongooseError(res, err);
         });
 }
 
@@ -288,15 +301,46 @@ function emptyCart (req, res) {
             });                   
         })
         .catch(err => {
-            responseToInternalServerError(res, err);
+            responseToMongooseError(res, err);
         });
 }
 
+function removeMarket (req, res) {
+    const customerId = req.user._id;
+    const marketId = req.params.marketId;
+    const conditions = {
+        '_id': customerId,
+        'shoppingCart.items': { $gt: [] }
+    };
+    const update = {
+        $pull: {
+            'shoppingCart': {
+                market: marketId
+            }
+        }
+    };
+    Customer.updateOne(conditions, update)
+        .then(result => {
+            if (result.nModified > 0){
+                res.status(200).json({
+                    message: 'Producto(s) eliminados satisfactoriamente'
+                });                
+            } else {
+                res.status(404).json({
+                    message: 'Tienda no ha sido encontrada en tu carrito'
+                })
+            }
+        })
+        .catch(err => {
+            responseToMongooseError(res, err);
+        });
+}
 
 module.exports = {
     getAllItems,
     addItem,
     updateItem,
+    emptyCart,
     removeItem,
-    emptyCart
+    removeMarket
 }

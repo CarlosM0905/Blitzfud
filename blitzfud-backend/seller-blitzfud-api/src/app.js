@@ -14,13 +14,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/auth', Routes.AuthenticationRoutes);
+app.use('/seller', Routes.SellerRoutes);
 app.use('/market', Routes.MarketRoutes);
 app.use('/products', Routes.ProductsRoutes);
 app.use('/categories', Routes.CategoriesRoutes);
+app.use('/sales', Routes.SalesRoutes);
 app.use('/orders', Routes.OrdersRoutes);
-app.use('/deliveryProviders', Routes.DeliveryProvidersRoutes);
 app.use('/jobInvitations', Routes.JobInvitationsRoutes);
 app.use('/deliveryWorkers', Routes.DeliveryWorkersRoutes);
+app.use('/deliveryProviders', Routes.DeliveryProvidersRoutes);
 
 app.use(ErrorsHandler.nonExistingEndpointHandler);
 app.use(ErrorsHandler.errorHandler);

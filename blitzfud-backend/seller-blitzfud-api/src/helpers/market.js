@@ -12,6 +12,19 @@ async function getMarketLocation (marketId) {
                  });    
 }
 
+async function getDeliveryWorkers (marketId) {
+    return Market.findById(marketId)
+                 .select('deliveryProviders')
+                 .exec()
+                 .then(doc => {
+                     return doc.deliveryProviders || [];
+                 })
+                 .catch(err => {
+                     responseToMongooseError(res, err);
+                 }); 
+}
+
 module.exports = {
-    getMarketLocation
+    getMarketLocation,
+    getDeliveryWorkers
 }

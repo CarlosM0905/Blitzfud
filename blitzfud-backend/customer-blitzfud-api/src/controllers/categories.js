@@ -1,5 +1,7 @@
 const Category = require('../models/category');
 
+const { responseToMongooseError } = require('../helpers/responses');
+
 function getAllCategories (req, res) {
     Category.find()
         .select('name description _id')
@@ -18,10 +20,7 @@ function getAllCategories (req, res) {
             res.status(200).json(response);
         })
         .catch(err => {
-            res.status(500).json({
-                message: 'Error interno de servidor, reintente en unos minutos por favor',
-                error: err
-            })
+            responseToMongooseError(res, err);
         })
     }
 

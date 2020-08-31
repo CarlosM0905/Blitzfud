@@ -7,7 +7,6 @@ const CoordinatesMiddleware = require('../middlewares/coordinates');
 
 router.post('/signin', AuthenticationController.signin);
 router.post('/signup', CoordinatesMiddleware.checkCoordinates,
-                       CoordinatesMiddleware.formatCoordinates,
                        AuthenticationController.signup);
 
 module.exports = router;

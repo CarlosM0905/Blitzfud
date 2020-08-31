@@ -6,7 +6,7 @@ const OrdersController = require('../controllers/orders');
 const checkAuth = require('../middlewares/authentication');
 
 router.get('/', checkAuth, OrdersController.getAllOrders);
-router.post('/:orderId', checkAuth, 
+router.patch('/:orderId', checkAuth, 
                          OrdersController.updateOrder);
 
 module.exports = router;

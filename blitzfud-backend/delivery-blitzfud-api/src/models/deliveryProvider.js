@@ -1,8 +1,13 @@
 const mongoose = require('mongoose');
 
-const pointSchema = require('./schemas/point');
+const locationSchema = require('./schemas/location');
 
 const deliveryProviderSchema = new mongoose.Schema({
+    nationalIdentityNumber: {
+        type: String,
+        required: true,
+        unique: true
+    },
     phoneNumber: {
         type: String,
         required: true,
@@ -36,13 +41,19 @@ const deliveryProviderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    profilePhotoURL: {
+        type: String
+    },
+    profilePhotoId: {
+        type: String
+    },
 
     markets: [{
         type: mongoose.Types.ObjectId,
         ref: 'Market'
     }],
     location: {
-        type: pointSchema,
+        type: locationSchema,
         required: true
     }
 });

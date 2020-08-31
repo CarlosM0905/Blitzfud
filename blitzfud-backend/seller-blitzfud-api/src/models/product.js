@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const PRODUCT_CONSTANTS = require('../constants/product');
+
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -10,7 +12,7 @@ const productSchema = new mongoose.Schema({
     },
     unitOfMeasurement: {
         type: String,
-        enum: ['mg', 'g', 'kg', 'ml', 'l', 'un']
+        enum: PRODUCT_CONSTANTS.UNITS_OF_MEASUREMENT
     },
     content: {
         type: Number
@@ -18,8 +20,8 @@ const productSchema = new mongoose.Schema({
     maxQuantityPerOrder: {
         type: Number,
         min: 1,
-        max: 100,
-        default: 100
+        max: PRODUCT_CONSTANTS.MAX_QUANTITY_PER_ORDER,
+        default: PRODUCT_CONSTANTS.MAX_QUANTITY_PER_ORDER
     },
     price: {
         type: Number,
@@ -32,11 +34,11 @@ const productSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: [
-                'available',
-                'out-of-stock', 
-                'deleted'
+                PRODUCT_CONSTANTS.STATUS.AVAILABLE,
+                PRODUCT_CONSTANTS.STATUS.OUT_OF_STOCK, 
+                PRODUCT_CONSTANTS.STATUS.DELETED
               ],
-        default: 'available'
+        default: PRODUCT_CONSTANTS.STATUS.AVAILABLE
     },
     
     market: {

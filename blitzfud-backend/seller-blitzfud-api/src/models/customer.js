@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
-const pointSchema = require('./schemas/point');
+const locationSchema = require('./schemas/location');
 const subCartSchema = require('./schemas/subCart');
+
+const { STATUS } = require('../constants/account');
 
 const customerSchema = new mongoose.Schema({
     phoneNumber: { 
@@ -19,10 +21,10 @@ const customerSchema = new mongoose.Schema({
     accountStatus: {
         type: String,
         enum: [
-                'active',
-                'banned'
+                STATUS.ACTIVE,
+                STATUS.BANNED
               ],
-        default: 'active'
+        default: STATUS.ACTIVE
     },
     firstName: {
         type: String,
@@ -34,7 +36,7 @@ const customerSchema = new mongoose.Schema({
     },
     
     location: {
-        type: pointSchema,
+        type: locationSchema,
     },
     shoppingCart: [{
         type: subCartSchema

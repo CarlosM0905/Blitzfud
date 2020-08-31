@@ -1,7 +1,6 @@
 const { responseToInvalidFormat } = require('../helpers/responses');
 
 function onCreationHasDelivery (req, res, next) {
-    console.log(req.body)
     let body = req.body;
     if (body['deliveryMethods'] === 'delivery' ||
         body['deliveryMethods'] === 'both') {

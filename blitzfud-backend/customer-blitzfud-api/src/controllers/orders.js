@@ -5,7 +5,7 @@ const Order = require('../models/order');
 const PURCHASE_ORDERS_PATH = urljoin(process.env.HOST, 'purchaseOrders');
 const MARKETS_PATH = urljoin(process.env.HOST, 'markets');
 
-const { responseToInternalServerError } = require('../helpers/responses');
+const { responseToMongooseError } = require('../helpers/responses');
 
 function getOrder (req, res) {
     const customerId = req.user._id;
@@ -15,13 +15,16 @@ function getOrder (req, res) {
         customer: customerId
     })
     .populate('market', 'name')
+    .populate('deliveryProvider', 'firstName lastName profilePhotoURL')
     .exec()
     .then(doc => {
         if (doc) {
             const response = {
                 status: doc.status,
+                deliveryMethod: doc.deliveryMethod,
                 createdAt: doc.createdAt,
                 totalAmount: doc.totalAmount,
+                deliveryPrice: doc.deliveryPrice,
                 items: doc.items.map(item => {
                     return {
                         name: item.name,
@@ -39,8 +42,8 @@ function getOrder (req, res) {
                         url: urljoin(MARKETS_PATH, doc.market._id.toString())
                     }
                 },
-                deliveryMethod: doc.deliveryMethod,
-                deliveryPrice: doc.deliveryPrice,
+                deliveryPoint: doc.deliveryPoint,
+                deliveryProvider: doc.deliveryProvider,
                 _id: doc._id,
                 request: {
                     type: 'GET',
@@ -59,7 +62,7 @@ function getOrder (req, res) {
         }
     })
     .catch(err => {
-        responseToInternalServerError(res, err)
+        responseToMongooseError(res, err)
     })
 }
 

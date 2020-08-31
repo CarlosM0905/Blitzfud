@@ -10,6 +10,14 @@ const sellerSchema = new mongoose.Schema({
         type: String, 
         required: true 
     },
+    accountStatus: {
+        type: String,
+        enum: [
+                'active',
+                'banned'
+              ],
+        default: 'active'
+    },
     firstName: {
         type: String,
         required: true
@@ -22,11 +30,7 @@ const sellerSchema = new mongoose.Schema({
     market: {
         type: mongoose.Types.ObjectId,
         ref: 'Market'
-    },
-    marketNotifications: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'MarketNotifications'
-    }]
+    }
 });
 
 module.exports = mongoose.model('Seller', sellerSchema);

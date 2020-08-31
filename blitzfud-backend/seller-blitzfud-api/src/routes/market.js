@@ -11,7 +11,6 @@ const CoordinatesMiddleware = require('../middlewares/coordinates');
 router.get('/', checkAuth, MarketController.getMyMarket);
 router.post('/', checkAuth, OwnershipMiddleware.ownsMarket, 
                             CoordinatesMiddleware.checkCoordinates,
-                            CoordinatesMiddleware.formatCoordinates,
                             DeliveryMiddleware.onCreationHasDelivery, 
                             MarketController.createMarket);
 router.patch('/', checkAuth, DeliveryMiddleware.onUpdateHasDelivery,

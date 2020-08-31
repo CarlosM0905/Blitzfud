@@ -3,8 +3,11 @@ const mongoose = require('mongoose');
 const Customer = require('./customer');
 const DeliveryProvider = require('./deliveryProvider');
 
-const pointSchema = require('./schemas/point');
+const locationSchema = require('./schemas/location');
 const itemOrderSchema = require('./schemas/itemOrder');
+
+const { STATUS } = require('../constants/order');
+const { DELIVERY_METHODS } = require('../constants/market');
 
 const orderSchema = new mongoose.Schema({
     customer: {
@@ -23,7 +26,7 @@ const orderSchema = new mongoose.Schema({
         type: itemOrderSchema
     }],
     deliveryPoint: {
-        type: pointSchema,
+        type: locationSchema,
     },
 
     totalAmount: {
@@ -35,8 +38,8 @@ const orderSchema = new mongoose.Schema({
     deliveryMethod: {
         type: String,
         enum: [ 
-                'pickup', 
-                'delivery'
+                DELIVERY_METHODS.PICKUP, 
+                DELIVERY_METHODS.DELIVERY
               ],
         required: true
     },
@@ -46,13 +49,13 @@ const orderSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: [ 
-                'preprocessing', 
-                'in-progress',
-                'denied', 
-                'success',
-                'cancelled'
+                STATUS.PREPROCESSING,
+                STATUS.IN_PROGRESS,
+                STATUS.DENIED,
+                STATUS.SUCCESS,
+                STATUS.CANCELLED
               ],
-        default: 'preprocessing'
+        default: STATUS.PREPROCESSING
     }
 }, {
     timestamps: true 

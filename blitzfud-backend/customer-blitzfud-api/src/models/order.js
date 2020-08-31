@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
-const pointSchema = require('./schemas/point');
+const locationSchema = require('./schemas/location');
 const itemOrderSchema = require('./schemas/itemOrder');
+
+const DeliveryProvider = require('./deliveryProvider');
 
 const orderSchema = new mongoose.Schema({
     customer: {
@@ -14,13 +16,13 @@ const orderSchema = new mongoose.Schema({
     },
     deliveryProvider: {
         type: mongoose.Types.ObjectId,
-        ref: 'DeliveryProvider'
+        ref: DeliveryProvider
     },
     items: [{
         type: itemOrderSchema
     }],
     deliveryPoint: {
-        type: pointSchema,
+        type: locationSchema,
     },
 
     totalAmount: {
@@ -66,7 +68,8 @@ orderSchema.pre('save', function(next) {
     if (this.deliveryMethod == 'delivery'){
         total += this.deliveryPrice;
     }
-    this.totalAmount = total;  
+    this.totalAmount = total.toFixed(2);
+    this.totalQuantityOfProducts = totalQuantityOfProducts;  
     next();
 });
 

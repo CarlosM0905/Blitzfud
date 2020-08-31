@@ -1,12 +1,14 @@
 const Customer = require('../models/customer');
 
+const { responseToMongooseError } = require('../helpers/responses');
+
 function getAllMarkets (req, res) {
     const customerId = req.user._id;
     Customer.findById(customerId)
         .select('favoriteMarkets')
         .populate({
             path: 'favoriteMarkets',
-            select: 'name  _id'
+            select: 'name marketStatus deliveryMethods'
         })
         .exec()
         .then(doc => {
@@ -17,6 +19,8 @@ function getAllMarkets (req, res) {
                     markets: favoriteMarkets.map(market => {
                         return {
                             name: market.name,
+                            marketStatus: market.marketStatus,
+                            deliveryMethods: market.deliveryMethods,
                             _id: market._id,
                         }
                     })
@@ -30,10 +34,7 @@ function getAllMarkets (req, res) {
             }
         })
         .catch(err => {
-            res.status(500).json({
-                message: 'Error interno de servidor, reintente en unos minutos por favor',
-                error: err
-            });
+            responseToMongooseError(res, err);
         });
 }
 
@@ -60,10 +61,7 @@ function addMarket (req, res) {
             }
         })
         .catch(err => {
-            res.status(500).json({
-                message: 'Error interno de servidor, reintente en unos minutos por favor',
-                error: err
-            });
+            responseToMongooseError(res, err);
         });
 }
 
@@ -84,10 +82,7 @@ function removeMarket (req, res) {
 
         })
         .catch(err => {
-            res.status(500).json({
-                message: 'Error interno de servidor, reintente en unos minutos por favor',
-                error: err
-            });
+            responseToMongooseError(res, err);
         })
 }
 

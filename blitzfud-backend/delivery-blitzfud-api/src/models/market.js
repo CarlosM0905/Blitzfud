@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const pointSchema = require('./schemas/point');
+const locationSchema = require('./schemas/location');
 
 const marketSchema = new mongoose.Schema({
     name: {
@@ -37,7 +37,7 @@ const marketSchema = new mongoose.Schema({
         ref: 'DeliveryProvider'
     }],
     location: {
-        type: pointSchema,
+        type: locationSchema,
         required: true
     }
 }, { 

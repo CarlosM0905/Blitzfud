@@ -10,7 +10,8 @@ function getAllDeliveryWorkers (req, res) {
     const marketId = req.user.market;
     Market.findById(marketId)
         .select('deliveryProviders')
-        .populate('deliveryProviders', 'firstName lastName phoneNumber status')
+        .populate('deliveryProviders', 'firstName lastName phoneNumber status \
+                   profilePhotoURL')
         .exec()
         .then(docs => {
             const deliveryWorkers = docs.deliveryProviders;
@@ -31,6 +32,8 @@ function getAllDeliveryWorkers (req, res) {
                         firstName: deliveryProvider.firstName,
                         lastName: deliveryProvider.lastName,
                         phoneNumber: deliveryProvider.phoneNumber,
+                        status: deliveryProvider.status,
+                        profilePhotoURL: deliveryProvider.profilePhotoURL,
                         _id: deliveryProvider._id
                     }
                 }),

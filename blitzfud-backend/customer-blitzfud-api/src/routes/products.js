@@ -3,7 +3,10 @@ const router = Router();
 
 const ProductsController = require('../controllers/products');
 
-router.get('/:marketId/products', ProductsController.getAllProducts);
+const PaginationMiddleware = require('../middlewares/pagination');
+
+router.get('/:marketId/products', PaginationMiddleware.formatQuery, 
+                                  ProductsController.getAllProducts);
 router.get('/:marketId/products/:productId', ProductsController.getProduct);
 
 module.exports = router;

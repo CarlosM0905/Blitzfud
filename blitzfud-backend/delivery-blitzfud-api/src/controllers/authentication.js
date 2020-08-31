@@ -29,18 +29,22 @@ function signin (req, res) {
             }
             let payload = {
                 _id: deliveryProvider._id,
+                nationalIdentityNumber: deliveryProvider.nationalIdentityNumber,
                 phoneNumber: deliveryProvider.phoneNumber,
                 firstName: deliveryProvider.firstName,
                 lastName: deliveryProvider.lastName,
                 cellphoneNumber: deliveryProvider.cellphoneNumber
-
             }
             const token = jwt.sign(payload, JWT_KEY, expiresIn);
             const response = {
                 token: token,
                 user: {
                     firstName: deliveryProvider.firstName,
-                    lastName: deliveryProvider.lastName
+                    lastName: deliveryProvider.lastName,
+                    location: {
+                        address: deliveryProvider.location.address,
+                        coordinates: deliveryProvider.location.coordinates
+                    },
                 },
             }
             return res.status(200).json(response);
@@ -52,31 +56,50 @@ function signin (req, res) {
 
 function signup (req, res) {
     const body = req.body;
-    DeliveryProvider.findOne({ phoneNumber: body.phoneNumber })
+    DeliveryProvider.findOne({ 
+            $or: [
+                    { phoneNumber: body.phoneNumber },
+                    { nationalIdentityNumber: body.nationalIdentityNumber }
+                 ] 
+        })
         .exec()
-        .then(deliveryProvider => {
-            if (deliveryProvider) {
-                return res.status(409).json({
-                    message: 'Existe un repartidor con dicho correo, intente de nuevo'
-                });
-            } else {
-                const deliveryProvider = new DeliveryProvider({
-                    phoneNumber: body.phoneNumber,
-                    password: bcrypt.hashSync(body.password, 10),
-                    firstName: body.firstName,
-                    lastName: body.lastName,
-                    location: body.location,
-                });
-                deliveryProvider.save()
-                    .then(result => {
-                        res.status(201).json({
-                            message: 'Perfil de repartidor creado satisfactoriamente'
-                        });
-                    })
-                    .catch(err => {
-                        responseToMongooseError(res, err)
+        .then(existingProvider => {
+            if (existingProvider) {
+                if (existingProvider.phoneNumber == body.phoneNumber && 
+                    existingProvider.nationalIdentityNumber == body.nationalIdentityNumber){
+                    return res.status(409).json({
+                        message: 'Existe un repartidor registrado con dicho DNI y número de celular'
                     });
+                } else {
+                    if (existingProvider.phoneNumber == body.phoneNumber){
+                        return res.status(409).json({
+                            message: 'Existe un repartidor registrado con dicho número de celular'
+                        });
+                    } else {
+                        return res.status(409).json({
+                            message: 'Existe un repartidor registrado con dicho número de DNI'
+                        });
+                    }
+                }
             }
+            const deliveryProvider = new DeliveryProvider({
+                nationalIdentityNumber: body.nationalIdentityNumber,
+                phoneNumber: body.phoneNumber,
+                password: bcrypt.hashSync(body.password, 10),
+                firstName: body.firstName,
+                lastName: body.lastName,
+                location: body.location,
+            });
+            deliveryProvider.save()
+                .then(result => {
+                    res.status(201).json({
+                        message: 'Perfil de repartidor creado satisfactoriamente'
+                    });
+                })
+                .catch(err => {
+                    responseToMongooseError(res, err)
+                });
+            
         })
         .catch(err => {
             responseToMongooseError(res, err)

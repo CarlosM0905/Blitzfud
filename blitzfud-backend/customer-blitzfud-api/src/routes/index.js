@@ -4,8 +4,9 @@ module.exports = {
     MarketsRoutes: require('./markets'),
     ProductsRoutes: require('./products'),
     CartRoutes: require('./cart'),
-    PurchaseOrdersRoutes: require('./purchaseOrders'),
     OrdersRoutes: require('./orders'),
+    PurchasesRoutes: require('./purchases'),
+    PurchaseOrdersRoutes: require('./purchaseOrders'),
     FavoriteMarketsRoutes: require('./favoriteMarkets'),
     SearchRoutes: require('./search')
 }

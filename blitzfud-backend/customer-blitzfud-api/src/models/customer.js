@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const pointSchema = require('./schemas/point');
+const locationSchema = require('./schemas/location');
 const subCartSchema = require('./schemas/subCart');
 
 const customerSchema = new mongoose.Schema({
@@ -34,7 +34,7 @@ const customerSchema = new mongoose.Schema({
     },
     
     location: {
-        type: pointSchema,
+        type: locationSchema,
     },
     shoppingCart: [{
         type: subCartSchema

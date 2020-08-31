@@ -1,5 +1,7 @@
 const Market = require('../models/market');
 
+const { responseToMongooseError } = require('../helpers/responses');
+
 function getAllMarkets (req, res) {
     const coords = [req.query.lon, req.query.lat];
     Market.find({
@@ -11,7 +13,8 @@ function getAllMarkets (req, res) {
                     },
                     $maxDistance: 5 * 1000  // 5km
                 }
-            }
+            },
+            marketStatus: 'open'
         })
         .select('name description deliveryMethods deliveryPrice location products _id')
         .populate({
@@ -42,10 +45,7 @@ function getAllMarkets (req, res) {
             res.status(200).json(response);
         })
         .catch(err => {
-            res.status(500).json({
-                message: 'Error interno de servidor, reintente en unos minutos por favor',
-                error: err
-            });
+            responseToMongooseError(res, err);
         });
 }
 
@@ -80,10 +80,7 @@ function getMarket (req, res) {
             } 
         })
         .catch(err => {
-            res.status(500).json({
-                message: 'Error interno de servidor, reintente en unos minutos por favor',
-                error: err
-            });
+            responseToMongooseError(res, err);
         });
 }
 

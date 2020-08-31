@@ -12,16 +12,19 @@ function getMyMarket (req, res) {
     Market.findById(marketId)
         .select('name description marketStatus deliveryMethods deliveryPrice location _id')
         .exec()
-        .then(doc => {
-            if (doc) {
+        .then(market => {
+            if (market) {
                 const response = {
-                    name: doc.name, 
-                    description: doc.description,
-                    marketStatus: doc.marketStatus,
-                    deliveryMethods: doc.deliveryMethods,
-                    deliveryPrice: doc.deliveryPrice,
-                    location: doc.location,
-                    _id: doc._id,
+                    name: market.name, 
+                    description: market.description,
+                    marketStatus: market.marketStatus,
+                    deliveryMethods: market.deliveryMethods,
+                    deliveryPrice: market.deliveryPrice,
+                    location: {
+                        address: market.location.address,
+                        coordinates: market.location.coordinates
+                    },
+                    _id: market._id,
                     request: {
                         type: 'GET',
                         url: ENDPOINT_PATH

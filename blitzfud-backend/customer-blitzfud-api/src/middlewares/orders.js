@@ -52,8 +52,12 @@ function giveFormat (req, res, next) {
             { $lookup: 
                 { from: 'markets', localField: 'market', foreignField: '_id', as: 'market' } 
             },
-            { $project: 
-                { 'market._id': 1, 'market.deliveryMethods': 1, 'market.deliveryPrice': 1 } 
+            { $project: { 
+                  'market._id': 1,
+                  'market.marketStatus': 1, 
+                  'market.deliveryMethods': 1, 
+                  'market.deliveryPrice': 1 
+                } 
             } 
         ])
         .exec()
@@ -70,6 +74,14 @@ function giveFormat (req, res, next) {
                 let selectedMethod = subcarts[i].deliveryMethod;
                 let availableMethods = docs[i].market[0].deliveryMethods;
                 
+                let marketId = docs[i].market[0]._id;
+                let marketStatus = docs[i].market[0].marketStatus;
+
+                if (marketStatus === 'closed'){
+                    return res.status(400).json({
+                        message: `La tienda con id ${marketId} se encuentra cerrada`
+                    });
+                }
                 if (selectedMethod == 'delivery' && 
                     (['delivery', 'both'].includes(availableMethods))){
                     if (!subcarts[i]['deliveryPoint']) {
@@ -81,7 +93,7 @@ function giveFormat (req, res, next) {
                     delete subcarts[i]['deliveryPoint'];
                 } else {
                     return res.status(400).json({
-                        mesage: 'La tienda no cuenta con el servicio de entrega indicado'
+                        message: 'La tienda no cuenta con el servicio de entrega indicado'
                     });
                 }
             }
@@ -89,7 +101,7 @@ function giveFormat (req, res, next) {
             next();
         })
         .catch(err => {
-            Responses.responseToInternalServerError(res, err);
+            Responses.responseToMongooseError(res, err);
         });
 }
 

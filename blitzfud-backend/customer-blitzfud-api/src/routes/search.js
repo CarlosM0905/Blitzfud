@@ -3,8 +3,9 @@ const router = Router();
 
 const SearchController = require('../controllers/search');
 
-const is2DCoordinate = require('../middlewares/coordinates');
+const { checkCoordinatesInQuery } = require('../middlewares/coordinates');
 
-router.get('/products', is2DCoordinate, SearchController.getProducts);
+router.get('/products', checkCoordinatesInQuery, SearchController.getProducts);
+router.get('/market/:marketId/products', SearchController.getProductsOfMarket);
 
 module.exports = router;

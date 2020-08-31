@@ -11,7 +11,7 @@ const purchaseOrderSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now()
+        default: Date.now
     },
 
     customer: {
@@ -25,19 +25,17 @@ const purchaseOrderSchema = new mongoose.Schema({
 });
 
 purchaseOrderSchema.pre('save', function(next) {
-    Order.find({
-            _id: { $in: this.orders }
-        })
+    Order.find({ _id: { $in: this.orders } })
         .select('totalAmount')
         .exec()
         .then(docs => {
             const total = docs.map(doc => doc.totalAmount)
                               .reduce((v1, v2) => v1 + v2);
-            this.totalAmount = total;
+            this.totalAmount = total.toFixed(2);
             next();
         })
 });
 
 module.exports = mongoose.model('PurchaseOrder', 
-                                purchaseOrderSchema,
+                                 purchaseOrderSchema,
                                 'purchaseOrders');

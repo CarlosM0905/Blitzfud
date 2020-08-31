@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const pointSchema = require('./schemas/point');
+const locationSchema = require('./schemas/location');
 
 const marketSchema = new mongoose.Schema({
     name: {
@@ -10,6 +10,14 @@ const marketSchema = new mongoose.Schema({
     description: {
         type: String
     },
+    marketStatus: {
+        type: String,
+        enum: [
+                'open',
+                'closed'
+              ],
+        default: 'open'
+    },
     deliveryMethods: {
         type: String,
         enum: [ 
@@ -17,6 +25,7 @@ const marketSchema = new mongoose.Schema({
                 'delivery',
                 'both'
               ],
+        default: 'pickup',
         required: true
     },
     deliveryPrice: {
@@ -24,7 +33,7 @@ const marketSchema = new mongoose.Schema({
     },
     
     location: {
-        type: pointSchema,
+        type: locationSchema,
         required: true
     }
 }, { 

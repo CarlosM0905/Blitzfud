@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
-const pointSchema = require('./schemas/point');
+const locationSchema = require('./schemas/location');
+
+const ACCOUNT_CONSTANTS = require('../constants/account');
+const DELIVERY_PROVIDER_CONSTANTS = require('../constants/deliveryProvider');
 
 const deliveryProviderSchema = new mongoose.Schema({
     phoneNumber: {
@@ -15,18 +18,18 @@ const deliveryProviderSchema = new mongoose.Schema({
     accountStatus: {
         type: String,
         enum: [
-                'active',
-                'banned'
+                ACCOUNT_CONSTANTS.STATUS.ACTIVE,
+                ACCOUNT_CONSTANTS.STATUS.BANNED
               ],
-        default: 'active'
+        default: ACCOUNT_CONSTANTS.STATUS.ACTIVE
     },
     status: {
         type: String,
         enum: [
-                'available',
-                'busy'
+                DELIVERY_PROVIDER_CONSTANTS.STATUS.AVAILABLE,
+                DELIVERY_PROVIDER_CONSTANTS.STATUS.BUSY
               ],
-        default: 'available'
+        default: DELIVERY_PROVIDER_CONSTANTS.STATUS.AVAILABLE
     },
     firstName: {
         type: String,
@@ -36,13 +39,19 @@ const deliveryProviderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-
+    profilePhotoURL: {
+        type: String
+    },
+    profilePhotoId: {
+        type: String
+    },
+    
     markets: [{
         type: mongoose.Types.ObjectId,
         ref: 'Market'
     }],
     location: {
-        type: pointSchema,
+        type: locationSchema,
         required: true
     }
 });

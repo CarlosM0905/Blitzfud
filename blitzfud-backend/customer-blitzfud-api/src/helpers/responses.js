@@ -4,11 +4,11 @@ function responseToInvalidFormat (res) {
     });
 }
 
-function responseToInternalServerError (res, err) {
+function responseToMongooseError (res, err) {
     if (err.kind === 'ObjectId') {
 		res.status(404).json({
 			'message': 'ID no existe'
-		})
+		});
 	} else {
         res.status(500).json({
             message: 'Error interno de servidor, reintente en unos minutos por favor',
@@ -19,5 +19,5 @@ function responseToInternalServerError (res, err) {
 
 module.exports = {
     responseToInvalidFormat,
-    responseToInternalServerError
+    responseToMongooseError
 };

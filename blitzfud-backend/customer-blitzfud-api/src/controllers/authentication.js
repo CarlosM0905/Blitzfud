@@ -6,7 +6,7 @@ const expiresIn = { expiresIn: '7d' };
 
 const Customer = require('../models/customer');
 
-const { responseToInternalServerError } = require('../helpers/responses')
+const { responseToMongooseError } = require('../helpers/responses')
 
 function signin (req, res) {
     let body = req.body;
@@ -40,13 +40,16 @@ function signin (req, res) {
                 user: {
                     firstName: customer.firstName,
                     lastName: customer.lastName,
-                    location: customer.location
+                    location: {
+                        address: customer.location.address,
+                        coordinates: customer.location.coordinates
+                    }
                 },
             }
             return res.status(200).json(response);
         })
         .catch(err => {
-            responseToInternalServerError(res, err);
+            responseToMongooseError(res, err);
         });
 }
 
@@ -75,11 +78,11 @@ function signup (req, res) {
                     });
                 })
                 .catch(err => {
-                    responseToInternalServerError(res, err);
+                    responseToMongooseError(res, err);
                 });            
         })
         .catch(err => {
-            responseToInternalServerError(res, err);
+            responseToMongooseError(res, err);
         });
 }
 

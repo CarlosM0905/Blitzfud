@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const { STATUS } = require('../constants/jobInvitation');
+
 const jobInvitationSchema = new mongoose.Schema({
     seller: {
         type: mongoose.Types.ObjectId,
@@ -19,13 +21,13 @@ const jobInvitationSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: [
-                'proposed',
-                'accepted',
-                'denied',
-                'expired',
-                'cancelled'
+                STATUS.PROPOSED,
+                STATUS.ACCEPTED,
+                STATUS.DENIED,
+                STATUS.EXPIRED,
+                STATUS.CANCELLED
               ],
-        default: 'proposed'
+        default: STATUS.PROPOSED
     },
     proposal: {
         type: String,

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const { STATUS } = require('../constants/account');
+
 const sellerSchema = new mongoose.Schema({
     email: { 
         type: String, 
@@ -13,10 +15,10 @@ const sellerSchema = new mongoose.Schema({
     accountStatus: {
         type: String,
         enum: [
-                'active',
-                'banned'
+                STATUS.ACTIVE,
+                STATUS.BANNED
               ],
-        default: 'active'
+        default: STATUS.ACTIVE
     },
     firstName: {
         type: String,

@@ -3,32 +3,32 @@ const urljoin = require('url-join');
 const Order = require('../models/order');
 const PurchaseOrder = require('../models/purchaseOrder');
 
+const { STATUS } = require('../constants/order');
+const ORDERS_PATH = urljoin(process.env.HOST, 'orders'); 
 const ENDPOINT_PATH = urljoin(process.env.HOST, 'purchaseOrders');
 
-const { responseToInternalServerError } = require('../helpers/responses');
+const { responseToMongooseError } = require('../helpers/responses');
 
 function getAllPurchaseOrders (req, res) {
     const customerId = req.user._id;
-    let conditions = {
-        path: 'orders',
-        populate: {
-            path: 'market',
-            select: 'name'
-        }
-    }
-    if (req.query.status == 'active'){
-        conditions['match'] = {
-            status: {
-                $in: ['preprocessing', 'in-progress']
-            }
-        }
-    }
     PurchaseOrder.find({ customer: customerId })
         .select('orders totalAmount createdAt _id')
-        .populate(conditions)
+        .populate({
+            path: 'orders',
+            populate: {
+                path: 'market',
+                select: 'name location'
+            },
+            match: {
+                status: {
+                    $in: [STATUS.PREPROCESSING, STATUS.IN_PROGRESS]
+                }
+            }
+        })
         .exec()
         .then(docs => {
             if (docs.length != 0){
+                docs = docs.filter(doc => doc.orders.length > 0);
                 const response = {
                     count: docs.length,
                     purchaseOrders: docs.map(doc => {
@@ -42,6 +42,7 @@ function getAllPurchaseOrders (req, res) {
                                         deliveryMethod: order.deliveryMethod,
                                         market: {
                                             name: order.market.name,
+                                            location: order.market.location,
                                             _id: order.market._id
                                         },
                                         _id: order._id
@@ -51,7 +52,7 @@ function getAllPurchaseOrders (req, res) {
                             _id: doc._id,
                             request: {
                                 type: 'GET',
-                                url: urljoin(ENDPOINT_PATH, doc._id.toString())
+                                url: urljoin(ORDERS_PATH, doc._id.toString())
                             }
                         }
                     }),
@@ -96,7 +97,7 @@ function getAllPurchaseOrders (req, res) {
 
         })
         .catch(err => {
-            responseToInternalServerError(res, err);
+            responseToMongooseError(res, err);
         });
 }
 
@@ -121,11 +122,11 @@ function createPurchaseOrder (req, res) {
                     });
                 })
                 .catch(err => {
-                    responseToInternalServerError(res, err);
+                    responseToMongooseError(res, err);
                 });              
         })
         .catch(err => {
-            responseToInternalServerError(res, err);
+            responseToMongooseError(res, err);
         });    
 }
 
