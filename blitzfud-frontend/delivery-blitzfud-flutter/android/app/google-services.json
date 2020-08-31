@@ -1,0 +1,117 @@
+{
+  "project_info": {
+    "project_number": "534202966279",
+    "firebase_url": "https://blitzfudvalidation.firebaseio.com",
+    "project_id": "blitzfudvalidation",
+    "storage_bucket": "blitzfudvalidation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534202966279:android:e56921577c6d43a75b25a2",
+        "android_client_info": {
+          "package_name": "com.blitzfud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534202966279-g9kec1c57himi5dnkpbts1l39e444nlf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blitzfud",
+            "certificate_hash": "47737e960b730ecdcd5ea65e21da04fc2a2e2e1c"
+          }
+        },
+        {
+          "client_id": "534202966279-qtiip1td3eeeu8bgj7v20s07itvbkr41.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blitzfud",
+            "certificate_hash": "76790fbfc243ac8ed6ad6cc82426c1cbe4d2b156"
+          }
+        },
+        {
+          "client_id": "534202966279-gsqurj18lbkkb787nm43hrqjj9dmqfi6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blitzfud",
+            "certificate_hash": "5fa6419455a3b2946f015c3c9d316ced44617910"
+          }
+        },
+        {
+          "client_id": "534202966279-8kbda296rq2563vkab8of6ctdce9gc40.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKqVE6g_EBs8Qs0BwVIBOtziqxr2jZYwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "534202966279-8kbda296rq2563vkab8of6ctdce9gc40.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534202966279:android:6a08a0ff91012cf15b25a2",
+        "android_client_info": {
+          "package_name": "com.spika.blitzfud4delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534202966279-ts1lukugfl0uspv09dmnc65nlkahh4am.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spika.blitzfud4delivery",
+            "certificate_hash": "d1cd7863cfdf4b01ee99b0e6fdf83e0190f87394"
+          }
+        },
+        {
+          "client_id": "534202966279-cpbe8fdfndjf6a9264l16md9jp7ach28.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spika.blitzfud4delivery",
+            "certificate_hash": "63c03174c78d13b66dc99608e0bb81e0a01c58ac"
+          }
+        },
+        {
+          "client_id": "534202966279-srv3bu3f3s82466h247icq97kna411ir.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spika.blitzfud4delivery",
+            "certificate_hash": "5fa6419455a3b2946f015c3c9d316ced44617910"
+          }
+        },
+        {
+          "client_id": "534202966279-8kbda296rq2563vkab8of6ctdce9gc40.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKqVE6g_EBs8Qs0BwVIBOtziqxr2jZYwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "534202966279-8kbda296rq2563vkab8of6ctdce9gc40.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
