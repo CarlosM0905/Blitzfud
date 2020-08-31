@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGray"
+    tools:context=".views.fragments.shoppingCart.execute.ExecuteMarketFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_fragment_back" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:lines="1"
+                android:text="Solo una tienda"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtNameMarket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:lines="1"
+                android:maxLines="1"
+                android:textColor="@color/colorSecondary"
+                android:textSize="18sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardDelivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"
+            app:cardElevation="5dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Costo por delivery"
+                    android:textColor="@color/colorSecondary" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="right"
+                    android:text="S/ 1.00"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="22dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/colorSecondary"
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnExecuteOrder"
+                android:layout_width="200dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/button_rounded"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="Ejecutar"
+                android:textColor="@color/colorWhite"
+                app:backgroundTint="@color/colorPrimary" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

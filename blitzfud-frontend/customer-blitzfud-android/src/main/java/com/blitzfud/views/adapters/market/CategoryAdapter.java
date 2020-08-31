@@ -10,18 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.blitzfud.R;
 import com.blitzfud.models.market.Category;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<Category> categories;
+    private List<Category> categories;
     private OnItemClickListener itemClickListener;
 
-    public CategoryAdapter(Context context, ArrayList<Category> categories, OnItemClickListener itemClickListener) {
+    public CategoryAdapter(Context context, List<Category> categories, OnItemClickListener itemClickListener) {
         this.context = context;
         this.categories = categories;
         this.itemClickListener = itemClickListener;
@@ -41,8 +40,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         holder.txtNameCategory.setText(category.getName());
         holder.imgCategory.setImageResource(Category.getDrawableId(category.getName()));
-//        Picasso.with(context).load(Category.getDrawableId(category.getName())).into(holder.imgCategory);
-
         holder.bindListener(category, itemClickListener);
     }
 
@@ -67,13 +64,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onItemClick(category, getAdapterPosition());
+                    onItemClickListener.onItemClick(category);
                 }
             });
         }
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Category category, int position);
+        void onItemClick(Category category);
     }
 }

@@ -1,26 +1,34 @@
 package com.blitzfud.controllers.restapi.services;
 
 import com.blitzfud.controllers.restapi.API;
-import com.blitzfud.controllers.restapi.deserializers.product.getAllDeserializer;
 import com.blitzfud.controllers.restapi.interfaces.ProductInterface;
 import com.blitzfud.models.market.Product;
-import com.blitzfud.models.responseCount.ProductCount;
+import com.blitzfud.models.responseAPI.ProductSet;
 
 import retrofit2.Call;
 
 public class ProductService {
+
     private static final String URL = "markets/";
+    private static ProductInterface productInterface;
 
-    public static Call<ProductCount> getAll(final String marketId){
-        ProductInterface productInterface = API.createService(ProductInterface.class, ProductCount.class,
-                new getAllDeserializer(), URL);
-
-        return productInterface.getAll(marketId);
+    public static Call<ProductSet> getAll(final String marketId) {
+        return getInstance().getProducts(marketId, 0, 10, null );
     }
 
-    public static Call<Product> getById(final String marketId, final String productId){
-        ProductInterface productInterface = API.createService(ProductInterface.class, URL);
+    public static Call<ProductSet> getProducts(final String marketId, int offset, int limit,
+                                               String categoryId) {
+        return getInstance().getProducts(marketId, offset, limit, categoryId );
+    }
 
-        return productInterface.getById(marketId, productId);
+    public static Call<Product> getById(final String marketId, final String productId) {
+        return getInstance().getById(marketId, productId);
+    }
+
+    private static ProductInterface getInstance() {
+        if (productInterface == null)
+            productInterface = API.createService(ProductInterface.class, URL);
+
+        return productInterface;
     }
 }

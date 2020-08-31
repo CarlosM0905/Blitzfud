@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGray"
+    android:orientation="vertical"
+    tools:context=".views.authentication.VerifyPhoneActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_fragment_back" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtNameMarket"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_medium"
+            android:lines="1"
+            android:text="Ya casi terminamos"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/sizeToolbar" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:text="Verifica tu número de celular"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lblText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="center_horizontal"
+                android:text="Blitzfud te enviará un SMS para verificar tu número de celular"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputCodigo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="16dp"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtCodigo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="Código "
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnVerify"
+                android:layout_width="200dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/button_rounded"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Verificar"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@color/colorPrimary" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginRight="48dp"
+                android:layout_marginBottom="80dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_verify_phone"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </ScrollView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

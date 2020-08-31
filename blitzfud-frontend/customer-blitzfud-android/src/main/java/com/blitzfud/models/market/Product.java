@@ -1,22 +1,26 @@
 package com.blitzfud.models.market;
 
-public class Product {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class Product extends RealmObject {
+
+    @PrimaryKey
     private String _id;
     private String name;
-    private String description;
     private String unitOfMeasurement;
-    private int quantityOfProduct;
+    private double content;
     private double price;
+    private int maxQuantityPerOrder;
 
     public Product() {
     }
 
-    public Product(String _id, String name, String description, String unitOfMeasurement, int quantityOfProduct, double price) {
+    public Product(String _id, String name, String unitOfMeasurement, int content, double price) {
         this._id = _id;
         this.name = name;
-        this.description = description;
         this.unitOfMeasurement = unitOfMeasurement;
-        this.quantityOfProduct = quantityOfProduct;
+        this.content = content;
         this.price = price;
     }
 
@@ -28,20 +32,20 @@ public class Product {
         this._id = _id;
     }
 
+    public int getMaxQuantityPerOrder() {
+        return maxQuantityPerOrder;
+    }
+
+    public void setMaxQuantityPerOrder(int maxQuantityPerOrder) {
+        this.maxQuantityPerOrder = maxQuantityPerOrder;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getUnitOfMeasurement() {
@@ -52,12 +56,12 @@ public class Product {
         this.unitOfMeasurement = unitOfMeasurement;
     }
 
-    public int getQuantityOfProduct() {
-        return quantityOfProduct;
+    public double getContent() {
+        return content;
     }
 
-    public void setQuantityOfProduct(int quantityOfProduct) {
-        this.quantityOfProduct = quantityOfProduct;
+    public void setContent(double content) {
+        this.content = content;
     }
 
     public double getPrice() {
@@ -73,7 +77,15 @@ public class Product {
     }
 
     public String getInformation() {
-        return quantityOfProduct + " " + unitOfMeasurement;
+        return contentToString() + " " + unitOfMeasurement;
+    }
+
+    private String contentToString() {
+        if (Math.floor(content) == content) {
+            return String.valueOf((int) content);
+        }
+
+        return String.valueOf(content);
     }
 
 }

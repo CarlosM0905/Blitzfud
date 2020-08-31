@@ -1,56 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorGray"
     android:orientation="vertical"
-    android:background="@color/colorPrimaryLight"
     tools:context=".views.fragments.market.FavoriteMarketsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:visibility="gone" />
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center_horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="Tiendas suscritas"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/sizeToolbar" />
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/pantallaPrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/pantallaEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/empty_favorite_markets" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Aún no te has suscrito a tiendas"
+                android:textColor="@color/colorSecondary"
+                android:textSize="18sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/pantallaLoading"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <ProgressBar
-            android:layout_width="40dp"
-            android:layout_height="40dp" />
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_medium"
+            android:text="Espere un momento..."
             android:textColor="@color/colorSecondary"
-            android:text="Espere un momento..." />
+            android:textSize="16sp" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <LinearLayout
-        android:id="@+id/pantallaEmpty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
-            android:textColor="@color/colorSecondary"
-            android:text="Aún no te has suscrito a tiendas" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

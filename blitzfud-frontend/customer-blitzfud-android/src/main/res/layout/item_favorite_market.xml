@@ -1,39 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardBackgroundColor="@color/colorWhite"
-    app:cardElevation="5dp"
-    app:cardCornerRadius="12dp">
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgMarket"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:adjustViewBounds="true"
             android:src="@drawable/market_profile" />
 
-        <TextView
-            android:layout_marginTop="4dp"
-            android:id="@+id/txtNameMarket"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:gravity="center"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Chocman"
-            android:textSize="12sp" />
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtNameMarket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textColor="@color/colorBlackLight"
+                android:textSize="16sp" />
 
-</androidx.cardview.widget.CardView>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgPickup"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_pickup_method"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgDelivery"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/ic_delivery_method"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnStatusOpen"
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/border_secondary"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Abierto"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="11sp"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnStatusClose"
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/button_rounded"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Cerrado"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="11sp"
+                    android:visibility="gone"
+                    app:backgroundTint="@color/colorSecondary" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgSubscribe"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:src="@drawable/ic_favorite_market" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

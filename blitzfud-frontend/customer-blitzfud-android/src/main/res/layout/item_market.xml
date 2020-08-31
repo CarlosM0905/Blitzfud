@@ -1,50 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="4dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginRight="4dp"
-    android:layout_marginBottom="6dp"
-    android:orientation="vertical"
-    app:cardCornerRadius="12dp">
+    android:layout_marginBottom="12dp"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtNameMarket"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:maxWidth="200dp"
             android:ellipsize="end"
             android:fontFamily="@font/poppins_medium"
             android:lines="1"
-            android:layout_marginRight="4dp"
-            android:layout_marginLeft="4dp"
             android:maxLines="1"
             android:textColor="@color/colorSecondary"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/txtMore"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            android:gravity="center_horizontal"
-            android:layout_marginRight="4dp"
-            android:text="Ver más"
-            android:textSize="17sp" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgMore"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:src="@drawable/ic_market_more" />
 
-    </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgHasDelivery"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_delivery_method" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

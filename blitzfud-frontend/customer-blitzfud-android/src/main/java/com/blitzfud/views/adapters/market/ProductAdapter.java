@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blitzfud.R;
 import com.blitzfud.models.market.Product;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<Product> products;
+    private List<Product> products;
     private ProductAdapter.OnItemClickListener itemClickListener;
 
-    public ProductAdapter(Context context, ArrayList<Product> products, ProductAdapter.OnItemClickListener itemClickListener) {
+    public ProductAdapter(Context context, List<Product> products, ProductAdapter.OnItemClickListener itemClickListener) {
         this.context = context;
         this.products = products;
         this.itemClickListener = itemClickListener;
@@ -38,11 +38,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull final ProductAdapter.ViewHolder holder, int position) {
         final Product product = products.get(position);
 
-        holder.txtNameProduct.setText(product.getName());
-        holder.txtInformation.setText(product.getInformation());
+        holder.txtNameProduct.setText(product.getName()+" "+product.getInformation());
         holder.txtPriceProduct.setText(product.getPriceString());
 
-        holder.bindListener(product, itemClickListener);
+        holder.bindListener(itemClickListener);
     }
 
     @Override
@@ -55,7 +54,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         private ImageView imgProduct;
         private TextView txtNameProduct;
         private TextView txtPriceProduct;
-        private TextView txtInformation;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,20 +61,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             imgProduct = itemView.findViewById(R.id.imgProduct);
             txtNameProduct = itemView.findViewById(R.id.txtNameProduct);
             txtPriceProduct = itemView.findViewById(R.id.txtPriceProduct);
-            txtInformation = itemView.findViewById(R.id.txtInformation);
         }
 
-        public void bindListener(final Product product, final ProductAdapter.OnItemClickListener onItemClickListener){
+        public void bindListener(final ProductAdapter.OnItemClickListener onItemClickListener){
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onItemClick(product, getAdapterPosition());
+                    onItemClickListener.onItemClick(products.get(getAdapterPosition()));
                 }
             });
         }
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Product product, int position);
+        void onItemClick(Product product);
     }
 }

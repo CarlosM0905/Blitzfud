@@ -1,7 +1,7 @@
 package com.blitzfud.controllers.restapi.interfaces;
 
-import com.blitzfud.models.ResponseAPI;
-import com.blitzfud.models.responseCount.FavoriteMarketCount;
+import com.blitzfud.models.responseAPI.FavoriteMarketSet;
+import com.blitzfud.models.responseAPI.ResponseAPI;
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -14,7 +14,7 @@ import retrofit2.http.Path;
 
 public interface FavoriteMarketInterface {
     @GET(".")
-    Call<FavoriteMarketCount> getAll(@Header("authorization") String token);
+    Call<FavoriteMarketSet> getAll(@Header("authorization") String token);
 
     @FormUrlEncoded
     @POST(".")

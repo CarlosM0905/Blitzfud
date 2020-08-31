@@ -1,17 +1,18 @@
 package com.blitzfud.views.blitzfud;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.blitzfud.R;
-import com.blitzfud.controllers.utilities.MyPreference;
+import com.blitzfud.controllers.utilities.BlitzfudPreference;
 import com.blitzfud.databinding.ActivityGuideBinding;
 import com.blitzfud.views.authentication.SignInActivity;
+import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.ImageListener;
 
 public class GuideActivity extends AppCompatActivity implements View.OnClickListener {
@@ -19,9 +20,11 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
     private ActivityGuideBinding binding;
     private SharedPreferences prefs;
     private static final int[] images = new int[]{
-            R.drawable.image_default,
-            R.drawable.image_default,
-            R.drawable.image_default
+            R.drawable.onboarding1,
+            R.drawable.onboarding2,
+            R.drawable.onboarding3,
+            R.drawable.onboarding4,
+            R.drawable.onboarding5
     };
 
     @Override
@@ -31,7 +34,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         View view = binding.getRoot();
         setContentView(view);
 
-        prefs = getSharedPreferences(MyPreference.PREFERENCE_NAME, MODE_PRIVATE);
+        prefs = getSharedPreferences(BlitzfudPreference.PREFERENCE_NAME, MODE_PRIVATE);
 
         loadImages();
         bindListeners();
@@ -41,6 +44,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnNext: nextActivity(); break;
+            default: break;
         }
     }
 
@@ -49,7 +53,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         binding.carousel.setImageListener(new ImageListener() {
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
-                imageView.setImageResource(images[position]);
+                Picasso.with(GuideActivity.this).load(images[position]).fit().centerInside().into(imageView);
             }
         });
     }
@@ -59,8 +63,8 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void nextActivity(){
-        MyPreference.firstTime = false;
-        MyPreference.savePreferences(prefs);
+        BlitzfudPreference.firstTime = false;
+        BlitzfudPreference.savePreferences(prefs);
         startActivity(new Intent(GuideActivity.this, SignInActivity.class));
         finish();
     }

@@ -3,43 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="4dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginRight="4dp"
-    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="12dp"
     app:cardBackgroundColor="@color/colorWhite"
     app:cardCornerRadius="15dp"
     app:cardElevation="5dp">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:orientation="vertical">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtNameMarket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/colorSecondary"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="8dp"
             android:orientation="horizontal">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:text="Monto del pedido:" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtMountShopping"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -48,50 +48,51 @@
                 android:gravity="right"
                 android:text="S/ 00.00" />
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/layoutDelivery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="8dp"
             android:orientation="horizontal"
-            android:visibility="invisible">
+            android:visibility="gone">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:text="Delivery:" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtDeliveryPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins"
-                android:gravity="right"
-                android:text="S/ 1.00" />
+                android:gravity="right" />
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="8dp"
             android:orientation="horizontal">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:text="Subtotal: "
+                android:textSize="16sp"
                 android:textColor="@color/colorBlack" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtSubtotal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -99,10 +100,11 @@
                 android:fontFamily="@font/poppins"
                 android:gravity="right"
                 android:text="S/ 00.00"
+                android:textSize="16sp"
                 android:textColor="@color/colorBlack" />
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.cardview.widget.CardView>

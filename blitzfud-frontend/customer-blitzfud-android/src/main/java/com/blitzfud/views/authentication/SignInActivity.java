@@ -1,7 +1,5 @@
 package com.blitzfud.views.authentication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,29 +7,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.blitzfud.R;
 import com.blitzfud.controllers.restapi.services.AuthService;
+import com.blitzfud.controllers.utilities.BlitzfudPreference;
 import com.blitzfud.controllers.utilities.BlitzfudUtils;
-import com.blitzfud.controllers.utilities.BlitzfudUtils;
-import com.blitzfud.controllers.utilities.MyPreference;
 import com.blitzfud.databinding.ActivitySignInBinding;
-import com.blitzfud.models.ResponseAPI;
+import com.blitzfud.models.responseAPI.ResponseAPI;
 import com.blitzfud.views.pages.MainActivity;
-import com.google.gson.Gson;
 
-import java.io.IOException;
-
-import cn.pedant.SweetAlert.SweetAlertDialog;
-import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ActivitySignInBinding binding;
     private AlertDialog dialog;
-    private String email;
     private SharedPreferences prefs;
 
     @Override
@@ -48,23 +41,29 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnSignIn: clickSignIn(); break;
-            case R.id.btnSignUp: redirectSignUp(); break;
+        switch (v.getId()) {
+            case R.id.btnSignIn:
+                clickSignIn();
+                break;
+            case R.id.btnSignUp:
+                redirectSignUp();
+                break;
+            default: break;
         }
     }
 
-    private void initConfig(){
+    private void initConfig() {
         dialog = BlitzfudUtils.initLoading(this);
-        prefs = getSharedPreferences(MyPreference.PREFERENCE_NAME, MODE_PRIVATE);
+        prefs = getSharedPreferences(BlitzfudPreference.PREFERENCE_NAME, MODE_PRIVATE);
     }
 
     private void loadData() {
-        email = getIntent().getStringExtra("email");
+        String phoneNumber = getIntent().getStringExtra("phoneNumber");
 
-        if (email != null) {
-            binding.txtEmail.setText(email);
+        if (phoneNumber != null) {
+            binding.txtPhoneNumber.setText(phoneNumber.substring(3));
         }
+
     }
 
     private void bindListeners() {
@@ -73,28 +72,28 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void clickSignIn() {
-        final String email = binding.txtEmail.getText().toString();
+        final String phoneNumber = "+51" + binding.txtPhoneNumber.getText().toString();
         final String password = binding.txtPassword.getText().toString();
 
-        if (isValid(email, password)) {
+        if (isValid(phoneNumber, password)) {
             dialog.show();
-            signIn(email, password);
+            signIn(phoneNumber, password);
         }
     }
 
-    private void signIn(final String email, final String password){
-        AuthService.signIn(email, password).enqueue(new Callback<ResponseAPI>() {
+    private void signIn(final String phoneNumber, final String password) {
+        AuthService.signIn(phoneNumber, password).enqueue(new Callback<ResponseAPI>() {
             @Override
             public void onResponse(Call<ResponseAPI> call, Response<ResponseAPI> response) {
                 dialog.dismiss();
-                if(response.isSuccessful()){
-                    MyPreference.savePreferences(prefs);
+                if (response.isSuccessful()) {
+                    BlitzfudPreference.savePreferences(prefs);
                     Toast.makeText(SignInActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
-                }else{
-                    BlitzfudUtils.showError(SignInActivity.this, response.errorBody());
+                } else {
+                    BlitzfudUtils.showErrorWithCatch(SignInActivity.this, response.errorBody());
                 }
             }
 
@@ -106,20 +105,20 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    private void redirectSignUp(){
+    private void redirectSignUp() {
         startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
     }
 
-    private boolean isValid(final String email, final String password) {
+    private boolean isValid(final String phoneNumber, final String password) {
         clearErrors();
 
-        if (email.trim().isEmpty()) {
-            binding.inputEmail.setError("El email es necesario");
+        if (phoneNumber.equals("+51")) {
+            binding.inputPhoneNumber.setError("El número es necesario");
             return false;
         }
 
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.inputEmail.setError("No es un correo válido");
+        if (phoneNumber.length() != 12) {
+            binding.inputPhoneNumber.setError("El número no tiene 9 dígitos");
 
             return false;
         }
@@ -133,7 +132,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void clearErrors() {
-        binding.inputEmail.setError(null);
+        binding.inputPhoneNumber.setError(null);
         binding.inputPassword.setError(null);
     }
 

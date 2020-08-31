@@ -1,10 +1,10 @@
 package com.blitzfud.views.pages.order;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.blitzfud.databinding.ActivityOrderSuccessfullBinding;
 import com.blitzfud.views.pages.MainActivity;

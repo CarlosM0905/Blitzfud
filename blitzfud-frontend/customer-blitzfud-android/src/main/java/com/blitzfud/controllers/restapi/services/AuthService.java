@@ -3,12 +3,13 @@ package com.blitzfud.controllers.restapi.services;
 import com.blitzfud.controllers.restapi.API;
 import com.blitzfud.controllers.restapi.deserializers.auth.SignInDeserializer;
 import com.blitzfud.controllers.restapi.interfaces.AuthInterface;
-import com.blitzfud.models.ResponseAPI;
-import com.blitzfud.models.User;
+import com.blitzfud.models.auth.User;
+import com.blitzfud.models.responseAPI.ResponseAPI;
 
 import retrofit2.Call;
 
 public class AuthService {
+
     private static final String URL = "auth/";
     private static String token;
     private static User user;
@@ -20,11 +21,10 @@ public class AuthService {
         return userInterface.signIn(email, password);
     }
 
-    public static Call<ResponseAPI> signUp(String firstName, String lastName,
-                                           String email, String password) {
+    public static Call<ResponseAPI> signUp(User user) {
         AuthInterface userInterface = API.createService(AuthInterface.class, URL);
 
-        return userInterface.signUp(firstName, lastName, email, password);
+        return userInterface.signUp(user);
     }
 
 

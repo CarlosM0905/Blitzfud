@@ -1,207 +1,693 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLight"
-    android:fitsSystemWindows="true"
+    android:background="@color/colorWhite"
     tools:context=".views.authentication.SignUpActivity">
 
-    <include layout="@layout/layout_toolbar" />
-
-    <ScrollView
-        android:id="@+id/mainScroll"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <com.github.florent37.shapeofview.shapes.ArcView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="150dp"
+            android:elevation="4dp"
+            app:shape_arc_height="50dp"
+            app:shape_arc_position="bottom">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputNumberPhone"
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
-                app:counterEnabled="true"
-                app:counterMaxLength="9"
-                app:errorEnabled="true">
+                android:background="@color/colorPrimary" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtPhoneNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:maxLength="9"
-                    android:hint="Número de teléfono"
-                    android:inputType="number" />
+        </com.github.florent37.shapeofview.shapes.ArcView>
 
-            </com.google.android.material.textfield.TextInputLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputFirstName"
+        <com.github.florent37.shapeofview.shapes.ArcView
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:elevation="4dp"
+            android:rotation="180"
+            app:shape_arc_height="20dp"
+            app:shape_arc_position="bottom">
+
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
-                app:errorEnabled="true">
+                android:background="@color/colorPrimary" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtFirstName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:hint="Nombres"
-                    android:inputType="text" />
+        </com.github.florent37.shapeofview.shapes.ArcView>
 
-            </com.google.android.material.textfield.TextInputLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputLastName"
-                android:layout_width="match_parent"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBack"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:padding="8dp"
+                android:src="@drawable/ic_fragment_back" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="16dp"
-                app:errorEnabled="true">
+                android:layout_marginRight="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtLastName"
-                    android:layout_width="match_parent"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_blitzfud_white" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:hint="Apellidos"
-                    android:inputType="text" />
+                    android:layout_marginLeft="12dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Blitzfud"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="28sp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEmail"
+        <ScrollView
+            android:id="@+id/mainScroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:fitsSystemWindows="true">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="16dp"
-                app:errorEnabled="true">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtEmail"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:hint="Correo electrónico"
-                    android:inputType="textEmailAddress" />
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="50dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="16dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="16dp"
-                app:errorEnabled="true"
-                app:passwordToggleEnabled="true">
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:hint="Contraseña"
-                    android:inputType="textPassword" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_vertical"
+                                android:adjustViewBounds="true"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/ic_peru" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputConfirmPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="16dp"
-                app:errorEnabled="true"
-                app:passwordToggleEnabled="true">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="8dp"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="+51"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="16sp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtConfirmPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:hint="Confirmar contraseña"
-                    android:inputType="textPassword" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/inputPhoneNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="16dp"
+                                app:counterEnabled="true"
+                                app:counterMaxLength="9"
+                                app:errorEnabled="true">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/txtPhoneNumber"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins"
+                                    android:hint="Número de celular"
+                                    android:inputType="number"
+                                    android:maxLength="9" />
 
-                        <LinearLayout
-                            android:id="@+id/layoutPosition"
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginRight="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_marginRight="8dp"
+                                android:src="@drawable/ic_user_sign_up" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/inputFirstName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/txtFirstName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins"
+                                    android:hint="Nombres"
+                                    android:inputType="text" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
                             android:layout_marginTop="4dp"
                             android:layout_marginRight="16dp"
-                            android:orientation="vertical">
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_marginRight="8dp"
+                                android:src="@drawable/ic_user_sign_up" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/inputLastName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_medium"
-                                android:text="Posición predeterminada" />
 
-                            <TextView
-                                android:id="@+id/txtPosition"
+                                app:errorEnabled="true">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/txtLastName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins"
+                                    android:hint="Apellidos"
+                                    android:inputType="text" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_marginRight="8dp"
+                                android:src="@drawable/ic_mail_sign_up" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/inputEmail"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins"
-                                android:text="Selecciona una posición"
-                                android:layout_marginLeft="4dp"
-                                android:background="@drawable/border_bottom"
-                                android:layout_marginRight="4dp"
-                                android:gravity="center_horizontal"
-                                android:layout_marginTop="4dp"
-                                android:lines="1"
-                                android:ellipsize="end"
-                                android:textColor="@color/colorBlack" />
 
-                        </LinearLayout>
+                                app:errorEnabled="true">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="64dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/button_rounded"
-                android:fontFamily="@font/poppins_medium"
-                android:text="UNIRME"
-                android:textColor="@color/colorWhite"
-                android:textSize="18sp"
-                app:backgroundTint="@color/colorPrimary" />
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/txtEmail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins"
+                                    android:hint="Correo electrónico"
+                                    android:inputType="textEmailAddress" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnSignIn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="80dp"
-                android:background="@drawable/button_rounded"
-                android:fontFamily="@font/poppins_medium"
-                android:text="¿Ya tienes cuenta?"
-                android:textColor="@color/colorWhite"
-                app:backgroundTint="@color/colorSecondary" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </ScrollView>
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_marginRight="8dp"
+                                android:src="@drawable/ic_password_sign_in" />
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/inputPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                app:errorEnabled="true"
+                                app:passwordToggleEnabled="true"
+                                app:passwordToggleTint="@drawable/toggle_password">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/txtPassword"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins"
+                                    android:hint="Contraseña"
+                                    android:inputType="textPassword" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_marginRight="8dp"
+                                android:src="@drawable/ic_password_sign_in" />
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/inputConfirmPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true"
+                                app:passwordToggleEnabled="true"
+                                app:passwordToggleTint="@drawable/toggle_password">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/txtConfirmPassword"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins"
+                                    android:hint="Confirmar contraseña"
+                                    android:inputType="textPassword" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_marginRight="8dp"
+                                android:src="@drawable/ic_ubication_sign_up" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/layoutPosition"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Ubicación" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/txtPosition"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/border_bottom"
+                                    android:ellipsize="end"
+                                    android:fontFamily="@font/poppins"
+                                    android:gravity="center_horizontal"
+                                    android:lines="1"
+                                    android:padding="4dp"
+                                    android:text="Selecciona una ubicación"
+                                    android:textColor="@color/colorBlack" />
+
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnSignUp"
+                            android:layout_width="230dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="32dp"
+                            android:layout_marginBottom="32dp"
+                            android:background="@drawable/button_rounded"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/poppins_medium"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:text="UNIRME"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="18sp"
+                            app:backgroundTint="@color/colorPrimary" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </ScrollView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</FrameLayout>
+
+
+    <!--<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/colorWhite"-->
+    <!--android:orientation="vertical"-->
+    <!--tools:context=".views.authentication.SignUpActivity">-->
+
+    <!--<androidx.appcompat.widget.LinearLayoutCompat-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:background="@color/colorPrimary"-->
+    <!--    android:gravity="center_vertical"-->
+    <!--    android:orientation="horizontal"-->
+    <!--    android:padding="10dp">-->
+
+    <!--    <androidx.appcompat.widget.AppCompatImageView-->
+    <!--        android:id="@+id/imgBack"-->
+    <!--        android:layout_width="30dp"-->
+    <!--        android:layout_height="30dp"-->
+    <!--        android:src="@drawable/ic_fragment_back" />-->
+
+    <!--    <androidx.appcompat.widget.AppCompatTextView-->
+    <!--        android:id="@+id/txtNameMarket"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginLeft="12dp"-->
+    <!--        android:layout_marginTop="1dp"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:ellipsize="end"-->
+    <!--        android:fontFamily="@font/poppins_medium"-->
+    <!--        android:lines="1"-->
+    <!--        android:text="Unirme a Blitzfud"-->
+    <!--        android:textColor="@color/colorWhite"-->
+    <!--        android:textSize="@dimen/sizeToolbar" />-->
+
+    <!--</androidx.appcompat.widget.LinearLayoutCompat>-->
+
+    <!--<ScrollView-->
+    <!--    android:id="@+id/mainScroll"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="0dp"-->
+    <!--    android:layout_weight="1"-->
+    <!--    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">-->
+
+    <!--    <androidx.appcompat.widget.LinearLayoutCompat-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:orientation="vertical">-->
+
+    <!--        <androidx.appcompat.widget.LinearLayoutCompat-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="16dp"-->
+    <!--            android:layout_marginTop="16dp"-->
+    <!--            android:orientation="horizontal">-->
+
+
+    <!--            <androidx.appcompat.widget.AppCompatImageView-->
+    <!--                android:layout_width="30dp"-->
+    <!--                android:layout_height="30dp"-->
+    <!--                android:layout_gravity="center_vertical"-->
+    <!--                android:layout_marginBottom="1dp"-->
+    <!--                android:adjustViewBounds="true"-->
+    <!--                android:scaleType="centerInside"-->
+    <!--                android:src="@drawable/ic_peru" />-->
+
+    <!--            <androidx.appcompat.widget.AppCompatTextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_gravity="center_vertical"-->
+    <!--                android:layout_marginLeft="8dp"-->
+    <!--                android:fontFamily="@font/poppins_medium"-->
+    <!--                android:text="+51"-->
+    <!--                android:textColor="@color/colorBlack"-->
+    <!--                android:textSize="16sp" />-->
+
+    <!--            <com.google.android.material.textfield.TextInputLayout-->
+    <!--                android:id="@+id/inputPhoneNumber"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginLeft="8dp"-->
+    <!--                android:layout_marginRight="16dp"-->
+    <!--                app:counterEnabled="true"-->
+    <!--                app:counterMaxLength="9"-->
+    <!--                app:errorEnabled="true">-->
+
+    <!--                <com.google.android.material.textfield.TextInputEditText-->
+    <!--                    android:id="@+id/txtPhoneNumber"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:fontFamily="@font/poppins"-->
+    <!--                    android:hint="Número de teléfono"-->
+    <!--                    android:inputType="number"-->
+    <!--                    android:maxLength="9" />-->
+
+    <!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+    <!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:id="@+id/inputFirstName"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="16dp"-->
+    <!--            android:layout_marginTop="16dp"-->
+    <!--            android:layout_marginRight="16dp"-->
+    <!--            app:errorEnabled="true">-->
+
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:id="@+id/txtFirstName"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:fontFamily="@font/poppins"-->
+    <!--                android:hint="Nombres"-->
+    <!--                android:inputType="text" />-->
+
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:id="@+id/inputLastName"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="16dp"-->
+    <!--            android:layout_marginTop="4dp"-->
+    <!--            android:layout_marginRight="16dp"-->
+    <!--            app:errorEnabled="true">-->
+
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:id="@+id/txtLastName"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:fontFamily="@font/poppins"-->
+    <!--                android:hint="Apellidos"-->
+    <!--                android:inputType="text" />-->
+
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:id="@+id/inputEmail"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="16dp"-->
+    <!--            android:layout_marginTop="4dp"-->
+    <!--            android:layout_marginRight="16dp"-->
+    <!--            app:errorEnabled="true">-->
+
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:id="@+id/txtEmail"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:fontFamily="@font/poppins"-->
+    <!--                android:hint="Correo electrónico"-->
+    <!--                android:inputType="textEmailAddress" />-->
+
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:id="@+id/inputPassword"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="16dp"-->
+    <!--            android:layout_marginTop="4dp"-->
+    <!--            android:layout_marginRight="16dp"-->
+    <!--            app:errorEnabled="true"-->
+    <!--            app:passwordToggleEnabled="true">-->
+
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:id="@+id/txtPassword"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:fontFamily="@font/poppins"-->
+    <!--                android:hint="Contraseña"-->
+    <!--                android:inputType="textPassword" />-->
+
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:id="@+id/inputConfirmPassword"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="16dp"-->
+    <!--            android:layout_marginTop="4dp"-->
+    <!--            android:layout_marginRight="16dp"-->
+    <!--            app:errorEnabled="true"-->
+    <!--            app:passwordToggleEnabled="true">-->
+
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:id="@+id/txtConfirmPassword"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:fontFamily="@font/poppins"-->
+    <!--                android:hint="Confirmar contraseña"-->
+    <!--                android:inputType="textPassword" />-->
+
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+    <!--        <androidx.appcompat.widget.LinearLayoutCompat-->
+    <!--            android:id="@+id/layoutPosition"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="16dp"-->
+    <!--            android:layout_marginTop="4dp"-->
+    <!--            android:layout_marginRight="16dp"-->
+    <!--            android:clickable="true"-->
+    <!--            android:focusable="true"-->
+    <!--            android:foreground="?android:attr/selectableItemBackground"-->
+    <!--            android:orientation="vertical">-->
+
+    <!--            <androidx.appcompat.widget.AppCompatTextView-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:fontFamily="@font/poppins_medium"-->
+    <!--                android:text="Posición predeterminada" />-->
+
+    <!--            <androidx.appcompat.widget.AppCompatTextView-->
+    <!--                android:id="@+id/txtPosition"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:background="@drawable/border_bottom"-->
+    <!--                android:ellipsize="end"-->
+    <!--                android:fontFamily="@font/poppins"-->
+    <!--                android:gravity="center_horizontal"-->
+    <!--                android:lines="1"-->
+    <!--                android:padding="4dp"-->
+    <!--                android:text="Selecciona una posición"-->
+    <!--                android:textColor="@color/colorBlack" />-->
+
+    <!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+    <!--        <androidx.appcompat.widget.AppCompatButton-->
+    <!--            android:id="@+id/btnSignUp"-->
+    <!--            android:layout_width="230dp"-->
+    <!--            android:layout_height="35dp"-->
+    <!--            android:layout_gravity="center_horizontal"-->
+    <!--            android:layout_marginTop="64dp"-->
+    <!--            android:background="@drawable/button_rounded"-->
+    <!--            android:clickable="true"-->
+    <!--            android:focusable="true"-->
+    <!--            android:fontFamily="@font/poppins_medium"-->
+    <!--            android:foreground="?android:attr/selectableItemBackground"-->
+    <!--            android:text="UNIRME"-->
+    <!--            android:textColor="@color/colorWhite"-->
+    <!--            android:textSize="18sp"-->
+    <!--            app:backgroundTint="@color/colorPrimary" />-->
+
+    <!--        <androidx.appcompat.widget.AppCompatButton-->
+    <!--            android:id="@+id/btnSignIn"-->
+    <!--            android:layout_width="230dp"-->
+    <!--            android:layout_height="35dp"-->
+    <!--            android:layout_gravity="center_horizontal"-->
+    <!--            android:layout_marginTop="32dp"-->
+    <!--            android:layout_marginBottom="80dp"-->
+    <!--            android:background="@drawable/button_rounded"-->
+    <!--            android:clickable="true"-->
+    <!--            android:focusable="true"-->
+    <!--            android:fontFamily="@font/poppins_medium"-->
+    <!--            android:foreground="?android:attr/selectableItemBackground"-->
+    <!--            android:text="¿Ya tienes cuenta?"-->
+    <!--            android:textColor="@color/colorWhite"-->
+    <!--            app:backgroundTint="@color/colorSecondary" />-->
+
+    <!--    </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+    <!--</ScrollView>-->
+
+    <!--</androidx.appcompat.widget.LinearLayoutCompat>-->

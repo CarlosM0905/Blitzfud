@@ -1,40 +1,46 @@
 package com.blitzfud.views.fragments.market;
 
-import android.content.Intent;
+import android.app.AlertDialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.blitzfud.views.adapters.market.FavoriteMarketAdapter;
+import androidx.fragment.app.Fragment;
+
+import com.blitzfud.controllers.localDB.providers.FavoriteMarketsDBProvider;
 import com.blitzfud.controllers.restapi.services.FavoriteMarketService;
 import com.blitzfud.controllers.utilities.BlitzfudUtils;
 import com.blitzfud.databinding.FragmentFavoriteMarketsBinding;
-import com.blitzfud.models.market.Market;
-import com.blitzfud.models.responseCount.FavoriteMarketCount;
-import com.blitzfud.views.pages.market.MarketActivity;
+import com.blitzfud.models.dialog.ConfirmDialog;
+import com.blitzfud.models.market.FavoriteMarket;
+import com.blitzfud.models.responseAPI.FavoriteMarketSet;
+import com.blitzfud.models.responseAPI.ResponseAPI;
+import com.blitzfud.views.adapters.market.FavoriteMarketAdapter;
+import com.blitzfud.views.pages.MainActivity;
+import com.google.gson.JsonSyntaxException;
 
-import java.util.ArrayList;
-
+import io.realm.Realm;
+import io.realm.RealmChangeListener;
+import io.realm.RealmModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.blitzfud.controllers.utilities.BlitzfudConstants.FRAGMENT_MARKET;
+
 public class FavoriteMarketsFragment extends Fragment {
 
-    public static final int NONE_ACTION = -1;
-    public static final int UNSUBSCRIBE_ACTION = 0;
-    public static final int SUBSCRIBE_ACTION = 1;
-    private static ArrayList<Market> markets;
-    private static int count;
+    public static boolean loadedFromAPI = false;
 
     private FragmentFavoriteMarketsBinding binding;
+    private Realm realm;
+    private RealmChangeListener<RealmModel> listenerFavoritesMarkets;
+    private FavoriteMarketSet favoriteMarketSet;
     private FavoriteMarketAdapter adapter;
-    private GridLayoutManager layoutManager;
+    private ConfirmDialog confirmDialog;
+    private String marketIdSelected;
+    private AlertDialog alertDialog;
 
     public FavoriteMarketsFragment() {
     }
@@ -46,167 +52,164 @@ public class FavoriteMarketsFragment extends Fragment {
         binding = FragmentFavoriteMarketsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+        initConfig();
+        initListenerDB();
         prepareRecycler();
         loadData();
 
         return view;
     }
 
+    private void initConfig() {
+        realm = Realm.getDefaultInstance();
+        alertDialog = BlitzfudUtils.initLoading(getContext());
+        confirmDialog = new ConfirmDialog.Builder(getContext())
+                .setTitle("¿Estás seguro")
+                .setContent("Dejarás de seguir a esta tienda")
+                .setOnConfirmAction("Sí", new ConfirmDialog.OnConfirmDialog() {
+                    @Override
+                    public void onClickListener() {
+                        unsubscribe();
+                    }
+                })
+                .build();
+    }
+
+    private void initListenerDB() {
+        listenerFavoritesMarkets = new RealmChangeListener<RealmModel>() {
+            @Override
+            public void onChange(RealmModel realmModel) {
+                if (binding.pantallaEmpty.getVisibility() == View.VISIBLE) {
+                    binding.pantallaEmpty.setVisibility(View.GONE);
+                    binding.pantallaPrincipal.setVisibility(View.VISIBLE);
+                }
+
+                if (favoriteMarketSet.getMarkets().isEmpty()) {
+                    binding.pantallaPrincipal.setVisibility(View.GONE);
+                    binding.pantallaEmpty.setVisibility(View.VISIBLE);
+                } else {
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        };
+    }
+
     private void prepareRecycler() {
-        layoutManager = new GridLayoutManager(getContext(), 2);
         binding.recyclerView.setHasFixedSize(true);
-        binding.recyclerView.setLayoutManager(layoutManager);
     }
 
     private void loadData() {
-        if (markets != null) {
-            showMarkets();
-            return;
-        }
+        if (!loadedFromAPI) {
+            FavoriteMarketService.getAll().enqueue(new Callback<FavoriteMarketSet>() {
+                @Override
+                public void onResponse(Call<FavoriteMarketSet> call, Response<FavoriteMarketSet> response) {
+                    if (response.isSuccessful()) {
+                        FavoriteMarketsDBProvider.save(realm, response.body());
+                        favoriteMarketSet = FavoriteMarketsDBProvider.getFavoriteMarkets(realm);
+                        loadedFromAPI = true;
 
-        FavoriteMarketService.getAll().enqueue(new Callback<FavoriteMarketCount>() {
+                        showMarkets();
+                    } else {
+                        try {
+                            BlitzfudUtils.showError(getContext(), response.errorBody());
+                        } catch (JsonSyntaxException ex) {
+                            loadLocalFavoriteMarkets();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<FavoriteMarketSet> call, Throwable t) {
+                    loadLocalFavoriteMarkets();
+                }
+            });
+        } else {
+            favoriteMarketSet = FavoriteMarketsDBProvider.getFavoriteMarkets(realm);
+            showMarkets();
+        }
+    }
+
+    private void loadLocalFavoriteMarkets() {
+        favoriteMarketSet = FavoriteMarketsDBProvider.getFavoriteMarkets(realm);
+        if (favoriteMarketSet != null) {
+            showMarkets();
+            BlitzfudUtils.showFailureSnackbar(favoriteMarketSet.getMarkets()
+                    .isEmpty() ? binding.pantallaEmpty : binding.pantallaPrincipal);
+        } else {
+            BlitzfudUtils.showFailure(getContext());
+        }
+    }
+
+    private void showMarkets() {
+        favoriteMarketSet.addChangeListener(listenerFavoritesMarkets);
+        binding.pantallaLoading.setVisibility(View.GONE);
+
+        adapter = new FavoriteMarketAdapter(getContext(), favoriteMarketSet.getMarkets(), new FavoriteMarketAdapter.OnFavoriteMarketClickListener() {
             @Override
-            public void onResponse(Call<FavoriteMarketCount> call, Response<FavoriteMarketCount> response) {
+            public void onItemClick(FavoriteMarket market) {
+                if (!loadedFromAPI) {
+                    BlitzfudUtils.showFailureSnackbar(binding.pantallaPrincipal);
+                    return;
+                }
+
+                ((MainActivity) getActivity()).newFragment(new MarketFragment(market), FRAGMENT_MARKET);
+            }
+
+            @Override
+            public void onUnsubscribeClick(FavoriteMarket market) {
+                if (!loadedFromAPI) {
+                    BlitzfudUtils.showFailureSnackbar(binding.pantallaPrincipal);
+                    return;
+                }
+
+                marketIdSelected = market.get_id();
+                confirmDialog.show();
+            }
+        });
+        binding.recyclerView.setAdapter(adapter);
+
+        if (favoriteMarketSet.getMarkets().isEmpty()) {
+            binding.pantallaEmpty.setVisibility(View.VISIBLE);
+        } else {
+            binding.pantallaPrincipal.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void unsubscribe() {
+        alertDialog.show();
+        FavoriteMarketService.remove(marketIdSelected).enqueue(new Callback<ResponseAPI>() {
+            @Override
+            public void onResponse(Call<ResponseAPI> call, Response<ResponseAPI> response) {
+                alertDialog.dismiss();
                 if (response.isSuccessful()) {
-                    final FavoriteMarketCount favoriteMarketCount = response.body();
-                    count = favoriteMarketCount.getCount();
-                    markets = favoriteMarketCount.getMarkets();
-                    showMarkets();
+                    FavoriteMarketsDBProvider.remove(realm, favoriteMarketSet, new FavoriteMarket(marketIdSelected));
+                    BlitzfudUtils.showSnackbar(binding.pantallaPrincipal, response.body().getMessage());
                 } else {
-                    BlitzfudUtils.showError(getContext(), response.errorBody());
+                    try {
+                        BlitzfudUtils.showError(getContext(), response.errorBody());
+                    } catch (JsonSyntaxException ex) {
+                        BlitzfudUtils.showFailure(getContext());
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<FavoriteMarketCount> call, Throwable t) {
+            public void onFailure(Call<ResponseAPI> call, Throwable t) {
+                alertDialog.dismiss();
                 BlitzfudUtils.showFailure(getContext());
             }
         });
     }
 
-    private void showMarkets() {
-        binding.pantallaLoading.setVisibility(View.GONE);
-
-        if (markets.isEmpty()) {
-            binding.pantallaEmpty.setVisibility(View.VISIBLE);
-        } else {
-            adapter = new FavoriteMarketAdapter(getContext(), markets, new FavoriteMarketAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(Market market, int position) {
-                    MarketActivity.setMarket(market);
-                    final Intent intent = new Intent(getContext(), MarketActivity.class);
-                    startActivity(intent);
-                }
-            });
-
-            binding.recyclerView.setAdapter(adapter);
-            binding.recyclerView.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if (MarketsFragment.getSubscribeAction() == SUBSCRIBE_ACTION) {
-            if (adapter == null) {
-                adapter = new FavoriteMarketAdapter(getContext(), markets, new FavoriteMarketAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(Market market, int position) {
-                        MarketActivity.setMarket(market);
-                        final Intent intent = new Intent(getContext(), MarketActivity.class);
-                        startActivity(intent);
-                    }
-                });
-                binding.recyclerView.setAdapter(adapter);
-            } else {
-                adapter.notifyDataSetChanged();
-            }
-
-            if (binding.recyclerView.getVisibility() == View.GONE)
-                binding.recyclerView.setVisibility(View.VISIBLE);
-
-            if (binding.pantallaEmpty.getVisibility() == View.VISIBLE)
-                binding.pantallaEmpty.setVisibility(View.GONE);
-
-            MarketsFragment.setSubscribeAction(-1);
-        } else if (MarketsFragment.getSubscribeAction() == UNSUBSCRIBE_ACTION) {
-            if (FavoriteMarketsFragment.getMarkets().isEmpty()) {
-                binding.recyclerView.setVisibility(View.GONE);
-                binding.pantallaEmpty.setVisibility(View.VISIBLE);
-            } else {
-                if (binding.recyclerView.getVisibility() == View.GONE) {
-                    binding.pantallaEmpty.setVisibility(View.GONE);
-                    binding.recyclerView.setVisibility(View.VISIBLE);
-                }
-
-                adapter.notifyDataSetChanged();
-            }
-            MarketsFragment.setSubscribeAction(NONE_ACTION);
-        }
-    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
+        if (favoriteMarketSet != null)
+            favoriteMarketSet.removeChangeListener(listenerFavoritesMarkets);
+        realm.close();
         binding = null;
-    }
-
-    public static boolean existsMarket(final String marketId) {
-        for (int i = 0; i < markets.size(); i++)
-            if (markets.get(i).get_id().equals(marketId))
-                return true;
-
-        return false;
-    }
-
-    public static void addMarket(final Market market) {
-        markets.add(market);
-        count++;
-    }
-
-    public static void removeMarket(final Market market) {
-        final int position = findPosition(market);
-
-        if (position != -1) {
-            markets.remove(position);
-            count--;
-        }
-    }
-
-    private static int findPosition(final Market market) {
-        int position = -1;
-
-        for (int i = 0; i < markets.size(); i++) {
-            final Market marketItem = markets.get(i);
-
-            if (marketItem.equals(market)) {
-                position = i;
-                break;
-            }
-        }
-
-        return position;
-    }
-
-    public static boolean itemsInitialized() {
-        return markets != null;
-    }
-
-    public static int getCount() {
-        return count;
-    }
-
-    public static void setCount(int count) {
-        FavoriteMarketsFragment.count = count;
-    }
-
-    public static ArrayList<Market> getMarkets() {
-        return markets;
-    }
-
-    public static void setMarkets(ArrayList<Market> markets) {
-        FavoriteMarketsFragment.markets = markets;
     }
 
 }

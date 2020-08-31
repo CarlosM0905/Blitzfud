@@ -4,35 +4,38 @@
     android:layout_width="100dp"
     android:layout_height="100dp"
     android:layout_margin="6dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="@color/colorWhite"
-    app:cardElevation="5dp"
-    app:cardCornerRadius="12dp">
+    app:cardCornerRadius="12dp"
+    app:cardElevation="5dp">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgCategory"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true" />
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
 
-        <TextView
-            android:fontFamily="@font/poppins"
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtNameCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:text=""
-            android:lines="2"
+            android:fontFamily="@font/poppins"
             android:gravity="center"
-            android:textSize="12sp"/>
+            android:lines="2"
+            android:text=""
+            android:textSize="12sp" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.cardview.widget.CardView>

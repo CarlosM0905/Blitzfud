@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.fragments.market.ProductsFragment">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/pantallaPrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgBack"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_fragment_back" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtTitleToolbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_medium"
+                    android:lines="1"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/sizeToolbar" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgToolbar"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/ic_healthy_food" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerProduct"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <ProgressBar
+                android:id="@+id/loadingProducts"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="4dp"
+                android:visibility="gone" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/pantallaEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBack2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_fragment_back" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTitleToolbar2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:lines="1"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/sizeToolbar" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgToolbar2"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_healthy_food" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="No se encontraron elementos" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/pantallaLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Espere un momento..." />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

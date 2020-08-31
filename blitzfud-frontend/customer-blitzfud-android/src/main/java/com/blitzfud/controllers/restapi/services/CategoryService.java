@@ -1,20 +1,24 @@
 package com.blitzfud.controllers.restapi.services;
 
 import com.blitzfud.controllers.restapi.API;
-import com.blitzfud.controllers.restapi.deserializers.category.getAllDeserializer;
 import com.blitzfud.controllers.restapi.interfaces.CategoryInterface;
-import com.blitzfud.models.responseCount.CategoryCount;
-import com.blitzfud.models.responseCount.MarketCount;
+import com.blitzfud.models.responseAPI.CategorySet;
 
 import retrofit2.Call;
 
 public class CategoryService {
+
     private static final String URL = "categories/";
+    private static CategoryInterface marketInterface;
 
-    public static Call<CategoryCount> getAll() {
-        CategoryInterface marketInterface = API.createService(CategoryInterface.class, MarketCount.class,
-                new getAllDeserializer(), URL);
+    public static Call<CategorySet> getAll() {
+        return getInstance().getAll();
+    }
 
-        return marketInterface.getAll();
+    private static CategoryInterface getInstance() {
+        if (marketInterface == null)
+            marketInterface = API.createService(CategoryInterface.class, URL);
+
+        return marketInterface;
     }
 }

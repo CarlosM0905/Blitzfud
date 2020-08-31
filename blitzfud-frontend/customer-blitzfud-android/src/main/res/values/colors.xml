@@ -7,9 +7,15 @@
     <color name="colorAccent">#fe5366</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorDarkGray">#a0a0a0</color>
-    <color name="colorGray">#FEFEFE</color>
+    <color name="colorLightGray">#c2c2c2</color>
+    <color name="colorGray">#fafafa</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorBlackLight">#222222</color>
     <color name="colorMenuItem">#8c5167</color>
     <color name="colorSplash">#fff0de</color>
     <color name="colorSearch">#40a9ff</color>
+    <color name="colorGrayMedium">#f2f2f2</color>
+    <color name="colorModalTitle">#8C5167</color>
+    <color name="tagBorder">#FFBB96</color>
+    <color name="tagFill">#FFF2E8</color>
 </resources>

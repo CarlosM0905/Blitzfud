@@ -1,53 +1,48 @@
 package com.blitzfud.views.pages;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.blitzfud.R;
-import com.blitzfud.controllers.restapi.services.AuthService;
-import com.blitzfud.controllers.utilities.MyPreference;
-import com.blitzfud.views.authentication.SignInActivity;
-import com.blitzfud.views.fragments.market.FavoriteMarketsFragment;
-import com.blitzfud.views.fragments.order.HistoryOrdersFragment;
-import com.blitzfud.views.fragments.market.MarketsFragment;
-import com.blitzfud.views.fragments.settings.MyProfileFragment;
-import com.blitzfud.views.fragments.order.PendingOrdersFragment;
-import com.blitzfud.views.pages.shoppingCart.ShoppingCartActivity;
+import com.blitzfud.controllers.localDB.DBConnection;
+import com.blitzfud.controllers.utilities.BlitzfudPreference;
 import com.blitzfud.databinding.ActivityMainBinding;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.material.navigation.NavigationView;
+import com.blitzfud.views.authentication.SignInActivity;
+import com.blitzfud.views.fragments.account.AccountFragment;
+import com.blitzfud.views.fragments.market.FavoriteMarketsFragment;
+import com.blitzfud.views.fragments.market.MarketsFragment;
+import com.blitzfud.views.fragments.order.OrdersFragment;
+import com.blitzfud.views.fragments.shoppingCart.ShoppingCartFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
+import java.util.Stack;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+import io.realm.Realm;
 
-    private static final int MAP_ACTIVITY_RESULT = 1;
+import static com.blitzfud.controllers.utilities.BlitzfudConstants.FRAGMENT_ACCOUNT;
+import static com.blitzfud.controllers.utilities.BlitzfudConstants.FRAGMENT_CART;
+import static com.blitzfud.controllers.utilities.BlitzfudConstants.FRAGMENT_FAVORITES;
+import static com.blitzfud.controllers.utilities.BlitzfudConstants.FRAGMENT_HOME;
+import static com.blitzfud.controllers.utilities.BlitzfudConstants.FRAGMENT_ORDERS;
+import static com.blitzfud.controllers.utilities.BlitzfudConstants.MAP_ACTIVITY_RESULT;
 
-    private static MenuItem itemSelected;
-    private static String titleAppbar;
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private ActivityMainBinding binding;
+    private FragmentManager fragmentManager;
+    private String tagSelected = "";
+    private Stack<String> stackFragments;
     private SharedPreferences prefs;
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private Fragment fragment;
-    private TextView txtFullName;
-    private ImageView imgBlitzfud;
-    private int countTap;
+    private boolean logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,171 +51,101 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View view = binding.getRoot();
         setContentView(view);
 
-        prefs = getSharedPreferences(MyPreference.PREFERENCE_NAME, MODE_PRIVATE);
-
-        bindUI();
-        showFirstFragment(savedInstanceState);
-        bindListeners();
-        loadData();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (titleAppbar == null || titleAppbar.equals(MyPreference.position)) {
-            getMenuInflater().inflate(R.menu.menu_w_position, menu);
-        } else {
-            getMenuInflater().inflate(R.menu.menu, menu);
-        }
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
-            case R.id.optMyPosition:
-                redirectMyProfile();
-                return true;
-            case R.id.optMyOrder:
-                redirectMyOrder();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        initConfig();
+        bindListener();
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
         switch (item.getItemId()) {
-            case R.id.menuAllMarkets:
-                fragment = new MarketsFragment();
-                break;
-            case R.id.menuFavoriteMarkets:
-                fragment = new FavoriteMarketsFragment();
-                break;
-            case R.id.menuPendingOrders:
-                fragment = new PendingOrdersFragment();
-                break;
-            case R.id.menuHistoryOrders:
-                fragment = new HistoryOrdersFragment();
-                break;
-            case R.id.menuMyProfile:
-                fragment = new MyProfileFragment();
-                break;
-            case R.id.menuLogout:
-                logout();
+            case R.id.nav_home:
+                changeFragment(new MarketsFragment(), FRAGMENT_HOME);
                 return true;
+            case R.id.nav_favorites:
+                changeFragment(new FavoriteMarketsFragment(), FRAGMENT_FAVORITES);
+                return true;
+            case R.id.nav_orders:
+                changeFragment(new OrdersFragment(), FRAGMENT_ORDERS);
+                return true;
+            case R.id.nav_cart:
+                changeFragment(new ShoppingCartFragment(), FRAGMENT_CART);
+                return true;
+            case R.id.nav_account:
+                changeFragment(new AccountFragment(), FRAGMENT_ACCOUNT);
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private void initConfig() {
+        prefs = getSharedPreferences(BlitzfudPreference.PREFERENCE_NAME, MODE_PRIVATE);
+        fragmentManager = getSupportFragmentManager();
+        stackFragments = new Stack<>();
+        changeFragment(new MarketsFragment(), FRAGMENT_HOME);
+    }
+
+    private void bindListener() {
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener(this);
+    }
+
+    public void changeFragment(final Fragment fragment, final String tag) {
+        if (!tagSelected.isEmpty()) {
+            fragmentManager.beginTransaction().hide(fragmentManager.findFragmentByTag(tagSelected)).commit();
         }
 
-        changeFragment(fragment, item);
-        drawerLayout.closeDrawers();
-        return true;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.imgBlitzfud: easterEgg(); break;
-        }
-    }
-
-    private void bindUI() {
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navview);
-        View view = navigationView.getHeaderView(0);
-        txtFullName = view.findViewById(R.id.txtFullName);
-        imgBlitzfud = view.findViewById(R.id.imgBlitzfud);
-        navigationView.setItemIconTintList(null);
-
-        setToolbar();
-    }
-
-    private void setToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        if (titleAppbar != null) {
-            getSupportActionBar().setTitle(titleAppbar);
-            if (titleAppbar.equals(MyPreference.position)) {
-                itemSelected = navigationView.getMenu().getItem(0).getSubMenu().getItem(0).setChecked(true);
+        if (stackFragments.size() > 1) {
+            for (int i = 0; i < stackFragments.size() - 1; i++) {
+                final String popTag = stackFragments.pop();
+                final Fragment fragmentRemove = fragmentManager.findFragmentByTag(popTag);
+                fragmentManager.beginTransaction().remove(fragmentRemove).commit();
             }
         }
-    }
 
-    private void showFirstFragment(Bundle bundle) {
-        if (bundle == null) {
-            changeFragment(new MarketsFragment(), navigationView.getMenu().getItem(0).getSubMenu().getItem(0));
-        }
-    }
+        final Fragment fragmentSelected = fragmentManager.findFragmentByTag(tag);
 
-    private void bindListeners() {
-        imgBlitzfud.setOnClickListener(this);
-        navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    private void loadData(){
-        txtFullName.setText(AuthService.getUser().getFirstName());
-    }
-
-    private void easterEgg(){
-        countTap++;
-
-        if (countTap == 5) {
-            new SweetAlertDialog(MainActivity.this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
-                    .setTitleText("IN MEMORIAM")
-                    .setContentText("Encontraste al Don Pepucho de los proyectos, sacarás un 20")
-                    .setCustomImage(R.drawable.pepucho1)
-                    .show();
-        }
-
-        if (countTap > 10) {
-            countTap = 0;
-
-            new SweetAlertDialog(MainActivity.this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
-                    .setTitleText("Tilín")
-                    .setContentText("Ya deja a Don Pepucho en paz")
-                    .setCustomImage(R.drawable.pepucho2)
-                    .show();
-        }
-    }
-
-    public void changeFragment(Fragment fragment, MenuItem item) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .commit();
-
-        if (itemSelected != null) itemSelected.setChecked(false);
-
-        itemSelected = item;
-        itemSelected.setChecked(true);
-
-        if (fragment instanceof MarketsFragment) {
-            titleAppbar = MyPreference.position;
+        if (fragmentSelected == null) {
+            fragmentManager.beginTransaction().add(binding.contentFrame.getId(), fragment, tag).commit();
         } else {
-            titleAppbar = item.getTitle().toString();
+            fragmentManager.beginTransaction().show(fragmentSelected).commit();
         }
 
-        getSupportActionBar().setTitle(titleAppbar);
-
-        invalidateOptionsMenu();
+        tagSelected = tag;
+        stackFragments.clear();
+        stackFragments.push(tagSelected);
     }
 
-    private void redirectMyProfile() {
-        changeFragment(fragment = new MyProfileFragment(), navigationView.getMenu().getItem(2).getSubMenu().getItem(0));
+    public void changeFragment(final int selectedId) {
+        binding.bottomNavigationView.setSelectedItemId(selectedId);
     }
 
-    private void redirectMyOrder() {
-        startActivity(new Intent(MainActivity.this, ShoppingCartActivity.class));
+    public void newFragment(final Fragment fragment, final String tag) {
+        if (!tagSelected.isEmpty()) {
+            fragmentManager.beginTransaction().hide(fragmentManager.findFragmentByTag(tagSelected)).commit();
+        }
+
+        stackFragments.push(tag);
+
+        fragmentManager.beginTransaction().add(binding.contentFrame.getId(), fragment, tag).commit();
+        tagSelected = tag;
     }
 
-    private void logout() {
-        MyPreference.clearPreferences(prefs);
+    public void closeFragment() {
+        final String popTag = stackFragments.pop();
+        final Fragment fragment = fragmentManager.findFragmentByTag(popTag);
+        fragmentManager.beginTransaction().remove(fragment).commit();
+
+        tagSelected = stackFragments.peek();
+
+        fragmentManager.beginTransaction().show(fragmentManager.findFragmentByTag(tagSelected)).commit();
+    }
+
+    public void logout() {
+        for (Fragment fragment : fragmentManager.getFragments()) {
+            fragmentManager.beginTransaction().remove(fragment).commit();
+        }
+
+        logout = true;
         final Intent intent = new Intent(MainActivity.this, SignInActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -230,34 +155,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == MAP_ACTIVITY_RESULT) {
-            if (resultCode == Activity.RESULT_OK) {
-                String positionExtra = data.getStringExtra("position");
-                double positionLat = data.getDoubleExtra("positionLat", 0);
-                double positionLng = data.getDoubleExtra("positionLng", 0);
-
-                if (fragment instanceof MyProfileFragment) {
-                    ((MyProfileFragment) fragment).updateView(positionExtra, new LatLng(positionLat, positionLng));
-                }
-            }
+        if (requestCode == MAP_ACTIVITY_RESULT && resultCode == Activity.RESULT_OK &&
+                tagSelected.equals(FRAGMENT_HOME)) {
+            MarketsFragment marketsFragment = (MarketsFragment) fragmentManager
+                    .findFragmentByTag(FRAGMENT_HOME);
+            marketsFragment.reloadMarkets(true);
         }
     }
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawers();
-            return;
-        }
-
-        if (!getSupportActionBar().getTitle().toString().equals(MyPreference.position)) {
-            changeFragment(new MarketsFragment(), navigationView.getMenu().getItem(0).getSubMenu().getItem(0));
+        if (stackFragments.size() > 1) {
+            closeFragment();
+        } else if (!tagSelected.equals(FRAGMENT_HOME)) {
+            changeFragment(R.id.nav_home);
         } else {
             super.onBackPressed();
         }
     }
 
-    public NavigationView getNavigationView() {
-        return navigationView;
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (logout) {
+            BlitzfudPreference.clearPreferences(prefs);
+            DBConnection.clearDatabase(Realm.getDefaultInstance());
+        }
+
     }
 }

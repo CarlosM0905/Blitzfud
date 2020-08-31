@@ -1,8 +1,8 @@
 package com.blitzfud.controllers.restapi.deserializers.auth;
 
 import com.blitzfud.controllers.restapi.services.AuthService;
-import com.blitzfud.models.ResponseAPI;
-import com.blitzfud.models.User;
+import com.blitzfud.models.auth.User;
+import com.blitzfud.models.responseAPI.ResponseAPI;
 import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

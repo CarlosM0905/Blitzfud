@@ -1,22 +1,23 @@
 package com.blitzfud.views.pages.map;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.blitzfud.R;
+import com.blitzfud.controllers.restapi.services.AuthService;
+import com.blitzfud.controllers.utilities.BlitzfudPreference;
 import com.blitzfud.controllers.utilities.BlitzfudUtils;
 import com.blitzfud.databinding.ActivityMapBinding;
-import com.blitzfud.R;
-import com.blitzfud.controllers.utilities.MyPreference;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -26,7 +27,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.RectangularBounds;
-import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.maps.android.SphericalUtil;
@@ -36,16 +36,13 @@ import java.util.List;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    private SharedPreferences prefs;
     private ActivityMapBinding binding;
     private GoogleMap map;
-    private SupportMapFragment mapFragment;
-    private LocationRequest locationRequest;
-    //private FusedLocationProviderClient fusedLocation;
     private LatLng mCurrentLatLng;
-    private PlacesClient places;
     private AutocompleteSupportFragment autocompleteDestination;
-    private String position;
-    private LatLng positionLatLng;
+    private String address;
+    private LatLng ubication;
     private GoogleMap.OnCameraIdleListener mCameraListener;
 
     @Override
@@ -55,13 +52,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         View view = binding.getRoot();
         setContentView(view);
 
-        BlitzfudUtils.initToolbar(this, "Definir ubicación", true);
-
-        //fusedLocation = LocationServices.getFusedLocationProviderClient(this);
-
-        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
+        initConfig();
         instancePlaces();
         intanceAutocompleteDestination();
         instanceOnCameraListener();
@@ -88,13 +79,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         map.setMaxZoomPreference(20);
         map.setOnCameraIdleListener(mCameraListener);
 
-        locationRequest = new LocationRequest();
-        locationRequest.setInterval(1000);
-        locationRequest.setFastestInterval(1000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setSmallestDisplacement(5);
-
-        mCurrentLatLng = new LatLng(MyPreference.positionLatLng.latitude, MyPreference.positionLatLng.longitude);
+        if(AuthService.existsSession()){
+            mCurrentLatLng = new LatLng(AuthService.getUser().getLocationLatLng().latitude,
+                    AuthService.getUser().getLocationLatLng().longitude);
+        }else{
+            mCurrentLatLng = new LatLng(BlitzfudPreference.defaultUbication.latitude,
+                    BlitzfudPreference.defaultUbication.longitude);
+        }
 
         final CameraPosition camera = new CameraPosition.Builder()
                 .target(mCurrentLatLng)
@@ -103,6 +94,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         map.animateCamera(CameraUpdateFactory.newCameraPosition(camera));
         limitSearch();
+    }
+
+    private void initConfig(){
+        BlitzfudUtils.initToolbar(this, "Define tu ubicación", true);
+        prefs = getSharedPreferences(BlitzfudPreference.PREFERENCE_NAME, MODE_PRIVATE);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     private void limitSearch() {
@@ -117,7 +115,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
         }
 
-        places = Places.createClient(this);
+        Places.createClient(this);
     }
 
     private void intanceAutocompleteDestination() {
@@ -127,8 +125,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         autocompleteDestination.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
-                position = place.getName();
-                positionLatLng = place.getLatLng();
+                address = place.getName();
+                ubication = place.getLatLng();
 
                 map.moveCamera(CameraUpdateFactory.newCameraPosition(
                         new CameraPosition.Builder()
@@ -153,13 +151,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 try {
                     Geocoder geocoder = new Geocoder(MapActivity.this);
 
-                    positionLatLng = map.getCameraPosition().target;
-                    List<Address> addressList = geocoder.getFromLocation(positionLatLng.latitude,
-                            positionLatLng.longitude, 1);
+                    ubication = map.getCameraPosition().target;
+                    List<Address> addressList = geocoder.getFromLocation(ubication.latitude,
+                            ubication.longitude, 1);
                     String city = addressList.get(0).getLocality();
-                    String address = addressList.get(0).getAddressLine(0);
-                    position = address + " " + city;
-                    autocompleteDestination.setText(position);
+                    address = addressList.get(0).getAddressLine(0)+" "+city;
+                    autocompleteDestination.setText(address);
 
                 } catch (Exception e) {
                 }
@@ -168,15 +165,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     private void bindListener() {
-        binding.btnMyPosicion.setOnClickListener(new View.OnClickListener() {
+        binding.btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (position != null) {
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("position", position);
-                    returnIntent.putExtra("positionLat", positionLatLng.latitude);
-                    returnIntent.putExtra("positionLng", positionLatLng.longitude);
-                    setResult(Activity.RESULT_OK, returnIntent);
+                if (address != null) {
+                    if (AuthService.existsSession()){
+                        AuthService.getUser().getLocation().setAddress(address);
+                        AuthService.getUser().getLocation().getCoordinates().set(0, ubication.longitude);
+                        AuthService.getUser().getLocation().getCoordinates().set(1, ubication.latitude);
+                        BlitzfudPreference.saveUser(prefs);
+                    }
+
+                    final Intent intent = new Intent();
+                    intent.putExtra("address", address);
+                    intent.putExtra("ubicationLat", ubication.latitude);
+                    intent.putExtra("ubicationLng", ubication.longitude);
+                    setResult(Activity.RESULT_OK, intent);
                     finish();
                 }
             }

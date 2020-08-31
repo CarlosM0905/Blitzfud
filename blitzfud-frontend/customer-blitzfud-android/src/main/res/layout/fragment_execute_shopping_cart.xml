@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGray"
+    tools:context=".views.fragments.shoppingCart.execute.ExecuteShoppingCartFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_fragment_back" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:lines="1"
+                android:text="Todo mi carrito"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/sizeToolbar" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="32dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/colorSecondary"
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnExecuteOrder"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_rounded"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="Ejecutar"
+                android:textColor="@color/colorWhite"
+                app:backgroundTint="@color/colorPrimary" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

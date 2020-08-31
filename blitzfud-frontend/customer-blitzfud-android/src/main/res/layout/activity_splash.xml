@@ -1,19 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorSplash"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
     tools:context=".views.blitzfud.SplashActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/blitzfud2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.github.florent37.shapeofview.shapes.ArcView
+        android:id="@+id/something"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:elevation="4dp"
+        app:shape_arc_height="80dp"
+        app:shape_arc_position="bottom">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/something2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGrayMedium" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/something3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:layout_marginLeft="64dp"
+            android:layout_marginRight="64dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/icon_blitzfud" />
+
+    </com.github.florent37.shapeofview.shapes.ArcView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="bottom|center_horizontal"
+        android:text="Blitzfud"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="32sp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="bottom|center_horizontal"
+        android:text="by Spika"
+        android:textColor="@color/colorPrimaryLight"
+        android:textSize="16sp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="12dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginBottom="6dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/colorWhite"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="5dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtNameMarket"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/colorSecondary"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgDeliveryMethod"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_pickup_method" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtDeliveryMethod"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:fontFamily="@font/poppins" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTotal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins"
+                android:lines="1"
+                android:maxLines="1"
+                android:textColor="@color/colorSecondary" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgStatus"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_pre_processing_status" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtStatus"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:fontFamily="@font/poppins" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.cardview.widget.CardView>

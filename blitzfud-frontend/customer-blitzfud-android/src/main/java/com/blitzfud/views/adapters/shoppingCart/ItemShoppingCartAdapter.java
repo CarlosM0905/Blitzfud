@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blitzfud.R;
 import com.blitzfud.models.shoppingCart.ItemShoppingCart;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ItemShoppingCartAdapter extends RecyclerView.Adapter<ItemShoppingCartAdapter.ViewHolder> {
     private Context context;
-    private ArrayList<ItemShoppingCart> itemsShoppingCart;
+    private List<ItemShoppingCart> itemsShoppingCart;
     private ItemShoppingCartAdapter.OnItemClickListener itemClickListener;
 
-    public ItemShoppingCartAdapter(Context context, ArrayList<ItemShoppingCart> itemsShoppingCart, ItemShoppingCartAdapter.OnItemClickListener itemClickListener) {
+    public ItemShoppingCartAdapter(Context context, List<ItemShoppingCart> itemsShoppingCart, ItemShoppingCartAdapter.OnItemClickListener itemClickListener) {
         this.context = context;
         this.itemsShoppingCart = itemsShoppingCart;
         this.itemClickListener = itemClickListener;
@@ -43,7 +43,7 @@ public class ItemShoppingCartAdapter extends RecyclerView.Adapter<ItemShoppingCa
         holder.txtQuantity.setText(String.valueOf(itemShoppingCart.getQuantity()));
         holder.txtTotal.setText(itemShoppingCart.getTotalString());
 
-        if(itemClickListener!=null) holder.bindListener(itemShoppingCart, itemClickListener);
+        if(itemClickListener!=null) holder.bindListener(itemClickListener);
     }
 
     @Override
@@ -69,11 +69,11 @@ public class ItemShoppingCartAdapter extends RecyclerView.Adapter<ItemShoppingCa
             txtTotal = itemView.findViewById(R.id.txtTotal);
         }
 
-        public void bindListener(final ItemShoppingCart itemShoppingCart, final ItemShoppingCartAdapter.OnItemClickListener onItemClickListener) {
+        public void bindListener(final ItemShoppingCartAdapter.OnItemClickListener onItemClickListener) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onItemClick(itemShoppingCart, getAdapterPosition());
+                    onItemClickListener.onItemClick(itemsShoppingCart.get(getAdapterPosition()), getAdapterPosition());
                 }
             });
         }

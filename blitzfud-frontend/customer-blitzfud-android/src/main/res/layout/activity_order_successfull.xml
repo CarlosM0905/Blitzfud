@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLight"
+    android:background="@color/colorGray"
     tools:context=".views.pages.order.OrderSuccessfullActivity">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -17,7 +17,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -43,10 +43,13 @@
             android:layout_marginTop="16sp"
             android:background="@drawable/button_rounded"
             android:fontFamily="@font/poppins_medium"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:text="Ir al inicio"
             android:textColor="@color/colorWhite"
             app:backgroundTint="@color/colorPrimary" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
